@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ProxyLet – Premium Proxy Rentals</title>
+  <meta name="description" content="Browse free-to-list proxy rentals. Fast, verified, and ready to rent." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ===================== HEADER / NAV ===================== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">Proxy<span>Let</span></a>
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html" class="nav-link active">Browse</a>
+        <a href="list.html" class="nav-link">List a Proxy</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <!-- Hamburger for mobile -->
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="container hero-content">
+      <h1>Find Your <em>Perfect</em><br />Proxy Rental</h1>
+      <p class="hero-sub">Browse hundreds of verified proxy listings — residential, datacenter, and mobile. Free to rent.</p>
+
+      <!-- Search bar -->
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search by type, location, or provider…" autocomplete="off" />
+        <button class="btn btn-primary" id="searchBtn">Search</button>
+      </div>
+
+      <!-- Quick filters -->
+      <div class="quick-filters">
+        <button class="filter-chip active" data-filter="all">All</button>
+        <button class="filter-chip" data-filter="residential">Residential</button>
+        <button class="filter-chip" data-filter="datacenter">Datacenter</button>
+        <button class="filter-chip" data-filter="mobile">Mobile</button>
+        <button class="filter-chip" data-filter="rotating">Rotating</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== STATS BAR ===================== -->
+  <div class="stats-bar">
+    <div class="container stats-inner">
+      <div class="stat"><strong id="statTotal">0</strong><span>Listings</span></div>
+      <div class="stat"><strong>98%</strong><span>Uptime</span></div>
+      <div class="stat"><strong>150+</strong><span>Countries</span></div>
+      <div class="stat"><strong>Free</strong><span>To Rent</span></div>
+    </div>
+  </div>
+
+  <!-- ===================== LISTINGS GRID ===================== -->
+  <main class="listings-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Available Proxies</h2>
+        <div class="sort-controls">
+          <label for="sortSelect">Sort by:</label>
+          <select id="sortSelect">
+            <option value="newest">Newest</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="speed">Speed</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Cards are injected here by JavaScript -->
+      <div class="listings-grid" id="listingsGrid"></div>
+
+      <!-- Empty state -->
+      <div class="empty-state" id="emptyState" style="display:none;">
+        <div class="empty-icon">🔍</div>
+        <h3>No proxies found</h3>
+        <p>Try adjusting your search or <a href="list.html">list a proxy</a>.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- ===================== CTA BANNER ===================== -->
+  <section class="cta-banner">
+    <div class="container cta-inner">
+      <div class="cta-text">
+        <h2>Have a proxy to rent?</h2>
+        <p>List it for free in under 2 minutes. Reach thousands of renters today.</p>
+      </div>
+      <a href="list.html" class="btn btn-light">List Your Proxy →</a>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">Proxy<span>Let</span></a>
+        <p>The UK's leading free proxy rental marketplace.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <a href="index.html">Browse Proxies</a>
+        <a href="list.html">List a Proxy</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+      <div class="footer-links">
+        <h4>Proxy Types</h4>
+        <a href="#">Residential</a>
+        <a href="#">Datacenter</a>
+        <a href="#">Mobile</a>
+        <a href="#">Rotating</a>
+      </div>
+      <div class="footer-links">
+        <h4>Legal</h4>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms &amp; Conditions</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 ProxyLet. All rights reserved. &nbsp;·&nbsp; <a href="privacy.html">Privacy</a> &nbsp;·&nbsp; <a href="terms.html">Terms</a></p>
+    </div>
+  </footer>
+
+  <!-- ===================== PROPERTY DETAIL MODAL ===================== -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="propertyModal">
+      <button class="modal-close" id="modalClose">✕</button>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
