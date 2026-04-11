@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>List a Property – Patricia Real Estate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html"><img src="images/logo.png" alt="Patricia Real Estate" class="site-logo" /></a>
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html" class="nav-link">Properties</a>
+        <a href="list.html" class="nav-link active">List a Property</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="contact.html" class="btn btn-primary btn-sm nav-cta">Enquire Now</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">Home</a> <span>›</span> <span>List a Property</span></div>
+      <h1>List Your Property</h1>
+      <p>Add your property to our marketplace in minutes — free to list.</p>
+    </div>
+  </section>
+
+  <main class="form-page">
+    <div class="container form-container">
+
+      <div class="how-it-works">
+        <div class="how-step"><span class="step-num">1</span><p>Fill in your property details below</p></div>
+        <div class="how-step"><span class="step-num">2</span><p>Click Generate — copy the code snippet</p></div>
+        <div class="how-step"><span class="step-num">3</span><p>Paste into <code>js/data.js</code> on GitHub</p></div>
+      </div>
+
+      <div class="form-card">
+        <h2>Property Details</h2>
+        <p class="form-hint">Fields marked <span class="required">*</span> are required.</p>
+
+        <div id="propertyForm">
+
+          <!-- Basic Info -->
+          <div class="form-section">
+            <h3>Basic Information</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="propTitle">Listing Title <span class="required">*</span></label>
+                <input type="text" id="propTitle" placeholder="e.g. Stunning 3-Bed Victorian Terrace" required />
+              </div>
+            </div>
+            <div class="form-row two-col">
+              <div class="form-group">
+                <label for="propType">Listing Type <span class="required">*</span></label>
+                <select id="propType" required>
+                  <option value="">Select…</option>
+                  <option value="for-sale">For Sale</option>
+                  <option value="to-let">To Let</option>
+                  <option value="sold">Sold</option>
+                  <option value="let-agreed">Let Agreed</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="propCategory">Property Category <span class="required">*</span></label>
+                <select id="propCategory" required>
+                  <option value="">Select…</option>
+                  <option value="house">House</option>
+                  <option value="flat">Flat / Apartment</option>
+                  <option value="bungalow">Bungalow</option>
+                  <option value="land">Land</option>
+                  <option value="commercial">Commercial</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row two-col">
+              <div class="form-group">
+                <label for="propPrice">Price <span class="required">*</span></label>
+                <input type="text" id="propPrice" placeholder="e.g. £450,000 or £1,200 pcm" required />
+              </div>
+              <div class="form-group">
+                <label for="propEmoji">Display Icon</label>
+                <select id="propEmoji">
+                  <option value="🏠">🏠 House</option>
+                  <option value="🏡">🏡 House with garden</option>
+                  <option value="🏢">🏢 Apartment block</option>
+                  <option value="🏰">🏰 Large/luxury</option>
+                  <option value="🌻">🌻 Bungalow / garden</option>
+                  <option value="⚓">⚓ Waterside</option>
+                  <option value="🌿">🌿 Garden flat</option>
+                  <option value="🏗">🏗 New build</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Location -->
+          <div class="form-section">
+            <h3>Location</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="propAddress">Street Address <span class="required">*</span></label>
+                <input type="text" id="propAddress" placeholder="e.g. 14 Oakwood Drive" required />
+              </div>
+            </div>
+            <div class="form-row two-col">
+              <div class="form-group">
+                <label for="propTown">Town / City <span class="required">*</span></label>
+                <input type="text" id="propTown" placeholder="e.g. Guildford" required />
+              </div>
+              <div class="form-group">
+                <label for="propPostcode">Postcode <span class="required">*</span></label>
+                <input type="text" id="propPostcode" placeholder="e.g. GU2 7RN" required />
+              </div>
+            </div>
+          </div>
+
+          <!-- Specs -->
+          <div class="form-section">
+            <h3>Property Specifications</h3>
+            <div class="form-row three-col">
+              <div class="form-group">
+                <label for="propBeds">Bedrooms <span class="required">*</span></label>
+                <select id="propBeds" required>
+                  <option value="">—</option>
+                  <option value="0">Studio</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6+</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="propBaths">Bathrooms</label>
+                <select id="propBaths">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4+</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="propReception">Reception Rooms</label>
+                <select id="propReception">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row two-col">
+              <div class="form-group">
+                <label for="propSqft">Floor Area</label>
+                <input type="text" id="propSqft" placeholder="e.g. 1,200 sq ft" />
+              </div>
+              <div class="form-group">
+                <label for="propFeatures">Features / Tags</label>
+                <input type="text" id="propFeatures" placeholder="e.g. Garden, Parking, New kitchen" />
+                <small>Comma-separated list</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="form-section">
+            <h3>Description &amp; Agent</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="propDesc">Full Description</label>
+                <textarea id="propDesc" rows="5" placeholder="Describe the property — layout, condition, surroundings, standout features…"></textarea>
+              </div>
+            </div>
+            <div class="form-row two-col">
+              <div class="form-group">
+                <label for="agentName">Agent / Contact Name <span class="required">*</span></label>
+                <input type="text" id="agentName" placeholder="e.g. Patricia Reynolds" required />
+              </div>
+              <div class="form-group">
+                <label for="agentEmail">Agent Email <span class="required">*</span></label>
+                <input type="email" id="agentEmail" placeholder="patricia@example.com" required />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-primary btn-lg" id="generateBtn">Generate Listing Entry →</button>
+          </div>
+        </div><!-- end #propertyForm -->
+
+        <!-- Output Panel -->
+        <div class="output-panel" id="outputPanel" style="display:none;">
+          <h3>✅ Your Listing Entry</h3>
+          <p>Copy the code below and <strong>paste it into <code>js/data.js</code></strong> inside the <code>propertyListings</code> array, then commit to GitHub.</p>
+          <div class="code-block">
+            <button class="copy-btn" id="copyBtn">Copy</button>
+            <pre id="outputCode"></pre>
+          </div>
+          <div class="output-actions">
+            <button class="btn btn-secondary" id="downloadBtn">⬇ Download data.js</button>
+            <button class="btn btn-secondary" id="resetBtn">Add Another Property</button>
+          </div>
+          <div class="github-guide">
+            <h4>How to publish on GitHub Pages</h4>
+            <ol>
+              <li>Open your repository on <a href="https://github.com" target="_blank">github.com</a></li>
+              <li>Navigate to <code>js/data.js</code> and click the ✏️ pencil icon to edit</li>
+              <li>Paste the copied entry inside the <code>propertyListings = [</code> array at the top</li>
+              <li>Click <strong>Commit changes</strong> — your listing goes live instantly</li>
+            </ol>
+          </div>
+        </div>
+
+      </div><!-- end .form-card -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="images/logo.png" alt="Patricia Real Estate" class="site-logo-footer" />
+        <p>Trusted property specialists serving Hampshire and Surrey.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Properties</h4>
+        <a href="index.html">Browse All</a>
+        <a href="list.html">List a Property</a>
+      </div>
+      <div class="footer-links">
+        <h4>Company</h4>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-links">
+        <h4>Legal</h4>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms &amp; Conditions</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>© 2026 Patricia Real Estate. All rights reserved.</p>
+        <p><a href="privacy.html">Privacy</a> &nbsp;·&nbsp; <a href="terms.html">Terms</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/list.js"></script>
+</body>
+</html>

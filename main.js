@@ -1,0 +1,243 @@
+/**
+ * ============================================================
+ *  Patricia Real Estate – Main Page JavaScript (index.html)
+ *  Handles: card rendering, search, filter chips, sort, modal
+ * ============================================================
+ */
+
+/* ── DOM References ───────────────────────────────────── */
+const grid         = document.getElementById('listingsGrid');
+const emptyState   = document.getElementById('emptyState');
+const searchInput  = document.getElementById('searchInput');
+const searchBtn    = document.getElementById('searchBtn');
+const sortSelect   = document.getElementById('sortSelect');
+const filterChips  = document.querySelectorAll('.filter-chip');
+const statTotal    = document.getElementById('statTotal');
+const countDisplay = document.getElementById('countDisplay');
+const modalOverlay = document.getElementById('modalOverlay');
+const modalBody    = document.getElementById('modalBody');
+const modalClose   = document.getElementById('modalClose');
+const hamburger    = document.getElementById('hamburger');
+const mainNav      = document.getElementById('mainNav');
+
+/* ── State ────────────────────────────────────────────── */
+let activeFilter = 'all';
+let currentSort  = 'newest';
+let searchQuery  = '';
+
+/* ── Init ─────────────────────────────────────────────── */
+document.addEventListener('DOMContentLoaded', () => {
+  if (statTotal) statTotal.textContent = propertyListings.length;
+
+  // Check for URL filter param e.g. index.html?filter=for-sale
+  const params = new URLSearchParams(window.location.search);
+  const urlFilter = params.get('filter');
+  if (urlFilter) {
+    activeFilter = urlFilter;
+    filterChips.forEach(c => {
+      c.classList.toggle('active', c.dataset.filter === urlFilter);
+    });
+  }
+
+  renderListings();
+  bindEvents();
+});
+
+/* ── Render ────────────────────────────────────────────── */
+function renderListings() {
+  let items = [...propertyListings];
+
+  if (activeFilter !== 'all') {
+    items = items.filter(p => p.type === activeFilter);
+  }
+
+  if (searchQuery.trim()) {
+    const q = searchQuery.toLowerCase();
+    items = items.filter(p =>
+      p.title.toLowerCase().includes(q)   ||
+      p.address.toLowerCase().includes(q) ||
+      p.town.toLowerCase().includes(q)    ||
+      p.postcode.toLowerCase().includes(q) ||
+      p.category.toLowerCase().includes(q) ||
+      (p.features || []).some(f => f.toLowerCase().includes(q)) ||
+      p.description.toLowerCase().includes(q)
+    );
+  }
+
+  items = sortListings(items, currentSort);
+
+  grid.innerHTML = '';
+  if (countDisplay) countDisplay.textContent = items.length;
+
+  if (items.length === 0) {
+    emptyState.style.display = 'block';
+  } else {
+    emptyState.style.display = 'none';
+    items.forEach(p => grid.appendChild(createCard(p)));
+  }
+}
+
+function sortListings(items, method) {
+  return [...items].sort((a, b) => {
+    switch (method) {
+      case 'newest':
+        return new Date(b.added) - new Date(a.added);
+      case 'price-asc':
+        return parsePriceValue(a.price) - parsePriceValue(b.price);
+      case 'price-desc':
+        return parsePriceValue(b.price) - parsePriceValue(a.price);
+      case 'beds-desc':
+        return (b.bedrooms || 0) - (a.bedrooms || 0);
+      default:
+        return 0;
+    }
+  });
+}
+
+function parsePriceValue(price) {
+  if (!price) return 0;
+  const match = price.replace(/,/g, '').match(/[\d.]+/);
+  return match ? parseFloat(match[0]) : 0;
+}
+
+/* ── Card Builder ──────────────────────────────────────── */
+function createCard(p) {
+  const card = document.createElement('article');
+  card.className = 'listing-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-label', 'View details for ' + p.title);
+
+  const badgeLabels = {
+    'for-sale':   'For Sale',
+    'to-let':     'To Let',
+    'sold':       'Sold',
+    'let-agreed': 'Let Agreed'
+  };
+
+  const bedsLabel = p.bedrooms === 0 ? 'Studio' : p.bedrooms + ' bed' + (p.bedrooms !== 1 ? 's' : '');
+
+  card.innerHTML =
+    '<div class="card-image">' +
+      '<div class="card-image-bg ' + p.type + '">' + (p.emoji || '🏠') + '</div>' +
+      '<span class="card-badge ' + p.type + '">' + (badgeLabels[p.type] || p.type) + '</span>' +
+      '<button class="card-fav" aria-label="Save property" onclick="event.stopPropagation()">♡</button>' +
+    '</div>' +
+    '<div class="card-body">' +
+      '<div class="card-price">' + esc(p.price) + (p.type === 'to-let' ? '' : '') + '</div>' +
+      '<h3 class="card-title">' + esc(p.title) + '</h3>' +
+      '<p class="card-address">📍 ' + esc(p.address) + ', ' + esc(p.town) + ' ' + esc(p.postcode) + '</p>' +
+      '<div class="card-specs">' +
+        (p.bedrooms !== undefined ? '<span class="card-spec"><span class="card-spec-icon">🛏</span> ' + bedsLabel + '</span>' : '') +
+        (p.bathrooms ? '<span class="card-spec"><span class="card-spec-icon">🚿</span> ' + p.bathrooms + ' bath' + (p.bathrooms !== 1 ? 's' : '') + '</span>' : '') +
+        (p.sqft ? '<span class="card-spec"><span class="card-spec-icon">📐</span> ' + esc(p.sqft) + '</span>' : '') +
+      '</div>' +
+      '<p class="card-desc">' + esc(p.description) + '</p>' +
+    '</div>' +
+    '<div class="card-footer">' +
+      '<div class="card-agent"><span>Listed by</span><strong>' + esc(p.agent) + '</strong></div>' +
+      '<button class="btn btn-primary btn-sm card-enquire" data-id="' + p.id + '">Enquire</button>' +
+    '</div>';
+
+  card.addEventListener('click', e => {
+    if (e.target.closest('.card-enquire')) {
+      const id = e.target.closest('.card-enquire').dataset.id;
+      const prop = propertyListings.find(x => x.id === parseInt(id));
+      if (prop) window.location.href = 'contact.html?property=' + encodeURIComponent(prop.title);
+      return;
+    }
+    openModal(p);
+  });
+  card.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') openModal(p);
+  });
+
+  return card;
+}
+
+/* ── Modal ─────────────────────────────────────────────── */
+function openModal(p) {
+  const badgeLabels = { 'for-sale': 'For Sale', 'to-let': 'To Let', 'sold': 'Sold', 'let-agreed': 'Let Agreed' };
+  const bedsLabel = p.bedrooms === 0 ? 'Studio' : p.bedrooms + (p.bedrooms !== 1 ? ' Bedrooms' : ' Bedroom');
+
+  const featurePills = (p.features || [])
+    .map(f => '<span class="modal-feature">' + esc(f) + '</span>')
+    .join('');
+
+  modalBody.innerHTML =
+    '<div class="modal-image ' + p.type + '" style="font-size:5rem;">' +
+      (p.emoji || '🏠') +
+      '<button class="modal-close" id="modalCloseInner">✕</button>' +
+    '</div>' +
+    '<div class="modal-body">' +
+      '<span class="modal-badge ' + p.type + '">' + (badgeLabels[p.type] || p.type) + '</span>' +
+      '<div class="modal-price">' + esc(p.price) + '</div>' +
+      '<h2 class="modal-title">' + esc(p.title) + '</h2>' +
+      '<p class="modal-address">📍 ' + esc(p.address) + ', ' + esc(p.town) + ', ' + esc(p.postcode) + '</p>' +
+      '<div class="modal-specs-grid">' +
+        '<div class="modal-spec"><div class="spec-icon">🛏</div><label>Bedrooms</label><strong>' + bedsLabel + '</strong></div>' +
+        '<div class="modal-spec"><div class="spec-icon">🚿</div><label>Bathrooms</label><strong>' + (p.bathrooms || '—') + '</strong></div>' +
+        '<div class="modal-spec"><div class="spec-icon">🛋</div><label>Receptions</label><strong>' + (p.reception || '—') + '</strong></div>' +
+        '<div class="modal-spec"><div class="spec-icon">📐</div><label>Floor Area</label><strong>' + esc(p.sqft || '—') + '</strong></div>' +
+        '<div class="modal-spec"><div class="spec-icon">🏷</div><label>Category</label><strong>' + cap(p.category) + '</strong></div>' +
+        '<div class="modal-spec"><div class="spec-icon">📅</div><label>Added</label><strong>' + formatDate(p.added) + '</strong></div>' +
+      '</div>' +
+      '<p class="modal-desc">' + esc(p.description) + '</p>' +
+      '<div class="modal-features">' + featurePills + '</div>' +
+      '<div class="modal-agent">' +
+        '<div class="modal-agent-icon">👤</div>' +
+        '<div class="modal-agent-info"><h4>' + esc(p.agent) + '</h4><p>Patricia Real Estate</p></div>' +
+      '</div>' +
+      '<div class="modal-actions">' +
+        '<a href="contact.html?property=' + encodeURIComponent(p.title) + '" class="btn btn-primary">Enquire Now →</a>' +
+        '<a href="mailto:' + esc(p.email) + '?subject=Property Enquiry: ' + encodeURIComponent(p.title) + '" class="btn btn-secondary">Email Agent</a>' +
+      '</div>' +
+    '</div>';
+
+  // Bind inner close button
+  const innerClose = document.getElementById('modalCloseInner');
+  if (innerClose) innerClose.addEventListener('click', closeModal);
+
+  modalOverlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  modalOverlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* ── Events ────────────────────────────────────────────── */
+function bindEvents() {
+  filterChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      filterChips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      activeFilter = chip.dataset.filter;
+      renderListings();
+    });
+  });
+
+  searchInput.addEventListener('input',   () => { searchQuery = searchInput.value; renderListings(); });
+  searchBtn.addEventListener('click',     () => { searchQuery = searchInput.value; renderListings(); });
+  searchInput.addEventListener('keydown', e => { if (e.key === 'Enter') renderListings(); });
+  sortSelect.addEventListener('change',   () => { currentSort = sortSelect.value; renderListings(); });
+
+  modalClose.addEventListener('click', closeModal);
+  modalOverlay.addEventListener('click', e => { if (e.target === modalOverlay) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  hamburger.addEventListener('click', () => mainNav.classList.toggle('open'));
+  mainNav.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => mainNav.classList.remove('open')));
+}
+
+/* ── Helpers ───────────────────────────────────────────── */
+function esc(str) {
+  if (!str && str !== 0) return '';
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+function cap(str) { return str ? str.charAt(0).toUpperCase() + str.slice(1) : ''; }
+function formatDate(iso) {
+  if (!iso) return '—';
+  return new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+}
