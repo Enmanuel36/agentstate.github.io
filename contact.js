@@ -14,7 +14,7 @@
  * ============================================================
  */
 
-/** ⭐ YOUR EMAIL ADDRESS — Change this to yours! */
+/**YOUR EMAIL ADDRESS — Change this to yours! */
 const OWNER_EMAIL = 'hello@patriciarealestate.com';
 
 /* ── Init ──────────────────────────────────────────────── */
