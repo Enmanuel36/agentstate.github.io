@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!--
+    ============================================================
+    SECURITY NOTES:
+    - This page is NOT linked from anywhere on the site.
+    - The URL itself is the first layer of protection.
+    - The password is stored as a SHA-256 hash only.
+      The real password never appears in this file.
+    - Three wrong attempts locks the session for 15 minutes.
+    - The page is excluded from the nav and footer entirely.
+    ============================================================
+
+    YOUR ADMIN URL:
+    https://yourdomain.github.io/your-repo/admin-panel.html
+
+    CHANGING YOUR PASSWORD:
+    1. Compute the SHA-256 hash of your new password at:
+       https://emn178.github.io/online-tools/sha256.html
+    2. Replace the ADMIN_HASH value below with the new hash.
+    3. Commit the change to GitHub.
+  -->
+  <title>Admin – Patricia Real Estate</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ── Lock screen styles ────────────────────────────── */
+    .lock-screen {
+      min-height: 100vh;
+      background: var(--c-navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .lock-screen::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 60% at 70% 40%, rgba(200,167,90,0.1) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .lock-card {
+      background: var(--c-white);
+      border-radius: 20px;
+      padding: 48px 44px;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.4);
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+    .lock-logo {
+      height: 56px;
+      margin: 0 auto 24px;
+    }
+    .lock-icon {
+      font-size: 2.4rem;
+      margin-bottom: 16px;
+    }
+    .lock-card h1 {
+      font-family: var(--f-display);
+      font-size: 1.5rem;
+      color: var(--c-navy);
+      margin-bottom: 8px;
+    }
+    .lock-card p {
+      font-size: 0.87rem;
+      color: var(--c-text-2);
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+    .lock-input-wrap {
+      position: relative;
+      margin-bottom: 16px;
+    }
+    .lock-input {
+      width: 100%;
+      padding: 14px 48px 14px 18px;
+      border: 1.5px solid var(--c-border-dark);
+      border-radius: var(--r-sm);
+      font-family: var(--f-body);
+      font-size: 1rem;
+      color: var(--c-text);
+      background: var(--c-ivory);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      letter-spacing: 2px;
+    }
+    .lock-input:focus {
+      border-color: var(--c-gold);
+      box-shadow: 0 0 0 3px rgba(200,167,90,0.18);
+    }
+    .lock-input.error {
+      border-color: #C0392B;
+      box-shadow: 0 0 0 3px rgba(192,57,43,0.12);
+      animation: shake 0.35s ease;
+    }
+    .toggle-pw {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--c-text-3);
+      padding: 4px;
+      line-height: 1;
+    }
+    .lock-submit {
+      width: 100%;
+      padding: 14px;
+      font-size: 0.95rem;
+      border-radius: var(--r-sm);
+      margin-bottom: 12px;
+    }
+    .lock-error {
+      font-size: 0.82rem;
+      color: #C0392B;
+      margin-top: 8px;
+      min-height: 18px;
+    }
+    .lock-attempts {
+      font-size: 0.78rem;
+      color: var(--c-text-3);
+      margin-top: 6px;
+    }
+    .lock-locked {
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      border-radius: var(--r-sm);
+      padding: 12px 16px;
+      font-size: 0.84rem;
+      color: #856404;
+      margin-top: 12px;
+    }
+    /* ── Admin content (hidden until unlocked) ───────── */
+    #adminContent { display: none; }
+
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      20%      { transform: translateX(-8px); }
+      40%      { transform: translateX(8px); }
+      60%      { transform: translateX(-6px); }
+      80%      { transform: translateX(6px); }
+    }
+    @media (max-width: 480px) {
+      .lock-card { padding: 32px 22px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════════
+       LOCK SCREEN — shown until correct password entered
+       ══════════════════════════════════════════════════ -->
+  <div class="lock-screen" id="lockScreen">
+    <div class="lock-card">
+      <img src="images/logo.png" alt="Patricia Real Estate" class="lock-logo" />
+      <div class="lock-icon">🔒</div>
+      <h1>Admin Access</h1>
+      <p>This page is restricted. Enter your admin password to continue.</p>
+
+      <div class="lock-input-wrap">
+        <input
+          type="password"
+          id="pwInput"
+          class="lock-input"
+          placeholder="Enter password"
+          autocomplete="current-password"
+          spellcheck="false"
+        />
+        <button class="toggle-pw" id="togglePw" aria-label="Show/hide password" tabindex="-1">👁</button>
+      </div>
+
+      <button class="btn btn-primary lock-submit" id="unlockBtn">Unlock →</button>
+      <div class="lock-error"  id="lockError"></div>
+      <div class="lock-attempts" id="lockAttempts"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       ADMIN CONTENT — revealed after correct password
+       ══════════════════════════════════════════════════ -->
+  <div id="adminContent">
+
+    <!-- Admin header (no public nav links) -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="index.html">
+          <img src="images/logo.png" alt="Patricia Real Estate" class="site-logo" />
+        </a>
+        <nav class="main-nav" id="mainNav">
+          <a href="index.html" class="nav-link">← Back to Site</a>
+          <span class="nav-link" style="color:var(--c-gold);cursor:default;">Admin Panel</span>
+          <button class="btn btn-secondary btn-sm" id="lockAgainBtn" style="margin-left:8px;">Lock</button>
+        </nav>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Admin page hero -->
+    <section class="page-hero">
+      <div class="container">
+        <div class="breadcrumb">
+          <a href="index.html">Site</a>
+          <span>›</span>
+          <span>Admin Panel</span>
+        </div>
+        <h1>Add a New Property</h1>
+        <p>Secure admin area. Fill in the property details below to generate your listing entry.</p>
+      </div>
+    </section>
+
+    <!-- Listing Form (same as original list.html but admin-only) -->
+    <main class="form-page">
+      <div class="container form-container">
+
+        <div class="how-it-works">
+          <div class="how-step"><span class="step-num">1</span><p>Fill in your property details below</p></div>
+          <div class="how-step"><span class="step-num">2</span><p>Click Generate — copy the code snippet</p></div>
+          <div class="how-step"><span class="step-num">3</span><p>Paste into <code>js/data.js</code> on GitHub &amp; commit</p></div>
+        </div>
+
+        <div class="form-card">
+          <h2>Property Details</h2>
+          <p class="form-hint">Fields marked <span class="required">*</span> are required.</p>
+
+          <div id="propertyForm">
+
+            <!-- Basic Info -->
+            <div class="form-section">
+              <h3>Basic Information</h3>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="propTitle">Listing Title <span class="required">*</span></label>
+                  <input type="text" id="propTitle" placeholder="e.g. Stunning 3-Bed Victorian Terrace" />
+                </div>
+              </div>
+              <div class="form-row two-col">
+                <div class="form-group">
+                  <label for="propType">Listing Type <span class="required">*</span></label>
+                  <select id="propType">
+                    <option value="">Select…</option>
+                    <option value="for-sale">For Sale</option>
+                    <option value="to-let">To Let</option>
+                    <option value="sold">Sold</option>
+                    <option value="let-agreed">Let Agreed</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="propCategory">Property Category <span class="required">*</span></label>
+                  <select id="propCategory">
+                    <option value="">Select…</option>
+                    <option value="house">House</option>
+                    <option value="flat">Flat / Apartment</option>
+                    <option value="bungalow">Bungalow</option>
+                    <option value="land">Land</option>
+                    <option value="commercial">Commercial</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row two-col">
+                <div class="form-group">
+                  <label for="propPrice">Price <span class="required">*</span></label>
+                  <input type="text" id="propPrice" placeholder="e.g. £450,000 or £1,200 pcm" />
+                </div>
+                <div class="form-group">
+                  <label for="propEmoji">Display Icon</label>
+                  <select id="propEmoji">
+                    <option value="🏠">🏠 House</option>
+                    <option value="🏡">🏡 House with garden</option>
+                    <option value="🏢">🏢 Apartment block</option>
+                    <option value="🏰">🏰 Large / luxury</option>
+                    <option value="🌻">🌻 Bungalow / garden</option>
+                    <option value="⚓">⚓ Waterside</option>
+                    <option value="🌿">🌿 Garden flat</option>
+                    <option value="🏗">🏗 New build</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Location -->
+            <div class="form-section">
+              <h3>Location</h3>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="propAddress">Street Address <span class="required">*</span></label>
+                  <input type="text" id="propAddress" placeholder="e.g. 14 Oakwood Drive" />
+                </div>
+              </div>
+              <div class="form-row two-col">
+                <div class="form-group">
+                  <label for="propTown">Town / City <span class="required">*</span></label>
+                  <input type="text" id="propTown" placeholder="e.g. Guildford" />
+                </div>
+                <div class="form-group">
+                  <label for="propPostcode">Postcode <span class="required">*</span></label>
+                  <input type="text" id="propPostcode" placeholder="e.g. GU2 7RN" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Specs -->
+            <div class="form-section">
+              <h3>Property Specifications</h3>
+              <div class="form-row three-col">
+                <div class="form-group">
+                  <label for="propBeds">Bedrooms <span class="required">*</span></label>
+                  <select id="propBeds">
+                    <option value="">—</option>
+                    <option value="0">Studio</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6+</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="propBaths">Bathrooms</label>
+                  <select id="propBaths">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4+</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="propReception">Reception Rooms</label>
+                  <select id="propReception">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row two-col">
+                <div class="form-group">
+                  <label for="propSqft">Floor Area</label>
+                  <input type="text" id="propSqft" placeholder="e.g. 1,200 sq ft" />
+                </div>
+                <div class="form-group">
+                  <label for="propFeatures">Features / Tags</label>
+                  <input type="text" id="propFeatures" placeholder="e.g. Garden, Parking, New kitchen" />
+                  <small>Comma-separated list</small>
+                </div>
+              </div>
+            </div>
+
+            <!-- Description -->
+            <div class="form-section">
+              <h3>Description &amp; Agent</h3>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="propDesc">Full Description</label>
+                  <textarea id="propDesc" rows="5" placeholder="Describe the property — layout, condition, surroundings, standout features…"></textarea>
+                </div>
+              </div>
+              <div class="form-row two-col">
+                <div class="form-group">
+                  <label for="agentName">Agent / Contact Name <span class="required">*</span></label>
+                  <input type="text" id="agentName" placeholder="e.g. Patricia Reynolds" />
+                </div>
+                <div class="form-group">
+                  <label for="agentEmail">Agent Email <span class="required">*</span></label>
+                  <input type="email" id="agentEmail" placeholder="patricia@example.com" />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="btn btn-primary btn-lg" id="generateBtn">
+                Generate Listing Entry →
+              </button>
+            </div>
+          </div><!-- end #propertyForm -->
+
+          <!-- Output Panel -->
+          <div class="output-panel" id="outputPanel" style="display:none;">
+            <h3>✅ Your Listing Entry</h3>
+            <p>Copy the code below and <strong>paste it into <code>js/data.js</code></strong> inside the <code>propertyListings</code> array, then commit to GitHub.</p>
+            <div class="code-block">
+              <button class="copy-btn" id="copyBtn">Copy</button>
+              <pre id="outputCode"></pre>
+            </div>
+            <div class="output-actions">
+              <button class="btn btn-secondary" id="downloadBtn">⬇ Download data.js</button>
+              <button class="btn btn-secondary" id="resetBtn">Add Another Property</button>
+            </div>
+            <div class="github-guide">
+              <h4>How to publish your listing</h4>
+              <ol>
+                <li>Open your repository on <a href="https://github.com" target="_blank">github.com</a></li>
+                <li>Navigate to <code>js/data.js</code> and click the ✏️ pencil icon</li>
+                <li>Paste the entry inside <code>propertyListings = [</code> at the top</li>
+                <li>Click <strong>Commit changes</strong> — your listing is live instantly</li>
+              </ol>
+            </div>
+          </div>
+
+        </div><!-- end .form-card -->
+      </div>
+    </main>
+
+    <!-- Admin footer (minimal, no public links) -->
+    <footer class="site-footer">
+      <div class="footer-bottom" style="padding:20px 0;">
+        <div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+          <p style="color:rgba(255,255,255,0.3);font-size:0.8rem;">© 2026 Patricia Real Estate — Admin Panel</p>
+          <button class="btn btn-secondary btn-sm" id="lockAgainBtnFooter">🔒 Lock &amp; Exit</button>
+        </div>
+      </div>
+    </footer>
+
+  </div><!-- end #adminContent -->
+
+  <script src="js/data.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
