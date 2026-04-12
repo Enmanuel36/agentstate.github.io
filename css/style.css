@@ -1,6 +1,5 @@
 /* ============================================================
    Patricia Real Estate – Main Stylesheet
-   Luxury real estate portal, inspired by Rightmove / SpareRoom
    Palette: Navy #1F2933 · Ivory #FAF7F0 · Gold #C8A75A
    Fonts: Playfair Display (headings) · Inter (body/UI)
    Mobile-first, responsive at 600 / 768 / 1024 / 1200px
@@ -1544,3 +1543,4 @@ a:hover { color: var(--c-gold-dark); }
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
