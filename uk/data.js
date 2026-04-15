@@ -225,5 +225,27 @@ const propertyListings = [
     "email": "hello@patriciarealestate.com",
     "added": "2026-04-04",
     "emoji": "🌻"
+  },
+  {
+    "id": 1776293522645,
+    "title": "Test",
+    "type": "to-let",
+    "category": "house",
+    "price": "1500",
+    "address": "14 Test Rd",
+    "town": "London",
+    "postcode": "E15 1JS",
+    "bedrooms": 3,
+    "bathrooms": 1,
+    "reception": 1,
+    "sqft": "1200",
+    "photos": [],
+    "features": [
+      "Garden"
+    ],
+    "description": "",
+    "agent": "Patricia Reynolds",
+    "email": "hello@patriciarealestate.com",
+    "added": "2026-04-15"
   }
 ];
