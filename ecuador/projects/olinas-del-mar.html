@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Urbanización Olinas del Mar | Patricia Real Estate Ecuador</title>
+  <meta name="description" content="Olinas del Mar es un proyecto residencial de alto nivel ubicado frente al mar en el sur de Manta. Con infraestructura co" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../style.css" />
+  <style>
+    .proj-hero {
+      background: #1e1a0d; min-height: 80vh;
+      display: flex; align-items: center; position: relative; overflow: hidden;
+    }
+    .proj-hero::before {
+      content:''; position:absolute; inset:0;
+      background: radial-gradient(ellipse 70% 80% at 80% 40%, rgba(200,167,90,.13) 0%, transparent 60%),
+                  radial-gradient(ellipse 40% 60% at 10% 90%, rgba(200,167,90,.07) 0%, transparent 60%);
+    }
+    .proj-hero-inner { position:relative; z-index:1; max-width:700px; }
+    .proj-hero h1 { font-family:var(--f-display); font-size:clamp(2rem,5vw,3.6rem); color:#fff; line-height:1.15; margin-bottom:1.2rem; }
+    .proj-hero h1 em { color:var(--c-gold); font-style:italic; }
+    .proj-hero .location { font-size:.9rem; color:rgba(255,255,255,.6); margin-bottom:1rem; display:flex; align-items:center; gap:6px; }
+    .proj-hero .tagline { font-size:1.1rem; font-weight:300; color:rgba(255,255,255,.8); line-height:1.7; margin-bottom:2rem; }
+    .proj-highlights {
+      background: rgba(47,58,74,.6); border:1px solid rgba(200,167,90,.2);
+      border-radius:10px; padding:1.5rem 2rem; display:grid;
+      grid-template-columns:repeat(4,1fr); gap:1.5rem; margin-bottom:2rem;
+    }
+    .proj-hl-item { text-align:center; }
+    .proj-hl-val { font-family:var(--f-display); font-size:1.5rem; color:var(--c-gold); font-weight:700; }
+    .proj-hl-label { font-size:.75rem; color:rgba(250,247,240,.55); margin-top:4px; }
+    .proj-desc-section { background:var(--c-navy); padding:5rem 0; }
+    .proj-desc-inner { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start; }
+    .proj-desc-inner h2 { font-family:var(--f-display); font-size:1.8rem; color:#fff; margin-bottom:1rem; }
+    .proj-desc-inner h2 em { color:var(--c-gold); font-style:italic; }
+    .proj-desc-inner p { color:rgba(250,247,240,.7); line-height:1.8; margin-bottom:1rem; }
+    .proj-perks { list-style:none; padding:0; margin:1.5rem 0; }
+    .proj-perks li { display:flex; align-items:flex-start; gap:10px; font-size:.9rem; color:rgba(250,247,240,.8); margin-bottom:.8rem; line-height:1.5; }
+    .proj-perks li::before { content:'✓'; color:var(--c-gold); font-weight:700; flex-shrink:0; margin-top:1px; }
+    .proj-amenities { background:#17222C; padding:5rem 0; }
+    .proj-amenities-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top:3rem; }
+    .proj-amenity-card {
+      text-align:center;
+      background:var(--c-navy); border:1px solid rgba(200,167,90,.15);
+      border-radius:10px; padding:2rem 1.5rem;
+    }
+    .proj-amenity-icon { width:52px; height:52px; min-width:52px; background:rgba(200,167,90,.12); border-radius:12px; display:flex; align-items:center; justify-content:center; margin:0 auto 1rem; }
+    .proj-amenity-icon span { width:26px; height:26px; display:block; color:#C8A75A; flex-shrink:0; }
+    .proj-amenity-icon span svg { width:100%; height:100%; }
+    .proj-civil-item .civil-icon { width:44px; height:44px; background:rgba(200,167,90,.1); border-radius:10px; display:flex; align-items:center; justify-content:center; margin:0 auto .75rem; }
+    .proj-civil-item .civil-icon span { width:22px; height:22px; display:block; color:#C8A75A; }
+    .proj-civil-item .civil-icon span svg { width:100%; height:100%; }
+    .proj-amenity-card h3 { font-family:var(--f-display); font-size:1.1rem; color:#fff; margin-bottom:1rem; text-align:center; }
+    .proj-amenity-card ul { list-style:none; padding:0; }
+    .proj-amenity-card li { font-size:.875rem; color:rgba(250,247,240,.65); padding:.35rem 0; border-bottom:1px solid rgba(255,255,255,.05); display:flex; align-items:center; gap:8px; text-align:left; }
+    .proj-amenity-card li::before { content:'›'; color:var(--c-gold); }
+    .proj-civil { background:var(--c-navy); padding:4rem 0; }
+    .proj-civil-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-top:2rem; }
+    .proj-civil-item {
+      background:rgba(47,58,74,.4); border:1px solid rgba(200,167,90,.15);
+      border-radius:8px; padding:1.2rem; text-align:center;
+    }
+    .proj-civil-item span { display:block; }
+    .proj-civil-item p { font-size:.82rem; color:rgba(250,247,240,.65); line-height:1.5; }
+    .proj-gallery { background:#17222C; padding:5rem 0; }
+    .proj-gallery-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:.75rem; margin-top:2.5rem; }
+    .proj-gallery-item {
+      aspect-ratio: 1/1;
+      background: rgba(47,58,74,.5);
+      border: 1px solid rgba(200,167,90,.12);
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      transition: border-color .2s, transform .2s;
+    }
+    .proj-gallery-item:hover { border-color: rgba(200,167,90,.5); transform: scale(1.02); }
+    .proj-gallery-item img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .3s ease;
+    }
+    .proj-gallery-item:hover img { transform: scale(1.05); }
+        .proj-gallery-note { text-align:center; margin-top:1.5rem; font-size:.85rem; color:rgba(250,247,240,.4); }
+    .proj-cta { background:linear-gradient(135deg,#1a2730 0%,#253040 100%); padding:5rem 0; text-align:center; border-top:1px solid rgba(200,167,90,.2); }
+    .proj-cta h2 { font-family:var(--f-display); font-size:2.2rem; color:#fff; margin-bottom:1rem; }
+    .proj-cta h2 em { color:var(--c-gold); font-style:italic; }
+    .proj-cta p { color:rgba(250,247,240,.7); max-width:520px; margin:0 auto 2.5rem; line-height:1.7; }
+    .proj-cta-actions { display:flex; justify-content:center; gap:1rem; flex-wrap:wrap; }
+    .btn-whatsapp {
+      display:inline-flex; align-items:center; gap:10px;
+      padding:14px 32px; border-radius:6px;
+      background:#25D366; color:#fff; font-weight:600;
+      font-size:.95rem; text-decoration:none;
+      transition:background .22s, transform .22s; border:2px solid #25D366;
+    }
+    .btn-whatsapp:hover { background:#1db954; border-color:#1db954; transform:translateY(-2px); }
+    .btn-whatsapp svg { width:20px; height:20px; fill:#fff; }
+    @media(max-width:900px) {
+      .proj-highlights { grid-template-columns:repeat(2,1fr); }
+      .proj-desc-inner { grid-template-columns:1fr; gap:2rem; }
+      .proj-amenities-grid { grid-template-columns:1fr 1fr; }
+      .proj-civil-grid { grid-template-columns:repeat(2,1fr); }
+      .proj-gallery-grid { grid-template-columns:repeat(2,1fr); }
+    }
+    @media(max-width:580px) {
+      .proj-amenities-grid { grid-template-columns:1fr; }
+      .proj-gallery-grid { grid-template-columns:repeat(2,1fr); }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../../landing.html"><img src="../../images/logo.png" alt="Patricia Real Estate" class="site-logo" /></a>
+      <nav class="main-nav" id="mainNav">
+        <a href="../index.html" class="nav-link" style="color:rgba(255,255,255,.5);font-size:.8rem;" data-i18n="proj.nav.back">← Ecuador</a>
+        <a href="../../about.html" class="nav-link" data-i18n="nav.about">Who We Are</a>
+        <a href="../index.html#proyectos" class="nav-link" data-i18n="proj.nav.projects">Projects</a>
+        <a href="mailto:hello@patriciarealestate.com?subject=Consulta Ecuador" class="btn btn-primary btn-sm nav-cta" data-i18n="proj.nav.enquire">Enquire Now</a>
+        <button class="btn btn-sm nav-cta lang-toggle" id="langToggle" onclick="toggleLang()" style="background:transparent;border:1px solid rgba(200,167,90,0.5);color:var(--c-gold);padding:6px 14px;border-radius:4px;cursor:pointer;font-size:.78rem;font-weight:600;letter-spacing:1px;">ES</button>
+      </nav>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="proj-hero">
+    <div class="container proj-hero-inner">
+      <p style="font-size:.78rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--c-gold);margin-bottom:1rem;" data-i18n="proj.olinas-del-mar.type">Seafront Development</p>
+      <h1>Urbanización <em>Olinas del Mar</em></h1>
+      <p class="location">📍 Sur de Manta, Costa del Pacífico, Manabí</p>
+      <p class="tagline">Un estilo de vida frente al océano.</p>
+      <div class="proj-highlights">
+        <div class="proj-hl-item"><div class="proj-hl-val">$18,000</div><div class="proj-hl-label" data-i18n="proj.hl.price">Price from</div></div>
+        <div class="proj-hl-item"><div class="proj-hl-val">$2,000</div><div class="proj-hl-label" data-i18n="proj.hl.sep">Reservation from</div></div>
+        <div class="proj-hl-item"><div class="proj-hl-val" style="font-size:1.1rem;">Lotes desde 250 m²</div><div class="proj-hl-label" data-i18n="proj.hl.size">Plot size</div></div>
+        <div class="proj-hl-item"><div class="proj-hl-val" style="font-size:1rem;">Acceso directo a la playa</div><div class="proj-hl-label" data-i18n="proj.hl.dist">Distance to sea</div></div>
+      </div>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <a href="mailto:hello@patriciarealestate.com?subject=Consulta Ecuador" class="btn btn-primary btn-lg" data-i18n="proj.cta.btn">Enquire Now →</a>
+        <a href="../index.html#proyectos" class="btn btn-ghost-light btn-lg" data-i18n="proj.hero.back">← View all projects</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DESCRIPTION -->
+  <section class="proj-desc-section">
+    <div class="container proj-desc-inner">
+      <div>
+        <h2>Sobre el proyecto <em>Mar</em></h2>
+        <p>Olinas del Mar es un proyecto residencial de alto nivel ubicado frente al mar en el sur de Manta. Con infraestructura completa, acceso directo a la playa y amenidades de primer nivel, es la opción ideal para quienes buscan calidad de vida e inversión segura.</p>
+        <p>Patricia Real Estate te acompaña en cada paso del proceso de compra, desde la consulta inicial hasta la firma de escrituras — con transparencia, seguridad jurídica y atención personalizada.</p>
+      </div>
+      <div>
+        <h2 style="font-size:1.3rem;margin-bottom:1rem;" data-i18n="proj.desc.benefits">Key Benefits</h2>
+        <ul class="proj-perks">
+          <li>Playa de acceso privado</li><li>El proyecto más exclusivo de la zona</li><li>Financiamiento propio flexible</li><li>Rentabilidad turística comprobada</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- AMENITIES -->
+  <section class="proj-amenities">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-eyebrow" data-i18n="proj.amenities.eyebrow">Amenities</span>
+        <h2 style="color:#fff;" data-i18n="proj.amenities.h2">Project Amenities &amp; Works</h2>
+        <p style="color:rgba(250,247,240,.65);" data-i18n="proj.amenities.sub">Everything you need to live or invest with comfort and value.</p>
+      </div>
+      <div class="proj-amenities-grid">
+        <div class="proj-amenity-card"><div class="proj-amenity-icon"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 12c0 4.4-5.5 8-5.5 8S6.5 16.4 6.5 12a5.5 5.5 0 0 1 11 0z"/><path d="M3 20h18"/></svg></span></div><h3>Frente al Mar</h3><ul><li>Playa privada</li><li>Muelle de acceso</li><li>Zona de kayaks</li><li>Club de playa</li></ul></div><div class="proj-amenity-card"><div class="proj-amenity-icon"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span></div><h3>Residencial</h3><ul><li>Lotes amplios desde 250 m²</li><li>Diseño urbanístico planificado</li><li>Zonas de comercio</li><li>Parques infantiles</li></ul></div><div class="proj-amenity-card"><div class="proj-amenity-icon"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></span></div><h3>Exclusivo</h3><ul><li>Acceso controlado 24/7</li><li>Seguridad privada</li><li>CCTV perimetral</li><li>Administración comunal</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CIVIL WORKS -->
+  <section class="proj-civil">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-eyebrow" data-i18n="proj.civil.eyebrow">Infrastructure</span>
+        <h2 style="color:#fff;" data-i18n="proj.civil.h2">Civil Works Included</h2>
+      </div>
+      <div class="proj-civil-grid">
+        <div class="proj-civil-item"><div class="civil-icon"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6M10 22h4"/></svg></span></div><p>Vías internas pavimentadas</p></div><div class="proj-civil-item"><div class="civil-icon"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></span></div><p>Sistema de agua potable</p></div><div class="proj-civil-item"><div class="civil-icon"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8H6a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2z"/></svg></span></div><p>Red eléctrica completa</p></div><div class="proj-civil-item"><div class="civil-icon"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2h-2"/><circle cx="9" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></span></div><p>Alcantarillado moderno</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="proj-gallery">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-eyebrow" data-i18n="proj.gallery.eyebrow">Gallery</span>
+        <h2 style="color:#fff;" data-i18n="proj.gallery.h2">Project Gallery</h2>
+        <p style="color:rgba(250,247,240,.65);" data-i18n="proj.gallery.sub">Illustrative images of the project and surrounding area.</p>
+      </div>
+      <div class="proj-gallery-grid" id="galleryGrid">
+        <div class="proj-gallery-item" onclick="openLightbox(0)"><img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=900&q=80" alt="Foto 1" style="width:100%;height:100%;object-fit:cover;" loading="lazy" /></div>
+        <div class="proj-gallery-item" onclick="openLightbox(1)"><img src="https://images.unsplash.com/photo-1540202403-b7abd6747a18?w=900&q=80" alt="Foto 2" style="width:100%;height:100%;object-fit:cover;" loading="lazy" /></div>
+        <div class="proj-gallery-item" onclick="openLightbox(2)"><img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=900&q=80" alt="Foto 3" style="width:100%;height:100%;object-fit:cover;" loading="lazy" /></div>
+        <div class="proj-gallery-item" onclick="openLightbox(3)"><img src="https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=900&q=80" alt="Foto 4" style="width:100%;height:100%;object-fit:cover;" loading="lazy" /></div>
+        <div class="proj-gallery-item" onclick="openLightbox(4)"><img src="https://images.unsplash.com/photo-1437719417032-8595fd9e9dc6?w=900&q=80" alt="Foto 5" style="width:100%;height:100%;object-fit:cover;" loading="lazy" /></div>
+        <div class="proj-gallery-item" onclick="openLightbox(5)"><img src="https://images.unsplash.com/photo-1463003416389-296a1ad37ca0?w=900&q=80" alt="Foto 6" style="width:100%;height:100%;object-fit:cover;" loading="lazy" /></div>
+        <div class="proj-gallery-item" onclick="openLightbox(6)"><img src="https://images.unsplash.com/photo-1476673160081-cf065607f449?w=900&q=80" alt="Foto 7" style="width:100%;height:100%;object-fit:cover;" loading="lazy" /></div>
+        <div class="proj-gallery-item" onclick="openLightbox(7)"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&q=80" alt="Foto 8" style="width:100%;height:100%;object-fit:cover;" loading="lazy" /></div>
+      </div>
+      <p class="proj-gallery-note" data-i18n="proj.gallery.note">Want to see more photos or take a virtual tour? Contact us.</p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="proj-cta">
+    <div class="container">
+      <h2>¿Te interesa<br/><em>Mar?</em></h2>
+      <p data-i18n="proj.cta.p">Speak with our team today. We will send you all the information, updated prices and payment plans with no obligation.</p>
+      <div class="proj-cta-actions">
+        <a href="mailto:hello@patriciarealestate.com?subject=Consulta Ecuador" class="btn btn-primary btn-lg" data-i18n="proj.cta.btn">Enquire Now →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="../../landing.html"><img src="../../images/logo.png" alt="Patricia Real Estate" class="site-logo-footer" /></a>
+        <p>Especialistas en inversión inmobiliaria en Ecuador.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Ecuador</h4>
+        <a href="../index.html">Inicio Ecuador</a>
+        <a href="../index.html#proyectos">Ver Proyectos</a>
+      </div>
+      <div class="footer-links">
+        <h4>Otros Países</h4>
+        <a href="../../uk/index.html">🇬🇧 United Kingdom</a>
+        <a href="../../spain/index.html">🇪🇸 Spain</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container"><p>© 2026 Patricia Real Estate Ecuador. Todos los derechos reservados.</p></div>
+    </div>
+  </footer>
+  <script>
+    const h = document.getElementById('hamburger'), n = document.getElementById('mainNav');
+    h.addEventListener('click', () => n.classList.toggle('open'));
+    n.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => n.classList.remove('open')));
+  </script>
+
+  <div id="lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9999;align-items:center;justify-content:center;flex-direction:column;">
+    <button onclick="closeLightbox()" style="position:absolute;top:16px;right:20px;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;">✕</button>
+    <button id="lbPrev" onclick="changeLb(-1)" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);border:none;color:#fff;font-size:2rem;width:48px;height:48px;border-radius:50%;cursor:pointer;">&#8249;</button>
+    <img id="lbImg" src="" style="max-width:90vw;max-height:80vh;object-fit:contain;border-radius:4px;" />
+    <div id="lbCounter" style="color:rgba(255,255,255,.6);font-size:.85rem;margin-top:12px;"></div>
+    <div style="display:flex;gap:8px;margin-top:14px;overflow-x:auto;max-width:90vw;padding:4px 0;" id="lbThumbs"></div>
+    <button id="lbNext" onclick="changeLb(1)" style="position:absolute;right:16px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);border:none;color:#fff;font-size:2rem;width:48px;height:48px;border-radius:50%;cursor:pointer;">&#8250;</button>
+  </div>
+  <script>
+    const lbPhotos = ["https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=900&q=80","https://images.unsplash.com/photo-1540202403-b7abd6747a18?w=900&q=80","https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=900&q=80","https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=900&q=80","https://images.unsplash.com/photo-1437719417032-8595fd9e9dc6?w=900&q=80","https://images.unsplash.com/photo-1463003416389-296a1ad37ca0?w=900&q=80","https://images.unsplash.com/photo-1476673160081-cf065607f449?w=900&q=80","https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&q=80"];
+    let lbIdx = 0;
+    function openLightbox(i) {
+      lbIdx = i; updateLb();
+      document.getElementById('lightbox').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+      document.body.style.overflow = '';
+    }
+    function changeLb(dir) { lbIdx = (lbIdx + dir + lbPhotos.length) % lbPhotos.length; updateLb(); }
+    function updateLb() {
+      document.getElementById('lbImg').src = lbPhotos[lbIdx];
+      document.getElementById('lbCounter').textContent = (lbIdx+1) + ' / ' + lbPhotos.length;
+      const thumbs = document.getElementById('lbThumbs');
+      thumbs.innerHTML = lbPhotos.map((p,i) =>
+        '<img src="'+p+'" onclick="lbIdx='+i+';updateLb()" style="width:56px;height:40px;object-fit:cover;border-radius:3px;cursor:pointer;opacity:'+(i===lbIdx?'1':'.45')+';border:2px solid '+(i===lbIdx?'#C8A75A':'transparent')+';" />'
+      ).join('');
+    }
+    document.addEventListener('keydown', e => {
+      if (document.getElementById('lightbox').style.display !== 'none') {
+        if (e.key === 'ArrowLeft') changeLb(-1);
+        if (e.key === 'ArrowRight') changeLb(1);
+        if (e.key === 'Escape') closeLightbox();
+      }
+    });
+  </script>
+  <script src="../../js/i18n.js"></script>
+</body>
+</html>

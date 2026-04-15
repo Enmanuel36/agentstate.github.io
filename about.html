@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Meet the team behind Patricia Real Estate — trusted specialists in UK lettings, Spanish properties and Ecuador land investments." />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Who We Are | Patricia Real Estate" />
+  <meta property="og:description" content="A personal, professional property group operating across the UK, Spain and Ecuador. Meet our founder Patricia Reynolds." />
+  <meta property="og:url" content="https://yourdomain.com/about.html" />
+  <meta property="og:image" content="https://yourdomain.com/images/og-preview.jpg" />
+  <meta property="og:site_name" content="Patricia Real Estate" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Who We Are | Patricia Real Estate" />
+  <meta name="twitter:description" content="A personal, professional property group operating across the UK, Spain and Ecuador. Meet our founder Patricia Reynolds." />
+  <meta name="description" content="Meet the team behind Patricia Real Estate — trusted specialists in UK lettings, Spanish properties and Ecuador land investments." />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Who We Are | Patricia Real Estate" />
+  <meta property="og:description" content="A personal, professional property group operating across the UK, Spain and Ecuador. Meet our founder Patricia Reynolds." />
+  <meta property="og:url" content="https://yourdomain.com/about.html" />
+  <meta property="og:image" content="https://yourdomain.com/images/og-preview.jpg" />
+  <meta property="og:site_name" content="Patricia Real Estate" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Who We Are | Patricia Real Estate" />
+  <meta name="twitter:description" content="A personal, professional property group operating across the UK, Spain and Ecuador. Meet our founder Patricia Reynolds." />
+  <title>Who We Are | Patricia Real Estate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .about-hero { position:relative; overflow:hidden; background:var(--c-navy); padding:8rem 0 6rem; }
+    .about-hero::before { content:''; position:absolute; inset:0;
+      background:radial-gradient(ellipse 60% 80% at 80% 30%,rgba(200,167,90,.12) 0%,transparent 60%),
+                radial-gradient(ellipse 40% 50% at 10% 80%,rgba(200,167,90,.07) 0%,transparent 60%); }
+    .about-hero-inner { position:relative; z-index:1; max-width:700px; }
+    .about-hero h1 { font-family:var(--f-display); font-size:clamp(2.2rem,5vw,3.8rem); color:#fff; line-height:1.15; margin-bottom:1.2rem; }
+    .about-hero h1 em { color:var(--c-gold); font-style:italic; }
+    .about-hero p { font-size:1.1rem; font-weight:300; color:rgba(255,255,255,.75); line-height:1.75; max-width:580px; }
+
+    .mission-section { background:var(--c-ivory); padding:6rem 0; }
+    .mission-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; }
+    .mission-text h2 { font-family:var(--f-display); font-size:2rem; color:var(--c-navy); margin-bottom:1.2rem; }
+    .mission-text h2 em { color:var(--c-gold); font-style:italic; }
+    .mission-text p { color:var(--c-text-2,#5A6A7A); line-height:1.8; margin-bottom:1rem; font-size:.97rem; }
+    .mission-visual { background:var(--c-navy); border-radius:16px; padding:3rem 2.5rem; }
+    .mission-stat { text-align:center; padding:1.5rem 0; border-bottom:1px solid rgba(200,167,90,.15); }
+    .mission-stat:last-child { border-bottom:none; }
+    .mission-stat-num { font-family:var(--f-display); font-size:2.8rem; color:var(--c-gold); font-weight:700; }
+    .mission-stat-label { font-size:.85rem; color:rgba(250,247,240,.6); margin-top:4px; }
+
+    .values-section { background:var(--c-navy); padding:6rem 0; }
+    .values-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top:3rem; }
+    .value-card { background:rgba(47,58,74,.5); border:1px solid rgba(200,167,90,.15); border-radius:12px; padding:2.5rem 2rem; transition:border-color .22s, transform .22s; display:flex; flex-direction:column; }
+    .value-card:hover { border-color:rgba(200,167,90,.5); transform:translateY(-4px); }
+    .value-icon { width:52px; height:52px; min-width:52px; min-height:52px; background:rgba(200,167,90,.12); border-radius:12px; display:flex; align-items:center; justify-content:center; margin:0 auto 1.4rem; }
+    .value-icon span { width:26px; height:26px; display:block; color:#C8A75A; flex-shrink:0; }
+    .value-icon span svg { width:100%; height:100%; }
+    .value-card h3 { font-family:var(--f-display); font-size:1.1rem; color:#fff; margin-bottom:.75rem; text-align:center; }
+    .value-card p { font-size:.875rem; color:rgba(250,247,240,.65); line-height:1.7; margin:0; }
+
+    .story-section { background:var(--c-ivory); padding:6rem 0; }
+    .story-inner { max-width:760px; margin:0 auto; }
+    .story-inner h2 { font-family:var(--f-display); font-size:2rem; color:var(--c-navy); margin-bottom:1.5rem; }
+    .story-inner h2 em { color:var(--c-gold); font-style:italic; }
+    .story-inner p { color:var(--c-text-2,#5A6A7A); line-height:1.85; margin-bottom:1.2rem; font-size:.97rem; }
+    .story-timeline { margin:3rem 0; border-left:3px solid var(--c-gold); padding-left:2rem; }
+    .story-item { margin-bottom:2.5rem; position:relative; }
+    .story-item::before { content:''; position:absolute; left:-2.6rem; top:6px; width:14px; height:14px; background:var(--c-gold); border-radius:50%; }
+    .story-year { font-size:.78rem; font-weight:600; letter-spacing:2px; color:var(--c-gold); text-transform:uppercase; margin-bottom:.4rem; }
+    .story-item h4 { font-family:var(--f-display); font-size:1.05rem; color:var(--c-navy); margin-bottom:.4rem; }
+    .story-item p { font-size:.88rem; color:var(--c-text-2,#5A6A7A); line-height:1.7; margin:0; }
+
+    .team-section { background:var(--c-navy); padding:6rem 0; }
+    .team-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top:3rem; }
+    .team-card { background:rgba(47,58,74,.45); border:1px solid rgba(200,167,90,.15); border-radius:12px; padding:2rem 1.5rem; text-align:center; }
+    .team-avatar { width:80px; height:80px; border-radius:50%; background:rgba(200,167,90,.15); border:2px solid rgba(200,167,90,.3); display:flex; align-items:center; justify-content:center; font-size:2.2rem; margin:0 auto 1.2rem; }
+    .team-name { font-family:var(--f-display); font-size:1.1rem; color:#fff; margin-bottom:.3rem; }
+    .team-role { font-size:.8rem; color:var(--c-gold); font-weight:600; letter-spacing:1px; text-transform:uppercase; margin-bottom:.8rem; }
+    .team-bio { font-size:.855rem; color:rgba(250,247,240,.6); line-height:1.65; }
+
+    .countries-section { background:var(--c-ivory); padding:6rem 0; }
+    .countries-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top:3rem; }
+    .country-card { background:#fff; border:1px solid #E5E7EB; border-radius:12px; padding:2.5rem 2rem; text-align:center; transition:box-shadow .22s, transform .22s; text-decoration:none; color:inherit; }
+    .country-card:hover { box-shadow:0 8px 32px rgba(31,41,51,.12); transform:translateY(-4px); }
+    .country-flag { font-size:3rem; margin-bottom:1rem; }
+    .country-card h3 { font-family:var(--f-display); font-size:1.2rem; color:var(--c-navy); margin-bottom:.5rem; }
+    .country-card p { font-size:.875rem; color:#5A6A7A; line-height:1.6; }
+    .country-link { display:inline-flex; align-items:center; gap:6px; margin-top:1rem; font-size:.82rem; font-weight:600; color:var(--c-gold); }
+
+    .about-cta { background:var(--c-navy); padding:5rem 0; text-align:center; }
+    .about-cta h2 { font-family:var(--f-display); font-size:2rem; color:#fff; margin-bottom:1rem; }
+    .about-cta h2 em { color:var(--c-gold); font-style:italic; }
+    .about-cta p { color:rgba(250,247,240,.7); max-width:500px; margin:0 auto 2rem; line-height:1.7; }
+
+    /* Team split layout */
+    .team-split { display:grid; grid-template-columns:1fr 1px 1fr; gap:0; margin-top:3rem; align-items:start; }
+    .team-card-featured { padding:2.5rem 3rem 2.5rem 0; }
+    .team-avatar-lg { width:90px; height:90px; border-radius:50%; background:rgba(200,167,90,.15); border:2px solid rgba(200,167,90,.35); display:flex; align-items:center; justify-content:center; font-size:2.5rem; margin-bottom:1.2rem; }
+    .team-name-lg { font-family:var(--f-display); font-size:1.4rem; color:#fff; margin-bottom:.3rem; }
+    .team-role-lg { font-size:.78rem; color:var(--c-gold); font-weight:600; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:1rem; }
+    .team-bio-lg { font-size:.9rem; color:rgba(250,247,240,.7); line-height:1.75; margin-bottom:1.5rem; }
+    .team-contact-row { margin-top:.5rem; }
+    .team-divider { background:rgba(200,167,90,.2); width:1px; margin:0 3rem; align-self:stretch; }
+    .team-partners { padding:2.5rem 0 2.5rem 3rem; padding-left:4rem; }
+    .team-partners-header { margin-bottom:2rem; }
+    .partners-icon { font-size:2rem; margin-bottom:.8rem; }
+    .team-partners-header h3 { font-family:var(--f-display); font-size:1.2rem; color:#fff; margin-bottom:.6rem; }
+    .team-partners-header p { font-size:.875rem; color:rgba(250,247,240,.6); line-height:1.7; }
+    .partners-list { display:flex; flex-direction:column; gap:1.5rem; margin-bottom:1.5rem; }
+    .partner-item { display:flex; gap:1rem; align-items:flex-start; }
+    .partner-flag { font-size:1.8rem; flex-shrink:0; margin-top:2px; }
+    .partner-market { font-size:.8rem; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--c-gold); margin-bottom:.4rem; }
+    .partner-desc { font-size:.855rem; color:rgba(250,247,240,.65); line-height:1.65; }
+    .partners-note { font-size:.8rem; color:rgba(250,247,240,.4); font-style:italic; line-height:1.6; border-top:1px solid rgba(200,167,90,.12); padding-top:1.2rem; }
+    @media(max-width:900px) {
+      .mission-grid,.values-grid,.countries-grid { grid-template-columns:1fr 1fr; }
+      .team-split { grid-template-columns:1fr; }
+      .team-divider { width:100%; height:1px; margin:2rem 0; }
+      .team-card-featured,.team-partners { padding:1.5rem 0; }
+      .team-partners { padding-left:0 !important; }
+    }
+    @media(max-width:580px) {
+      .mission-grid,.values-grid,.countries-grid { grid-template-columns:1fr; }
+      .about-hero h1 { font-size:clamp(2rem,8vw,3rem); }
+      .partner-item { flex-direction:column; gap:.5rem; }
+      .story-line { padding-left:1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="landing.html"><img src="images/logo.png" alt="Patricia Real Estate" class="site-logo" /></a>
+      <nav class="main-nav" id="mainNav">
+        <a href="landing.html" class="nav-link" style="color:rgba(255,255,255,0.5);font-size:.8rem;">&#8592; Countries</a>
+        <a href="uk/index.html" class="nav-link" data-i18n="nav.properties">Properties</a>
+        <a href="about.html" class="nav-link active" data-i18n="nav.about">Who We Are</a>
+        <a href="mailto:hello@patriciarealestate.com" class="nav-link" data-i18n="footer.contact">Contact</a>
+        <a href="mailto:hello@patriciarealestate.com" class="btn btn-primary btn-sm nav-cta">Enquire Now</a>
+        <button class="btn btn-sm nav-cta lang-toggle" id="langToggle" onclick="toggleLang()" style="background:transparent;border:1px solid rgba(200,167,90,0.5);color:var(--c-gold);padding:6px 14px;border-radius:4px;cursor:pointer;font-size:.78rem;font-weight:600;letter-spacing:1px;">ES</button>
+      </nav>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="about-hero">
+    <div class="container about-hero-inner">
+      <p class="hero-eyebrow" style="color:var(--c-gold);font-size:.78rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:1.2rem;display:flex;align-items:center;gap:8px;">
+        <span style="width:24px;height:1px;background:var(--c-gold);opacity:.6;display:inline-block;"></span>
+        <span data-i18n="about.eyebrow">Patricia Real Estate</span>
+        <span style="width:24px;height:1px;background:var(--c-gold);opacity:.6;display:inline-block;"></span>
+      </p>
+      <h1 data-i18n-html="about.hero.h1">Who <em>We Are</em></h1>
+      <p data-i18n="about.hero.p">A trusted, personal and professional property group operating across three countries — connecting people with exceptional homes and investments.</p>
+    </div>
+  </section>
+
+  <!-- MISSION -->
+  <section class="mission-section">
+    <div class="container mission-grid">
+      <div class="mission-text">
+        <h2 data-i18n-html="about.mission.h2">Our <em>Mission</em></h2>
+        <p data-i18n="about.mission.p1">At Patricia Real Estate, our mission is simple: to make property ownership accessible, transparent and rewarding — whether you're searching for a family home in the UK, a luxury villa in Spain, or investing in land in Ecuador.</p>
+        <p data-i18n="about.mission.p2">We believe that finding or selling a property should be a positive, empowering experience. That means honest advice, clear communication, and a team that genuinely cares about your outcome — not just the transaction.</p>
+        <p data-i18n="about.mission.p3">With operations across three countries and a multilingual team, we bring local expertise and global perspective to every client relationship.</p>
+      </div>
+      <div class="mission-visual">
+        <div class="mission-stat"><div class="mission-stat-num">10+</div><div class="mission-stat-label" data-i18n="about.stats.years">Years of experience</div></div>
+        <div class="mission-stat"><div class="mission-stat-num">500+</div><div class="mission-stat-label" data-i18n="about.stats.clients">Happy clients worldwide</div></div>
+        <div class="mission-stat"><div class="mission-stat-num">3</div><div class="mission-stat-label" data-i18n="about.stats.countries">Countries of operation</div></div>
+        <div class="mission-stat"><div class="mission-stat-num">98%</div><div class="mission-stat-label" data-i18n="about.stats.satisfaction">Client satisfaction rate</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="values-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-eyebrow" data-i18n="about.values.eyebrow">Our Values</span>
+        <h2 style="color:#fff;" data-i18n-html="about.values.h2">What We <em>Stand For</em></h2>
+        <p style="color:rgba(250,247,240,.65);" data-i18n="about.values.sub">The principles that guide every decision we make and every relationship we build.</p>
+      </div>
+      <div class="values-grid">
+        <div class="value-card"><div class="value-icon"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></svg></span></div><h3 data-i18n="about.values.trust.h">Trust &amp; Transparency</h3><p data-i18n="about.values.trust.p">We say what we mean and mean what we say. Every client receives honest, clear advice — even when it's not what they hoped to hear. Trust is the foundation of everything we do.</p></div>
+        <div class="value-card"><div class="value-icon"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></span></div><h3 data-i18n="about.values.excellence.h">Excellence</h3><p data-i18n="about.values.excellence.p">We set high standards for ourselves and never stop improving. From the quality of our listings to the speed of our response, excellence is our baseline — not our ceiling.</p></div>
+        <div class="value-card"><div class="value-icon"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></span></div><h3 data-i18n="about.values.personal.h">Personal Service</h3><p data-i18n="about.values.personal.p">You're not a number to us. Every client has a dedicated contact who knows their situation, their goals, and their timeline. Relationships come first — always.</p></div>
+        <div class="value-card"><div class="value-icon"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></span></div><h3 data-i18n="about.values.global.h">Global Thinking</h3><p data-i18n="about.values.global.p">Our reach spans the UK, Spain and Ecuador. We understand how international buyers think and what they need — bringing global perspective with deep local knowledge.</p></div>
+        <div class="value-card"><div class="value-icon"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></span></div><h3 data-i18n="about.values.legal.h">Legal Integrity</h3><p data-i18n="about.values.legal.p">Every property we handle is backed by proper legal due diligence. We work with trusted solicitors and notaries in each country to protect our clients at every step.</p></div>
+        <div class="value-card"><div class="value-icon"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg></span></div><h3 data-i18n="about.values.community.h">Community &amp; Legacy</h3><p data-i18n="about.values.community.p">We invest in the communities we serve. In Ecuador, we help families build generational wealth. In the UK and Spain, we help people put down roots and build meaningful lives.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="story-section">
+    <div class="container story-inner">
+      <h2 data-i18n-html="about.story.h2">Our <em>Story</em></h2>
+      <p data-i18n="about.story.p1">Patricia Real Estate was founded on a simple belief: that property — wherever in the world — should be accessible to everyone, handled with care and backed by expertise. What started as a local estate agency in Hampshire has grown into an international property group with deep roots in three countries.</p>
+      <div class="story-timeline">
+        <div class="story-item"><div class="story-year">2009</div><h4 data-i18n="about.story.t1.h">Founded in Hampshire, UK</h4><p data-i18n="about.story.t1.p">Patricia Reynolds opens the first office, focusing on residential sales and lettings across Hampshire and Surrey.</p></div>
+        <div class="story-item"><div class="story-year">2014</div><h4 data-i18n="about.story.t2.h">Expansion to Spain</h4><p data-i18n="about.story.t2.p">Growing demand from international buyers leads to a dedicated Spain portfolio, with listings across Marbella, Barcelona, Madrid and the Costa Brava.</p></div>
+        <div class="story-item"><div class="story-year">2018</div><h4 data-i18n="about.story.t3.h">Ecuador Land &amp; Investment Division</h4><p data-i18n="about.story.t3.p">Partnering with local developers, Patricia Real Estate launches its Ecuador division — helping overseas Ecuadorians and international investors access high-growth land projects on the coast.</p></div>
+        <div class="story-item"><div class="story-year">2026</div><h4 data-i18n="about.story.t4.h">A Global Property Group</h4><p data-i18n="about.story.t4.p">Today, Patricia Real Estate serves clients across three continents, with a multilingual team and a track record of hundreds of successful transactions.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="team-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-eyebrow" data-i18n="about.team.eyebrow">Our Team</span>
+        <h2 style="color:#fff;" data-i18n-html="about.team.h2">The People <em>Behind the Properties</em></h2>
+        <p style="color:rgba(250,247,240,.65);" data-i18n="about.team.sub">A dedicated founder supported by trusted local partners across every market we serve.</p>
+      </div>
+      <div class="team-split">
+        <!-- Patricia card -->
+        <div class="team-card-featured">
+          <div class="team-avatar-lg" style="width:90px;height:90px;border-radius:50%;background:rgba(200,167,90,0.15);border:2px solid rgba(200,167,90,0.35);display:flex;align-items:center;justify-content:center;font-family:var(--f-display);font-size:1.8rem;color:#C8A75A;font-weight:600;margin-bottom:1.2rem;">PR</div>
+          <div class="team-name-lg">Patricia Reynolds</div>
+          <div class="team-role-lg" data-i18n="about.team.r1.role">Founder &amp; Director</div>
+          <p class="team-bio-lg" data-i18n="about.team.r1.bio">With 10+ years in residential property across Hampshire and Surrey, Patricia founded the agency on the belief that personal service always wins. Fluent in English and Spanish, she oversees all three markets and every client relationship personally.</p>
+          <div class="team-contact-row">
+            <a href="mailto:hello@patriciarealestate.com" class="btn btn-primary btn-sm" data-i18n="about.team.contact">Contact Patricia →</a>
+          </div>
+        </div>
+
+        <!-- Vertical divider -->
+        <div class="team-divider"></div>
+
+        <!-- Partners section -->
+        <div class="team-partners">
+          <div class="team-partners-header">
+            <h3 data-i18n="about.partners.h">Our Local Partners</h3>
+            <p data-i18n="about.partners.sub">We work with carefully selected local specialists in Spain and Ecuador to ensure every client receives expert, on-the-ground guidance — whatever the market.</p>
+          </div>
+          <div class="partners-list">
+            <div class="partner-item">
+              <div class="partner-info">
+                <div class="partner-market" data-i18n="about.partners.es.market">Spain</div>
+                <div class="partner-desc" data-i18n="about.partners.es.desc">Licensed Spanish agents and legal specialists covering Marbella, Barcelona, Madrid and the Costa Brava. Full conveyancing, mortgage referrals and after-sale support.</div>
+              </div>
+            </div>
+            <div class="partner-item">
+              <div class="partner-info">
+                <div class="partner-market" data-i18n="about.partners.ec.market">Ecuador</div>
+                <div class="partner-desc" data-i18n="about.partners.ec.desc">Trusted land developers and legal notaries on Ecuador's Pacific coast. Fully verified projects, secure title deeds and flexible financing — with support for overseas buyers from start to finish.</div>
+              </div>
+            </div>
+          </div>
+          <div class="partners-note" data-i18n="about.partners.note">
+            Every partner is personally vetted by Patricia and held to the same standards of transparency and client care that define our business.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COUNTRIES -->
+  <section class="countries-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-eyebrow" data-i18n="about.countries.eyebrow">Where We Operate</span>
+        <h2 data-i18n-html="about.countries.h2">Explore Properties <em>by Country</em></h2>
+      </div>
+      <div class="countries-grid">
+        <a class="country-card" href="uk/index.html"><div class="country-flag">🇬🇧</div><h3 data-i18n="about.countries.uk.h">United Kingdom</h3><p data-i18n="about.countries.uk.p">Sales and lettings across Hampshire, Surrey and surrounding counties. Expert local knowledge and a personal service you can trust.</p><span class="country-link" data-i18n="about.countries.uk.link">Browse UK properties →</span></a>
+        <a class="country-card" href="spain/index.html"><div class="country-flag">🇪🇸</div><h3 data-i18n="about.countries.es.h">Spain</h3><p data-i18n="about.countries.es.p">From Barcelona apartments to Marbella villas — we cover Spain's most desirable property markets for buyers, sellers and renters.</p><span class="country-link" data-i18n="about.countries.es.link">Explore Spain listings →</span></a>
+        <a class="country-card" href="ecuador/index.html"><div class="country-flag">🇪🇨</div><h3 data-i18n="about.countries.ec.h">Ecuador</h3><p data-i18n="about.countries.ec.p">Land investment and residential projects on Ecuador's Pacific coast. High growth, legal security and flexible finance options.</p><span class="country-link" data-i18n="about.countries.ec.link">Ver proyectos en Ecuador →</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="about-cta">
+    <div class="container">
+      <h2 data-i18n-html="about.cta.h2">Ready to find your <em>perfect property?</em></h2>
+      <p data-i18n="about.cta.p">Whether you're finding, selling, renting or investing — our team is here to guide you every step of the way.</p>
+      <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;">
+        <a href="landing.html" class="btn btn-primary btn-lg" data-i18n="about.cta.browse">Browse Properties →</a>
+        <a href="mailto:hello@patriciarealestate.com" class="btn btn-ghost-light btn-lg" data-i18n="about.cta.contact">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="landing.html"><img src="images/logo.png" alt="Patricia Real Estate" class="site-logo-footer" /></a>
+        <p data-i18n="footer.tagline">Trusted property specialists in the UK, Spain and Ecuador.</p>
+      </div>
+      <div class="footer-links"><h4 data-i18n="footer.explore">Explore</h4><a href="uk/index.html" data-i18n="footer.uk">United Kingdom</a><a href="spain/index.html" data-i18n="footer.es">Spain</a><a href="ecuador/index.html" data-i18n="footer.ec">Ecuador</a></div>
+      <div class="footer-links"><h4 data-i18n="footer.company">Company</h4><a href="about.html" data-i18n="nav.about" data-i18n="nav.about">Who We Are</a><a href="mailto:hello@patriciarealestate.com" data-i18n="nav.contact" data-i18n="footer.contact">Contact</a></div>
+    </div>
+    <div class="footer-bottom"><div class="container"><p data-i18n="footer.copy">© 2026 Patricia Real Estate. All rights reserved.</p></div></div>
+  </footer>
+  <script>
+    const h = document.getElementById('hamburger'), n = document.getElementById('mainNav');
+    h.addEventListener('click', () => n.classList.toggle('open'));
+    n.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => n.classList.remove('open')));
+  </script>
+  <script src="js/i18n.js"></script>
+
+<!-- Cookie consent -->
+<div id="cookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1F2933;color:rgba(255,255,255,.85);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;z-index:9999;border-top:2px solid #C8A75A;font-size:.82rem;">
+  <p style="margin:0;line-height:1.6;max-width:680px;">We use Google Fonts and similar services that may set cookies. By continuing to use this site you agree to our <a href="uk/privacy.html" style="color:#C8A75A;">Privacy Policy</a>.</p>
+  <div style="display:flex;gap:10px;flex-shrink:0">
+    <button onclick="acceptCookies()" style="background:#C8A75A;color:#1F2933;border:none;padding:8px 18px;border-radius:6px;font-weight:600;cursor:pointer;font-size:.82rem;">Accept</button>
+    <button onclick="declineCookies()" style="background:transparent;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.2);padding:8px 14px;border-radius:6px;cursor:pointer;font-size:.82rem;">Decline</button>
+  </div>
+</div>
+<script>
+(function(){
+  if(!localStorage.getItem('cookieConsent')){
+    document.getElementById('cookieBanner').style.display='flex';
+  }
+  window.acceptCookies = function(){
+    localStorage.setItem('cookieConsent','accepted');
+    document.getElementById('cookieBanner').style.display='none';
+  };
+  window.declineCookies = function(){
+    localStorage.setItem('cookieConsent','declined');
+    document.getElementById('cookieBanner').style.display='none';
+  };
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Exclusive properties to let in Barcelona, Madrid, Marbella and the Costa del Sol. Personal, professional service for international clients." />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Properties to Let in Spain | Patricia Real Estate" />
+  <meta property="og:description" content="Exclusive rental properties across Spain's most desirable locations. Expert local knowledge, personal service." />
+  <meta property="og:url" content="https://yourdomain.com/spain/" />
+  <meta property="og:image" content="https://yourdomain.com/images/og-preview.jpg" />
+  <meta property="og:site_name" content="Patricia Real Estate" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Properties to Let in Spain | Patricia Real Estate" />
+  <meta name="twitter:description" content="Exclusive rental properties across Spain's most desirable locations. Expert local knowledge, personal service." />
+  <title>Properties to Let in Spain | Patricia Real Estate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html">
+        <img src="../images/logo.png" alt="Patricia Real Estate" class="site-logo" />
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <a href="../landing.html" class="nav-link" style="color:rgba(255,255,255,0.5);font-size:.8rem;">&#8592; Countries</a>
+        <a href="index.html" class="nav-link active">Properties</a>
+        <a href="../about.html" class="nav-link" data-i18n="nav.about">Who We Are</a>
+        <a href="contact.html" class="nav-link" data-i18n="footer.contact">Contact</a>
+        <a href="contact.html" class="btn btn-primary btn-sm nav-cta">Enquire Now</a>
+        <button class="btn btn-sm nav-cta lang-toggle" id="langToggle" onclick="toggleLang()" style="background:transparent;border:1px solid rgba(200,167,90,0.5);color:var(--c-gold);padding:6px 14px;border-radius:4px;cursor:pointer;font-size:.78rem;font-weight:600;letter-spacing:1px;">ES</button>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero">
+    <div class="container hero-content">
+      <p class="hero-eyebrow" data-i18n="hero.eyebrow">Patricia Real Estate</p>
+      <h1 data-i18n-html="es.hero.h1">Find Your <em>Dream</em><br />Spanish Home</h1>
+      <p class="hero-sub" data-i18n="es.hero.sub">Exclusive properties for sale and to let across Barcelona, Madrid, Marbella and the Costa del Sol.</p>
+      <div class="hero-actions">
+        <a href="#listings" class="btn btn-primary btn-lg" data-i18n="index.browse">Browse Properties</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><strong id="statTotal">0</strong><span data-i18n="stat.listings">Listings</span></div>
+        <div class="hero-stat"><strong>10+</strong><span data-i18n="stat.years">Years Experience</span></div>
+        <div class="hero-stat"><strong>98%</strong><span data-i18n="stat.satisfaction">Client Satisfaction</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SEARCH ===================== -->
+  <section class="search-section">
+    <div class="container">
+      <div class="search-card">
+        <h3 data-i18n="search.h3">Search Properties</h3>
+        <div class="search-bar">
+          <input type="text" id="searchInput" placeholder="Search by location, postcode, or property type…" data-i18n-placeholder="index.search.placeholder" autocomplete="off" />
+          <button class="btn btn-primary" id="searchBtn" data-i18n="index.search.btn">Search</button>
+        </div>
+        <div class="filter-row">
+          <button class="filter-chip active" data-filter="all" data-i18n="index.filter.all">All Properties</button>
+          <button class="filter-chip" data-filter="to-let" data-i18n="index.filter.let">To Let</button>
+          <button class="filter-chip" data-filter="let-agreed" data-i18n="index.filter.agreed">Let Agreed</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== LISTINGS ===================== -->
+  <section class="listings-section" id="listings">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-eyebrow" data-i18n="listings.eyebrow">Available Properties</span>
+        <h2 data-i18n="listings.h2">Featured Listings</h2>
+        <p data-i18n="listings.sub">Carefully selected properties across Spain's most desirable locations, personally managed by our team.</p>
+      </div>
+
+      <div class="listings-controls">
+        <p class="listings-count"><strong id="countDisplay">0</strong> properties found</p>
+        <div class="sort-controls">
+          <label for="sortSelect">Sort:</label>
+          <select id="sortSelect">
+            <option value="newest" data-i18n="index.sort.newest">Newest First</option>
+            <option value="price-asc" data-i18n="index.sort.priceasc">Price: Low to High</option>
+            <option value="price-desc" data-i18n="index.sort.pricedesc">Price: High to Low</option>
+            <option value="beds-desc" data-i18n="index.sort.beds">Most Bedrooms</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="listings-grid" id="listingsGrid"></div>
+      <div class="empty-state" id="emptyState" style="display:none;">
+        <div class="empty-icon" style="display:flex;justify-content:center;margin-bottom:1rem;"><span style="width:48px;height:48px;color:rgba(100,120,140,0.5);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span></div>
+        <h3 data-i18n="empty.h3">No properties found</h3>
+        <p>Try adjusting your search or <a href="contact.html">contact us</a> to discuss your requirements.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FEATURES ===================== -->
+  <section class="features-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-eyebrow" data-i18n="features.eyebrow">Why Choose Us</span>
+        <h2 data-i18n="features.h2">A Personal Touch in Property</h2>
+        <p data-i18n="features.sub">We combine local expertise with exceptional service to make your property journey seamless.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></span></div>
+          <h3 data-i18n="es.feat1.h">International Reach</h3>
+          <p data-i18n="es.feat1.p">We connect international buyers with Spain's finest properties — with multilingual support and deep local knowledge across all major Spanish markets.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></svg></span></div>
+          <h3 data-i18n="es.feat3.h">Dedicated Support</h3>
+          <p data-i18n="es.feat3.p">Your personal agent handles everything from the first viewing to the day you collect your keys — always available.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></span></div>
+          <h3 data-i18n="es.feat4.h">Legal &amp; Conveyancing</h3>
+          <p data-i18n="es.feat4.p">We work with trusted Spanish notaries and solicitors to ensure every transaction is legally secure — giving you complete peace of mind throughout.</p>
+        </div>
+      </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="../landing.html"><img src="../images/logo.png" alt="Patricia Real Estate" class="site-logo-footer" /></a>
+        <p>Trusted property specialists serving Hampshire and Surrey. Selling, or letting — we're here to help.</p>
+      </div>
+      <div class="footer-links">
+        <h4 data-i18n="footer.props">Properties</h4>
+        <a href="index.html?filter=to-let" data-i18n="footer.tolet">To Let</a>
+      </div>
+      <div class="footer-links">
+        <h4 data-i18n="footer.company">Company</h4>
+        <a href="contact.html" data-i18n="footer.contact">Contact</a>
+      </div>
+      <div class="footer-links">
+        <h4 data-i18n="footer.legal">Legal</h4>
+        <a href="privacy.html" data-i18n="footer.privacy">Privacy Policy</a>
+        <a href="terms.html" data-i18n="footer.terms">Terms &amp; Conditions</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p data-i18n="footer.copy">© 2026 Patricia Real Estate. All rights reserved.</p>
+        <p><a href="privacy.html">Privacy</a> &nbsp;·&nbsp; <a href="terms.html">Terms</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================== MODAL ===================== -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="propertyModal">
+      <button class="modal-close" id="modalClose">✕</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/i18n.js"></script>
+
+<!-- Cookie consent -->
+<div id="cookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1F2933;color:rgba(255,255,255,.85);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;z-index:9999;border-top:2px solid #C8A75A;font-size:.82rem;">
+  <p style="margin:0;line-height:1.6;max-width:680px;">We use Google Fonts and similar services that may set cookies. By continuing to use this site you agree to our <a href="uk/privacy.html" style="color:#C8A75A;">Privacy Policy</a>.</p>
+  <div style="display:flex;gap:10px;flex-shrink:0">
+    <button onclick="acceptCookies()" style="background:#C8A75A;color:#1F2933;border:none;padding:8px 18px;border-radius:6px;font-weight:600;cursor:pointer;font-size:.82rem;">Accept</button>
+    <button onclick="declineCookies()" style="background:transparent;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.2);padding:8px 14px;border-radius:6px;cursor:pointer;font-size:.82rem;">Decline</button>
+  </div>
+</div>
+<script>
+(function(){
+  if(!localStorage.getItem('cookieConsent')){
+    document.getElementById('cookieBanner').style.display='flex';
+  }
+  window.acceptCookies = function(){
+    localStorage.setItem('cookieConsent','accepted');
+    document.getElementById('cookieBanner').style.display='none';
+  };
+  window.declineCookies = function(){
+    localStorage.setItem('cookieConsent','declined');
+    document.getElementById('cookieBanner').style.display='none';
+  };
+})();
+</script>
+</body>
+</html>

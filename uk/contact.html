@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact – Patricia Real Estate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html"><img src="../images/logo.png" alt="Patricia Real Estate" class="site-logo" /></a>
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html" class="nav-link">Properties</a>
+        <a href="contact.html" class="nav-link active">Contact</a>
+        <a href="contact.html" class="btn btn-primary btn-sm nav-cta">Enquire Now</a>
+        <button class="btn btn-sm nav-cta lang-toggle" id="langToggle" onclick="toggleLang()" style="background:transparent;border:1px solid rgba(200,167,90,0.5);color:var(--c-gold);padding:6px 14px;border-radius:4px;cursor:pointer;font-size:.78rem;font-weight:600;letter-spacing:1px;">ES</button>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">Home</a> <span>›</span> <span>Contact</span></div>
+      <h1>Get in Touch</h1>
+      <p>Enquire about a property or speak with our team — we reply within 24 hours.</p>
+    </div>
+  </section>
+
+  <main class="form-page">
+    <div class="container contact-layout">
+
+      <div class="contact-form-card">
+        <h2>Send an Enquiry</h2>
+
+        <!-- How it works notice -->
+        <div class="mailto-notice">
+          <span class="mailto-icon">📨</span>
+          <p>Fill in the form and click <strong>Send Message</strong>. Your email app will open with everything pre-filled — just click Send. No accounts needed.</p>
+        </div>
+
+        <div id="contactForm">
+
+          <div class="form-row two-col">
+            <div class="form-group">
+              <label for="contactName">Your Name <span class="required">*</span></label>
+              <input type="text" id="contactName" placeholder="Jane Smith" />
+            </div>
+            <div class="form-group">
+              <label for="contactEmail">Your Email <span class="required">*</span></label>
+              <input type="email" id="contactEmail" placeholder="jane@example.com" />
+            </div>
+          </div>
+
+          <div class="form-row two-col">
+            <div class="form-group">
+              <label for="contactPhone">Phone (optional)</label>
+              <input type="tel" id="contactPhone" placeholder="+44 7700 900000" />
+            </div>
+            <div class="form-group">
+              <label for="contactProperty">Property of Interest</label>
+              <select id="contactProperty">
+                <option value="">Select a property…</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="contactSubject">Subject <span class="required">*</span></label>
+              <select id="contactSubject">
+                <option value="">Select reason for contact…</option>
+                <option value="Property Viewing">Book a Viewing</option>
+                                <option value="Pricing Enquiry">Pricing Enquiry</option>
+                <option value="Rental Enquiry">Rental Enquiry</option>
+                <option value="General Enquiry">General Enquiry</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="contactMessage">Message <span class="required">*</span></label>
+              <textarea id="contactMessage" rows="6" placeholder="Tell us about your requirements, preferred viewing times, or any questions…"></textarea>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-primary btn-lg" id="submitBtn">
+              Open Email App &amp; Send →
+            </button>
+          </div>
+
+          <p class="form-privacy">
+            By submitting this form you agree to our <a href="privacy.html">Privacy Policy</a> and
+            <a href="terms.html">Terms &amp; Conditions</a>. We never share your data with third parties.
+          </p>
+        </div>
+      </div>
+
+      <aside class="contact-sidebar">
+        <div class="sidebar-card">
+          <h3>📧 Email Us</h3>
+          <p><a href="/cdn-cgi/l/email-protection#355d5059595a75455441475c565c54475054595046415441501b565a58"><span class="__cf_email__" data-cfemail="0d65686161624d7d6c797f646e646c7f686c61687e796c7968236e6260">[email&#160;protected]</span></a></p>
+        </div>
+        <div class="sidebar-card">
+          <h3>⏱ Response Time</h3>
+          <p>We typically reply within 24 hours, Monday to Saturday.</p>
+        </div>
+        <div class="sidebar-card">
+          <h3>📍 Areas We Cover</h3>
+          <p>Hampshire, Surrey, and surrounding counties. Contact us to discuss your area.</p>
+        </div>
+        <div class="sidebar-card faq-card">
+          <h3>❓ FAQs</h3>
+          <details>
+            <summary>How do I book a viewing?</summary>
+            <p>Use the form above and select "Book a Viewing", or email us directly. We'll confirm a time within 24 hours.</p>
+          </details>
+          <details>
+            
+          </details>
+          <details>
+            <summary>How do I list my property?</summary>
+            <p>Head to our page, fill in the details, and your listing goes live on GitHub Pages instantly.</p>
+          </details>
+          <details>
+            <summary>Why does clicking Send open my email app?</summary>
+            <p>This site runs on GitHub Pages (no server), so we use your own email client to send messages. Your data never passes through a third party.</p>
+          </details>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="../landing.html"><img src="../images/logo.png" alt="Patricia Real Estate" class="site-logo-footer" /></a>
+        <p>Trusted property specialists serving Hampshire and Surrey.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Properties</h4>
+        <a href="index.html">Browse All</a>
+      </div>
+      <div class="footer-links">
+        <h4>Company</h4>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-links">
+        <h4>Legal</h4>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms &amp; Conditions</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>© 2026 Patricia Real Estate. All rights reserved.</p>
+        <p><a href="privacy.html">Privacy</a> &nbsp;·&nbsp; <a href="ter
