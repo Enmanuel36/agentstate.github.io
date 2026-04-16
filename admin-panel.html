@@ -271,7 +271,10 @@
           <div class="metric-card"><div class="metric-label">GitHub status</div><div class="metric-value" id="metricGH" style="font-size:1rem;margin-top:4px">Not set up</div></div>
         </div>
         <div class="card">
-          <div class="card-title">Quick actions</div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:16px">
+            <div class="card-title" style="margin-bottom:0">Quick actions</div>
+            <button class="btn btn-outline btn-sm" id="refreshLiveBtn" type="button" onclick="refreshLiveWebsiteData()">↻ Refresh live data</button>
+          </div>
           <div style="display:flex;gap:10px;flex-wrap:wrap">
             <button class="btn btn-gold" onclick="showSection('add')">+ Add new property</button>
             <button class="btn btn-outline" onclick="showSection('uk')">Manage UK listings</button>
@@ -279,6 +282,7 @@
             <button class="btn btn-outline" onclick="showSection('ecuador')">Manage Ecuador projects</button>
             <button class="btn btn-outline" onclick="showSection('github')">GitHub settings</button>
           </div>
+          <div id="liveRefreshMsg" style="margin-top:12px;font-size:.78rem;color:var(--text2)">Pull the published website data into the dashboard whenever you need a live refresh.</div>
         </div>
       </div>
 
@@ -977,6 +981,138 @@ function showSection(id) {
 let ukListings   = [];
 let esListings   = [];
 let ecListings   = [];
+const LIVE_SITE_ORIGIN = 'https://patriciaestateagent.com';
+
+function getLiveSiteOrigin() {
+  return location.protocol === 'https:' && /(^|\.)patriciaestateagent\.com$/i.test(location.hostname)
+    ? location.origin
+    : LIVE_SITE_ORIGIN;
+}
+
+function setLiveRefreshMessage(message, tone) {
+  var el = document.getElementById('liveRefreshMsg');
+  if (!el) return;
+  el.textContent = message || '';
+  el.style.color = tone === 'success'
+    ? 'var(--green)'
+    : tone === 'warn'
+      ? 'var(--gold)'
+      : tone === 'error'
+        ? 'var(--red)'
+        : 'var(--text2)';
+}
+
+function setLiveRefreshPending(isPending) {
+  var btn = document.getElementById('refreshLiveBtn');
+  if (!btn) return;
+  btn.disabled = !!isPending;
+  btn.innerHTML = isPending ? '<span class="upload-spin"></span> Refreshing live data…' : '↻ Refresh live data';
+}
+
+function formatRefreshTime(date) {
+  return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+}
+
+function loadLiveDataScript(path, globalName) {
+  return new Promise(function(resolve, reject) {
+    var iframe = document.createElement('iframe');
+    var timeoutId = null;
+    iframe.style.display = 'none';
+    iframe.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(iframe);
+
+    function cleanup() {
+      clearTimeout(timeoutId);
+      if (iframe.parentNode) iframe.parentNode.removeChild(iframe);
+    }
+
+    try {
+      var doc = iframe.contentWindow.document;
+      doc.open();
+      doc.write('<!DOCTYPE html><html><head></head><body></body></html>');
+      doc.close();
+
+      var script = doc.createElement('script');
+      script.src = getLiveSiteOrigin() + '/' + path + '?t=' + Date.now();
+      script.onload = function() {
+        try {
+          var bridge = doc.createElement('script');
+          bridge.text = 'window.__livePayload = ' + globalName + ';';
+          doc.body.appendChild(bridge);
+          var payload = iframe.contentWindow.__livePayload;
+          delete iframe.contentWindow.__livePayload;
+          if (!Array.isArray(payload)) throw new Error('Unexpected live data format in ' + path);
+          cleanup();
+          resolve(JSON.parse(JSON.stringify(payload)));
+        } catch (e) {
+          cleanup();
+          reject(e);
+        }
+      };
+      script.onerror = function() {
+        cleanup();
+        reject(new Error('Unable to load ' + path + ' from the live website'));
+      };
+      doc.body.appendChild(script);
+
+      timeoutId = setTimeout(function() {
+        cleanup();
+        reject(new Error('Timed out while loading ' + path + ' from the live website'));
+      }, 15000);
+    } catch (e) {
+      cleanup();
+      reject(e);
+    }
+  });
+}
+
+async function refreshLiveWebsiteData() {
+  if (refreshLiveWebsiteData.pending) return;
+  refreshLiveWebsiteData.pending = true;
+  setLiveRefreshPending(true);
+  setLiveRefreshMessage('Refreshing published data from ' + getLiveSiteOrigin().replace(/^https?:\/\//, '') + '…');
+
+  try {
+    var results = await Promise.allSettled([
+      loadLiveDataScript('uk/data.js', 'propertyListings'),
+      loadLiveDataScript('spain/data.js', 'propertyListings'),
+      loadLiveDataScript('ecuador/data.js', 'ecuadorProjects')
+    ]);
+
+    var synced = [];
+    var failed = [];
+
+    if (results[0].status === 'fulfilled') { ukListings = results[0].value; synced.push('UK'); }
+    else failed.push('UK');
+
+    if (results[1].status === 'fulfilled') { esListings = results[1].value; synced.push('Spain'); }
+    else failed.push('Spain');
+
+    if (results[2].status === 'fulfilled') { ecListings = results[2].value; synced.push('Ecuador'); }
+    else failed.push('Ecuador');
+
+    if (!synced.length) throw new Error('Unable to load any published data from the live website right now.');
+
+    renderTables();
+    updateMetrics();
+
+    var refreshedAt = formatRefreshTime(new Date());
+    if (failed.length) {
+      setLiveRefreshMessage('Partially refreshed at ' + refreshedAt + '. Missing: ' + failed.join(', ') + '.', 'warn');
+      showToast('Live refresh completed with warnings: ' + failed.join(', '));
+    } else {
+      setLiveRefreshMessage('Live website data refreshed at ' + refreshedAt + '.', 'success');
+      showToast('Dashboard refreshed from live website ✓', 'success');
+    }
+  } catch (e) {
+    setLiveRefreshMessage(e.message, 'error');
+    showToast('Live refresh failed — ' + e.message, 'error');
+  } finally {
+    refreshLiveWebsiteData.pending = false;
+    setLiveRefreshPending(false);
+  }
+}
+refreshLiveWebsiteData.pending = false;
 
 function initAdmin() {
   try { ukListings = JSON.parse(JSON.stringify(_ukData)); } catch(e) { ukListings = []; }
