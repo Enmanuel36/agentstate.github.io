@@ -985,6 +985,33 @@ function initAdmin() {
   renderTables();
   loadGitHubSettings();
   updateMetrics();
+  // Fetch latest data from GitHub if connected
+  var user = localStorage.getItem('ghUser'), repo = localStorage.getItem('ghRepo'),
+      branch = localStorage.getItem('ghBranch') || 'main', token = localStorage.getItem('ghToken');
+  if (user && repo && token) fetchLatestDataFromGitHub(user, repo, branch, token);
+}
+
+async function fetchLatestDataFromGitHub(user, repo, branch, token) {
+  var headers = { Authorization: 'token ' + token, Accept: 'application/vnd.github.v3+json' };
+  async function fetchData(path) {
+    try {
+      var res = await fetch('https://api.github.com/repos/' + user + '/' + repo + '/contents/' + path + '?ref=' + branch, { headers: headers });
+      if (!res.ok) return null;
+      var d = await res.json();
+      var code = decodeURIComponent(escape(atob(d.content.replace(/\n/g, ''))));
+      var match = code.match(/=\s*(\[\s*\{[\s\S]*?\}\s*\]);/);
+      return match ? JSON.parse(match[1]) : null;
+    } catch(e) { return null; }
+  }
+  var results = await Promise.all([
+    fetchData('uk/data.js'),
+    fetchData('spain/data.js'),
+    fetchData('ecuador/data.js')
+  ]);
+  if (results[0]) ukListings = results[0];
+  if (results[1]) esListings = results[1];
+  if (results[2]) ecListings = results[2];
+  if (results[0] || results[1] || results[2]) { renderTables(); updateMetrics(); }
 }
 
 function updateMetrics() {
