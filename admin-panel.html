@@ -539,8 +539,8 @@
             </div>
           </div>
           <div style="margin-top:24px;display:flex;gap:12px;align-items:center">
-            <button class="btn btn-gold" onclick="saveEcProject()">Save to GitHub →</button>
-            <button class="btn btn-outline" onclick="clearEcForm()">Clear</button>
+            <button class="btn btn-gold" id="saveEcProjectBtn" type="button" onclick="saveEcProject()">Save to GitHub →</button>
+            <button class="btn btn-outline" type="button" onclick="clearEcForm()">Clear</button>
             <span id="ecSaveMsg" style="font-size:.8rem;color:var(--text2)"></span>
           </div>
         </div>
@@ -1319,22 +1319,352 @@ function saveToGitHub() {
 /* ══ TOAST ════════════════════════════════════════════════════════ */
 let toastTimer;
 
-async function pushEcuadorToGitHub() {
+async function pushEcuadorToGitHub(options) {
+  options = options || {};
   const user = localStorage.getItem('ghUser'), repo = localStorage.getItem('ghRepo'),
         branch = localStorage.getItem('ghBranch') || 'main', token = localStorage.getItem('ghToken');
-  if (!user || !repo || !token) { showToast('GitHub not connected', 'error'); return; }
+  if (!user || !repo || !token) throw new Error('GitHub is not connected. Reconnect it in GitHub Setup first.');
   const content = '/**\n * Patricia Real Estate - Ecuador Projects\n */\nconst ecuadorProjects = ' + JSON.stringify(ecListings, null, 2) + ';\n';
-  showToast('Saving Ecuador to GitHub...');
+  if (!options.quiet) showToast('Saving Ecuador to GitHub...');
+  const getRes = await fetch('https://api.github.com/repos/'+user+'/'+repo+'/contents/ecuador/data.js?ref='+branch, { headers: { Authorization: 'token '+token, Accept: 'application/vnd.github.v3+json' } });
+  if (!getRes.ok && getRes.status !== 404) {
+    const err = await getRes.json().catch(function(){ return {}; });
+    throw new Error(err.message || 'Unable to read ecuador/data.js from GitHub');
+  }
+  let sha = '';
+  if (getRes.ok) {
+    const d = await getRes.json();
+    sha = d.sha;
+  }
+  const putRes = await fetch('https://api.github.com/repos/'+user+'/'+repo+'/contents/ecuador/data.js', {
+    method: 'PUT', headers: { Authorization: 'token '+token, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: 'Admin: update Ecuador projects', content: btoa(unescape(encodeURIComponent(content))), branch, ...(sha ? { sha } : {}) })
+  });
+  if (!putRes.ok) {
+    const err = await putRes.json().catch(function(){ return {}; });
+    throw new Error(err.message || ('GitHub error ' + putRes.status));
+  }
+  if (!options.quiet) showToast('Ecuador saved to GitHub ✓', 'success');
+}
+
+function hasGitHubConnection() {
+  return !!(localStorage.getItem('ghUser') && localStorage.getItem('ghRepo') && localStorage.getItem('ghToken'));
+}
+
+function setEcSaveMessage(message, tone) {
+  var msg = document.getElementById('ecSaveMsg');
+  if (!msg) return;
+  msg.textContent = message || '';
+  msg.style.color = tone === 'success'
+    ? 'var(--green)'
+    : tone === 'error'
+      ? 'var(--red)'
+      : 'var(--text2)';
+}
+
+function setEcSavePending(isPending) {
+  var btn = document.getElementById('saveEcProjectBtn');
+  if (!btn) return;
+  btn.disabled = !!isPending;
+  btn.innerHTML = isPending ? '<span class="spinner"></span> Saving…' : 'Save to GitHub →';
+}
+
+function sanitizeEcSlug(value) {
+  return (value || '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .replace(/-{2,}/g, '-');
+}
+
+function getEcEditIndex() {
+  var editIdx = document.getElementById('section-add-ecuador').dataset.editIdx;
+  if (editIdx === undefined || editIdx === '') return -1;
+  var parsed = parseInt(editIdx, 10);
+  return Number.isNaN(parsed) ? -1 : parsed;
+}
+
+
+function editEcListing(idx) {
+  var p = ecListings[idx];
+  document.getElementById('ecName').value      = p.name || '';
+  document.getElementById('ecType').value      = p.type || 'Urbanizacion';
+  document.getElementById('ecPrice').value     = p.price || '';
+  document.getElementById('ecLoc').value       = p.location || '';
+  document.getElementById('ecSlug').value      = p.slug || '';
+  document.getElementById('ecDescShort').value = p.desc || '';
+  document.getElementById('ecHlPrice').value   = p.hlPrice || p.price || '';
+  document.getElementById('ecHlSep').value     = p.hlSep || '';
+  document.getElementById('ecHlSize').value    = p.hlSize || '';
+  document.getElementById('ecHlDist').value    = p.hlDist || '';
+  document.getElementById('ecDesc1').value     = p.descFull1 || p.desc || '';
+  document.getElementById('ecDesc2').value     = p.descFull2 || '';
+  document.getElementById('ecBenefits').value  = p.benefits || '';
+  document.getElementById('ecAm1T').value      = p.am1Title || '';
+  document.getElementById('ecAm1I').value      = p.am1Items || '';
+  document.getElementById('ecAm2T').value      = p.am2Title || '';
+  document.getElementById('ecAm2I').value      = p.am2Items || '';
+  document.getElementById('ecAm3T').value      = p.am3Title || '';
+  document.getElementById('ecAm3I').value      = p.am3Items || '';
+  document.getElementById('ecCivil').value     = p.civilWorks || '';
+  document.getElementById('ecPhotos').value    = (p.photos || []).join('\n');
+  if (window.populateEcPhotoThumbs) populateEcPhotoThumbs(p.photos || []);
+  document.getElementById('section-add-ecuador').dataset.editIdx = idx;
+  setEcSavePending(false);
+  setEcSaveMessage('Editing existing project — save to update');
+  showSection('add-ecuador');
+}
+
+function deleteEcListing(idx) {
+  if (!confirm('Delete this project? This cannot be undone.')) return;
+  ecListings.splice(idx, 1);
+  renderEcTable();
+  updateMetrics();
+  pushEcuadorToGitHub().catch(function(e) {
+    showToast('GitHub error: ' + e.message, 'error');
+  });
+}
+
+async function saveEcProject() {
+  if (saveEcProject.pending) return;
+  var name  = document.getElementById('ecName').value.trim();
+  var price = document.getElementById('ecPrice').value.trim();
+  var loc   = document.getElementById('ecLoc').value.trim();
+  var slug  = sanitizeEcSlug(document.getElementById('ecSlug').value);
+  var editIdx = getEcEditIndex();
+  document.getElementById('ecSlug').value = slug;
+
+  if (!name || !price || !loc || !slug) {
+    setEcSaveMessage('Project name, price, location and slug are required.', 'error');
+    showToast('Please fill in all required fields', 'error');
+    return;
+  }
+  var duplicateIdx = ecListings.findIndex(function(item, idx) {
+    return item.slug === slug && idx !== editIdx;
+  });
+  if (duplicateIdx !== -1) {
+    setEcSaveMessage('That slug is already in use by "' + ecListings[duplicateIdx].name + '". Choose a unique slug.', 'error');
+    showToast('Slug already in use', 'error');
+    return;
+  }
+  if (!hasGitHubConnection()) {
+    setEcSaveMessage('Connect GitHub first so this project can publish to the live Ecuador page.', 'error');
+    showToast('GitHub not connected', 'error');
+    return;
+  }
+
+  var current = editIdx >= 0 ? ecListings[editIdx] : null;
+  var project = {
+    id: current && current.id ? current.id : Date.now(), slug: slug, name: name, price: price, location: loc,
+    type:       document.getElementById('ecType').value,
+    desc:       document.getElementById('ecDescShort').value.trim(),
+    hlPrice:    document.getElementById('ecHlPrice').value.trim(),
+    hlSep:      document.getElementById('ecHlSep').value.trim(),
+    hlSize:     document.getElementById('ecHlSize').value.trim(),
+    hlDist:     document.getElementById('ecHlDist').value.trim(),
+    descFull1:  document.getElementById('ecDesc1').value.trim(),
+    descFull2:  document.getElementById('ecDesc2').value.trim(),
+    benefits:   document.getElementById('ecBenefits').value.trim(),
+    am1Title:   document.getElementById('ecAm1T').value.trim(),
+    am1Items:   document.getElementById('ecAm1I').value.trim(),
+    am2Title:   document.getElementById('ecAm2T').value.trim(),
+    am2Items:   document.getElementById('ecAm2I').value.trim(),
+    am3Title:   document.getElementById('ecAm3T').value.trim(),
+    am3Items:   document.getElementById('ecAm3I').value.trim(),
+    civilWorks: document.getElementById('ecCivil').value.trim(),
+    photos:     document.getElementById('ecPhotos').value.split('\n').map(function(s){return s.trim();}).filter(Boolean),
+    emoji:      '🌴'
+  };
+  var previousListings = ecListings.slice();
+  var nextListings = previousListings.slice();
+  if (editIdx >= 0) nextListings[editIdx] = project;
+  else nextListings.push(project);
+
   try {
-    const getRes = await fetch('https://api.github.com/repos/'+user+'/'+repo+'/contents/ecuador/data.js?ref='+branch, { headers: { Authorization: 'token '+token, Accept: 'application/vnd.github.v3+json' } });
-    let sha = ''; if (getRes.ok) { const d = await getRes.json(); sha = d.sha; }
-    const putRes = await fetch('https://api.github.com/repos/'+user+'/'+repo+'/contents/ecuador/data.js', {
-      method: 'PUT', headers: { Authorization: 'token '+token, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: 'Admin: update Ecuador projects', content: btoa(unescape(encodeURIComponent(content))), branch, ...(sha ? { sha } : {}) })
-    });
-    if (!putRes.ok) { const err = await putRes.json(); throw new Error(err.message); }
-    showToast('Ecuador saved to GitHub ✓', 'success');
-  } catch(e) { showToast('GitHub error: ' + e.message, 'error'); }
+    saveEcProject.pending = true;
+    setEcSavePending(true);
+    setEcSaveMessage(editIdx >= 0 ? 'Updating project in GitHub…' : 'Publishing project to GitHub…');
+    ecListings = nextListings;
+    renderEcTable();
+    updateMetrics();
+    await pushEcuadorToGitHub({ quiet: true });
+    await pushProjectPage(project, { quiet: true });
+    clearEcForm();
+    renderEcTable();
+    updateMetrics();
+    showSection('ecuador');
+    showToast(editIdx >= 0 ? 'Project updated and published to GitHub ✓' : 'Project added and published to GitHub ✓', 'success');
+  } catch(e) {
+    ecListings = previousListings;
+    renderEcTable();
+    updateMetrics();
+    setEcSaveMessage(e.message, 'error');
+    showToast('GitHub error: ' + e.message, 'error');
+  } finally {
+    saveEcProject.pending = false;
+    setEcSavePending(false);
+  }
+}
+saveEcProject.pending = false;
+
+function clearEcForm() {
+  ['ecName','ecPrice','ecLoc','ecSlug','ecDescShort','ecHlPrice','ecHlSep','ecHlSize','ecHlDist',
+   'ecDesc1','ecDesc2','ecBenefits','ecAm1T','ecAm1I','ecAm2T','ecAm2I','ecAm3T','ecAm3I','ecCivil','ecPhotos']
+    .forEach(function(id) { var el = document.getElementById(id); if (el) el.value = ''; });
+  var thumbs = document.getElementById('ecPhotoThumbs');
+  var status = document.getElementById('ecPhotoStatus');
+  if (thumbs) thumbs.innerHTML = '';
+  if (status) status.textContent = '';
+  setEcSaveMessage('');
+  delete document.getElementById('section-add-ecuador').dataset.editIdx;
+}
+
+async function pushProjectPage(p, options) {
+  options = options || {};
+  var user = localStorage.getItem('ghUser'), repo = localStorage.getItem('ghRepo'),
+      branch = localStorage.getItem('ghBranch') || 'main', token = localStorage.getItem('ghToken');
+  if (!user || !repo || !token) throw new Error('GitHub is not connected. Reconnect it in GitHub Setup first.');
+  var html = buildProjectPage(p);
+  var path = 'ecuador/projects/' + p.slug + '.html';
+  var getRes = await fetch('https://api.github.com/repos/' + user + '/' + repo + '/contents/' + path + '?ref=' + branch, { headers: { Authorization: 'token ' + token, Accept: 'application/vnd.github.v3+json' } });
+  if (!getRes.ok && getRes.status !== 404) {
+    var getErr = await getRes.json().catch(function(){ return {}; });
+    throw new Error(getErr.message || ('Unable to read project page ' + p.slug + '.html'));
+  }
+  var sha = '';
+  if (getRes.ok) {
+    var d = await getRes.json();
+    sha = d.sha;
+  }
+  var body = { message: 'Admin: create project page ' + p.slug, content: btoa(unescape(encodeURIComponent(html))), branch: branch };
+  if (sha) body.sha = sha;
+  var putRes = await fetch('https://api.github.com/repos/' + user + '/' + repo + '/contents/' + path, {
+    method: 'PUT', headers: { Authorization: 'token ' + token, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+  if (!putRes.ok) {
+    var err = await putRes.json().catch(function(){ return {}; });
+    throw new Error(err.message || ('GitHub error ' + putRes.status));
+  }
+  if (!options.quiet) showToast('Project page ' + p.slug + '.html saved to GitHub', 'success');
+}
+
+function buildProjectPage(p) {
+  var amenCards = [{t:p.am1Title,i:p.am1Items},{t:p.am2Title,i:p.am2Items},{t:p.am3Title,i:p.am3Items}].filter(function(a){return a.t && a.t.trim();});
+  var amenHTML = amenCards.map(function(a) {
+    var items = a.i.split(',').map(function(s){return s.trim();}).filter(Boolean);
+    return '<div class="proj-amenity-card"><h3>' + a.t + '</h3><ul>' + items.map(function(i){return '<li>' + i + '</li>';}).join('') + '</ul></div>';
+  }).join('');
+  var civilList = (p.civilWorks||'').split(',').map(function(s){return s.trim();}).filter(Boolean);
+  var civilHTML = civilList.map(function(w){return '<div class="proj-civil-item"><p>' + w + '</p></div>';}).join('');
+  var benefits = (p.benefits||'').split('\n').map(function(s){return s.trim();}).filter(Boolean).map(function(b){return '<li>' + b + '</li>';}).join('');
+  var photos = p.photos || [];
+  var galleryHTML = photos.map(function(ph,i){return '<div class="proj-gallery-item" onclick="openLightbox('+i+')"><img src="'+ph+'" loading="lazy" style="width:100%;height:100%;object-fit:cover;"/></div>';}).join('');
+  var parts = p.name.split(' '), n1 = parts[0], n2 = parts.slice(1).join(' ');
+  var lines = [
+    '<!DOCTYPE html><html lang="en"><head>',
+    '<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>',
+    '<title>' + p.name + ' | Patricia Real Estate Ecuador</title>',
+    '<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>',
+    '<link rel="stylesheet" href="../../style.css"/>',
+    '<style>',
+    '.proj-hero{background:#1a2e1a;min-height:80vh;display:flex;align-items:center;position:relative;overflow:hidden}',
+    '.proj-hero-inner{position:relative;z-index:1;max-width:700px}',
+    '.proj-hero h1{font-family:var(--f-display);font-size:clamp(2rem,5vw,3.6rem);color:#fff;line-height:1.15;margin-bottom:1.2rem}',
+    '.proj-hero h1 em{color:var(--c-gold);font-style:italic}',
+    '.proj-hero .tagline{font-size:1.1rem;color:rgba(255,255,255,.8);line-height:1.7;margin-bottom:2rem}',
+    '.proj-highlights{background:rgba(47,58,74,.6);border:1px solid rgba(200,167,90,.2);border-radius:10px;padding:1.5rem 2rem;display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-bottom:2rem}',
+    '.proj-hl-item{text-align:center}.proj-hl-val{font-family:var(--f-display);font-size:1.5rem;color:var(--c-gold);font-weight:700}',
+    '.proj-hl-label{font-size:.75rem;color:rgba(250,247,240,.55);margin-top:4px}',
+    '.proj-desc-section{background:var(--c-navy);padding:5rem 0}',
+    '.proj-desc-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}',
+    '.proj-desc-inner h2{font-family:var(--f-display);font-size:1.8rem;color:#fff;margin-bottom:1rem}',
+    '.proj-desc-inner h2 em{color:var(--c-gold);font-style:italic}',
+    '.proj-desc-inner p{color:rgba(250,247,240,.7);line-height:1.8;margin-bottom:1rem}',
+    '.proj-perks{list-style:none;padding:0;margin:1.5rem 0}',
+    '.proj-perks li{display:flex;align-items:flex-start;gap:10px;font-size:.9rem;color:rgba(250,247,240,.8);margin-bottom:.8rem}',
+    '.proj-amenities{background:#17222C;padding:5rem 0}',
+    '.proj-amenities-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}',
+    '.proj-amenity-card{text-align:center;background:var(--c-navy);border:1px solid rgba(200,167,90,.15);border-radius:10px;padding:2rem 1.5rem}',
+    '.proj-amenity-card h3{font-family:var(--f-display);font-size:1.1rem;color:#fff;margin-bottom:1rem}',
+    '.proj-amenity-card li{font-size:.875rem;color:rgba(250,247,240,.65);padding:.35rem 0;border-bottom:1px solid rgba(255,255,255,.05);list-style:none;text-align:left}',
+    '.proj-civil{background:var(--c-navy);padding:4rem 0}',
+    '.proj-civil-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2rem}',
+    '.proj-civil-item{background:rgba(47,58,74,.45);border:1px solid rgba(200,167,90,.12);border-radius:8px;padding:1.2rem;text-align:center}',
+    '.proj-civil-item p{font-size:.82rem;color:rgba(250,247,240,.65);line-height:1.5}',
+    '.proj-gallery{background:#17222C;padding:5rem 0}',
+    '.proj-gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin-top:2.5rem}',
+    '.proj-gallery-item{aspect-ratio:1/1;border-radius:8px;overflow:hidden;cursor:pointer;position:relative;border:2px solid rgba(200,167,90,.12)}',
+    '.proj-gallery-item img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}',
+    '.proj-cta{background:linear-gradient(135deg,#1a2730,#253040);padding:5rem 0;text-align:center}',
+    '.proj-cta h2{font-family:var(--f-display);font-size:2.2rem;color:#fff;margin-bottom:1rem}',
+    '.proj-cta h2 em{color:var(--c-gold);font-style:italic}',
+    '.proj-cta p{color:rgba(250,247,240,.7);max-width:520px;margin:0 auto 2.5rem;line-height:1.7}',
+    '.proj-cta-actions{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}',
+    '@media(max-width:900px){.proj-highlights{grid-template-columns:1fr 1fr}.proj-desc-inner{grid-template-columns:1fr}.proj-amenities-grid{grid-template-columns:1fr 1fr}.proj-civil-grid{grid-template-columns:repeat(2,1fr)}.proj-gallery-grid{grid-template-columns:repeat(2,1fr)}}',
+    '</style></head><body>',
+    '<header class="site-header"><div class="container header-inner">',
+    '<a href="../../index.html"><img src="../../images/logo.png" alt="Patricia Real Estate" class="site-logo"/></a>',
+    '<nav class="main-nav" id="mainNav">',
+    '<a href="../index.html" class="nav-link" style="color:rgba(255,255,255,.5);font-size:.8rem;">&#8592; Ecuador</a>',
+    '<a href="../../about.html" class="nav-link">Who We Are</a>',
+    '<a href="../index.html#proyectos" class="nav-link">Projects</a>',
+    '<a href="mailto:hello@patriciarealestate.com?subject=Consulta Ecuador" class="btn btn-primary btn-sm nav-cta">Enquire Now</a>',
+    '</nav><button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>',
+    '</div></header>',
+    '<section class="proj-hero"><div class="container proj-hero-inner">',
+    '<p style="font-size:.78rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--c-gold);margin-bottom:1rem;">' + p.type + '</p>',
+    '<h1>' + n1 + ' <em>' + n2 + '</em></h1>',
+    '<p class="location">&#128205; ' + p.location + '</p>',
+    '<p class="tagline">' + (p.desc||'') + '</p>',
+    '<div class="proj-highlights">',
+    '<div class="proj-hl-item"><div class="proj-hl-val">' + (p.hlPrice||p.price) + '</div><div class="proj-hl-label">Price from</div></div>',
+    '<div class="proj-hl-item"><div class="proj-hl-val">' + (p.hlSep||'&mdash;') + '</div><div class="proj-hl-label">Reservation from</div></div>',
+    '<div class="proj-hl-item"><div class="proj-hl-val">' + (p.hlSize||'&mdash;') + '</div><div class="proj-hl-label">Plot size</div></div>',
+    '<div class="proj-hl-item"><div class="proj-hl-val">' + (p.hlDist||'&mdash;') + '</div><div class="proj-hl-label">Distance to sea</div></div>',
+    '</div>',
+    '<div style="display:flex;gap:1rem;flex-wrap:wrap;">',
+    '<a href="mailto:hello@patriciarealestate.com?subject=Consulta Ecuador" class="btn btn-primary btn-lg">Enquire Now &#8594;</a>',
+    '<a href="../index.html#proyectos" class="btn btn-ghost-light btn-lg">&#8592; View all projects</a>',
+    '</div></div></section>',
+    '<section class="proj-desc-section"><div class="container proj-desc-inner">',
+    '<div><h2>About <em>' + p.name + '</em></h2>',
+    '<p>' + (p.descFull1||p.desc||'') + '</p>' + (p.descFull2 ? '<p>' + p.descFull2 + '</p>' : ''),
+    '</div><div><h2 style="font-size:1.3rem;margin-bottom:1rem;">Key Benefits</h2>',
+    '<ul class="proj-perks">' + benefits + '</ul></div></div></section>',
+    amenCards.length ? '<section class="proj-amenities"><div class="container"><div class="section-heading"><span class="section-eyebrow">Amenities</span><h2 style="color:#fff;">Project Amenities</h2></div><div class="proj-amenities-grid">' + amenHTML + '</div></div></section>' : '',
+    civilList.length ? '<section class="proj-civil"><div class="container"><div class="section-heading"><span class="section-eyebrow">Infrastructure</span><h2 style="color:#fff;">Civil Works Included</h2></div><div class="proj-civil-grid">' + civilHTML + '</div></div></section>' : '',
+    photos.length ? '<section class="proj-gallery"><div class="container"><div class="section-heading"><span class="section-eyebrow">Gallery</span><h2 style="color:#fff;">Project Gallery</h2></div><div class="proj-gallery-grid">' + galleryHTML + '</div></div></section>' : '',
+    '<section class="proj-cta"><div class="container">',
+    '<h2>Interested in<br/><em>' + p.name + '?</em></h2>',
+    '<p>Speak with our team today for prices and payment plans.</p>',
+    '<div class="proj-cta-actions"><a href="mailto:hello@patriciarealestate.com?subject=Consulta Ecuador" class="btn btn-primary btn-lg">Enquire Now &#8594;</a></div>',
+    '</div></section>',
+    '<footer class="site-footer"><div class="container footer-inner">',
+    '<div class="footer-brand"><a href="../../index.html"><img src="../../images/logo.png" alt="Patricia Real Estate" class="site-logo-footer"/></a></div>',
+    '<div class="footer-links"><h4>Ecuador</h4><a href="../index.html">All Projects</a></div>',
+    '</div><div class="footer-bottom"><div class="container"><p>&#169; 2026 Patricia Real Estate Ecuador.</p></div></div></footer>',
+    '<div id="lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9999;align-items:center;justify-content:center;flex-direction:column;">',
+    '<button onclick="closeLightbox()" style="position:absolute;top:16px;right:20px;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;">&#10005;</button>',
+    '<button onclick="changeLb(-1)" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);border:none;color:#fff;font-size:2rem;width:48px;height:48px;border-radius:50%;cursor:pointer;">&#8249;</button>',
+    '<img id="lbImg" src="" style="max-width:90vw;max-height:80vh;object-fit:contain;border-radius:4px;"/>',
+    '<button onclick="changeLb(1)" style="position:absolute;right:16px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);border:none;color:#fff;font-size:2rem;width:48px;height:48px;border-radius:50%;cursor:pointer;">&#8250;</button>',
+    '</div>',
+    '<script>',
+    'var lbPhotos=' + JSON.stringify(photos) + ';',
+    'var lbIdx=0;',
+    'function openLightbox(i){lbIdx=i;document.getElementById("lbImg").src=lbPhotos[lbIdx];document.getElementById("lightbox").style.display="flex";document.body.style.overflow="hidden";}',
+    'function closeLightbox(){document.getElementById("lightbox").style.display="none";document.body.style.overflow="";}',
+    'function changeLb(dir){lbIdx=(lbIdx+dir+lbPhotos.length)%lbPhotos.length;document.getElementById("lbImg").src=lbPhotos[lbIdx];}',
+    'document.addEventListener("keydown",function(e){if(e.key==="Escape")closeLightbox();if(e.key==="ArrowLeft")changeLb(-1);if(e.key==="ArrowRight")changeLb(1);});',
+    'var h=document.getElementById("hamburger"),n=document.getElementById("mainNav");',
+    'h.addEventListener("click",function(){n.classList.toggle("open");});',
+    '<\/script>',
+    '<script src="../../js/i18n.js"><\/script>',
+    '</body></html>'
+  ];
+  return lines.join('\n');
 }
 
 function showToast(msg, type='') {
