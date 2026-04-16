@@ -4,38 +4,6 @@
  */
 const propertyListings = [
   {
-    "id": 2,
-    "title": "Charming 2-Bed Period Cottage",
-    "type": "to-let",
-    "category": "house",
-    "price": "£320,000",
-    "address": "7 Mill Lane",
-    "town": "Winchester",
-    "postcode": "SO23 8PT",
-    "bedrooms": 2,
-    "bathrooms": 1,
-    "reception": 1,
-    "sqft": "820 sq ft",
-    "photos": [
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80",
-      "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=900&q=80",
-      "https://images.unsplash.com/photo-1571055107559-3e67626fa8be?w=900&q=80",
-      "https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=900&q=80"
-    ],
-    "features": [
-      "Original beams",
-      "Inglenook fireplace",
-      "Private courtyard",
-      "Period features",
-      "Quiet lane"
-    ],
-    "description": "A wonderfully characterful Grade II listed cottage dating back to the 18th century. Beautifully maintained with exposed beams, an inglenook fireplace, and a private walled courtyard garden. Situated in a quiet lane just a short walk from Winchester Cathedral.",
-    "agent": "Patricia Reynolds",
-    "email": "hello@patriciarealestate.com",
-    "added": "2026-04-09",
-    "emoji": "🏠"
-  },
-  {
     "id": 3,
     "title": "Luxury 1-Bed City Centre Apartment",
     "type": "to-let",
