@@ -14,8 +14,9 @@
     <div class="container header-inner">
       <a href="index.html"><img src="../images/logo.png" alt="Patricia Real Estate" class="site-logo" /></a>
       <nav class="main-nav" id="mainNav">
-        <a href="index.html" class="nav-link">Properties</a>
-        <a href="contact.html" class="btn btn-primary btn-sm nav-cta">Enquire Now</a>
+        <a href="index.html" class="nav-link" id="backLink">Properties</a>
+        <a href="../about.html" class="nav-link" id="aboutLink">Who We Are</a>
+<a href="contact.html" class="btn btn-primary btn-sm nav-cta">Enquire Now</a>
         <button class="btn btn-sm nav-cta lang-toggle" id="langToggle" onclick="toggleLang()" style="background:transparent;border:1px solid rgba(200,167,90,0.5);color:var(--c-gold);padding:6px 14px;border-radius:4px;cursor:pointer;font-size:.78rem;font-weight:600;letter-spacing:1px;">ES</button>
       </nav>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
@@ -162,3 +163,22 @@
       <div class="container">
         <p>© 2026 Patricia Real Estate. All rights reserved.</p>
         <p><a href="privacy.html">Privacy</a> &nbsp;·&nbsp; <a href="ter
+
+<script>
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var from = params.get('from');
+  var backLink = document.getElementById('backLink');
+  var aboutLink = document.getElementById('aboutLink');
+  if (from === 'ecuador') {
+    if (backLink) { backLink.href = '../ecuador/index.html'; backLink.textContent = 'Projects'; }
+    if (aboutLink) { aboutLink.href = '../about.html?from=ecuador'; }
+  } else if (from === 'spain') {
+    if (backLink) { backLink.href = 'index.html'; backLink.textContent = 'Properties'; }
+    if (aboutLink) { aboutLink.href = '../about.html?from=spain'; }
+  } else {
+    if (backLink) { backLink.href = 'index.html'; backLink.textContent = 'Properties'; }
+    if (aboutLink) { aboutLink.href = '../about.html'; }
+  }
+})();
+</script>
