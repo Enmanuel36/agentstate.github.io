@@ -401,6 +401,7 @@ a:hover { color: var(--c-gold-dark); }
   gap: 32px;
   flex-wrap: wrap;
   padding-top: 32px;
+  padding-bottom: 32px;
   border-top: 1px solid rgba(255,255,255,0.1);
   justify-content: center;
   width: 100%;
