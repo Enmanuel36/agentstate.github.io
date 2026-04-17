@@ -358,6 +358,9 @@ a:hover { color: var(--c-gold-dark); }
   justify-content: center;
   width: 100%;
 }
+.hero-stat {
+  text-align: center;
+}
 .hero-stat strong {
   display: block;
   font-family: var(--f-display);
