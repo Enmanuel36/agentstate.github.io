@@ -130,7 +130,7 @@
   </style>
 </head>
 <body>
-  <header class="site-header">
+  <header class="site-header" style="position:relative;z-index:1000;">
     <div class="container header-inner">
       <a href="index.html"><img src="images/logo.png" alt="Patricia Real Estate" class="site-logo" /></a>
       <nav class="main-nav" id="mainNav">
@@ -364,10 +364,10 @@
   var propLink = document.getElementById('propertiesLink');
   var enquireBtn = document.getElementById('enquireBtn');
   if (from === 'ecuador') {
-    if (propLink) { propLink.href = 'ecuador/index.html'; propLink.textContent = 'Projects'; }
+    if (propLink) { propLink.href = 'ecuador/index.html'; propLink.textContent = 'Ecuador Projects'; }
     if (enquireBtn) enquireBtn.href = 'uk/contact.html';
   } else if (from === 'spain') {
-    if (propLink) { propLink.href = 'spain/index.html'; propLink.textContent = 'Properties'; }
+    if (propLink) { propLink.href = 'spain/index.html'; propLink.textContent = 'Spain Properties'; }
     if (enquireBtn) enquireBtn.href = 'spain/contact.html';
   } else {
     if (propLink) propLink.href = 'uk/index.html';
