@@ -86,32 +86,5 @@ const ecuadorProjects = [
     "desc": "Lotes de playa con escrituras individuales, ideal para construir o especular. Zona de alto crecimiento turístico.",
     "price": "Desde $9,800",
     "emoji": "🌴"
-  },
-  {
-    "id": 1776378916417,
-    "slug": "efef",
-    "name": "Test",
-    "price": "efe",
-    "location": "efef",
-    "type": "Quintas Campestres",
-    "desc": "",
-    "hlPrice": "",
-    "hlSep": "",
-    "hlSize": "",
-    "hlDist": "",
-    "descFull1": "",
-    "descFull2": "",
-    "benefits": "",
-    "am1Title": "",
-    "am1Items": "",
-    "am2Title": "",
-    "am2Items": "",
-    "am3Title": "",
-    "am3Items": "",
-    "civilWorks": "",
-    "photos": [
-      "https://raw.githubusercontent.com/Enmanuel36/agentstate.github.io/main/images/properties/1776378913384-a-stylized-3d-rhgothssvi.jpeg"
-    ],
-    "emoji": "🌴"
   }
 ];
