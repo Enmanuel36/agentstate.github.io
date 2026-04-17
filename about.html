@@ -135,9 +135,9 @@
       <a href="index.html"><img src="images/logo.png" alt="Patricia Real Estate" class="site-logo" /></a>
       <nav class="main-nav" id="mainNav">
         <a href="index.html" class="nav-link" style="color:rgba(255,255,255,0.5);font-size:.8rem;">&#8592; Countries</a>
-        <a href="uk/index.html" class="nav-link" data-i18n="nav.properties">Properties</a>
+        <a href="uk/index.html" class="nav-link" id="propertiesLink" data-i18n="nav.properties">Properties</a>
         <a href="about.html" class="nav-link active" data-i18n="nav.about">Who We Are</a>
-        <a href="uk/contact.html" class="btn btn-primary btn-sm nav-cta">Enquire Now</a>
+        <a href="uk/contact.html" class="btn btn-primary btn-sm nav-cta" id="enquireBtn">Enquire Now</a>
         <button class="btn btn-sm nav-cta lang-toggle" id="langToggle" onclick="toggleLang()" style="background:transparent;border:1px solid rgba(200,167,90,0.5);color:var(--c-gold);padding:6px 14px;border-radius:4px;cursor:pointer;font-size:.78rem;font-weight:600;letter-spacing:1px;">ES</button>
       </nav>
       <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
@@ -325,6 +325,25 @@
     localStorage.setItem('cookieConsent','declined');
     document.getElementById('cookieBanner').style.display='none';
   };
+})();
+</script>
+
+<script>
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var from = params.get('from');
+  var propLink = document.getElementById('propertiesLink');
+  var enquireBtn = document.getElementById('enquireBtn');
+  if (from === 'ecuador') {
+    if (propLink) { propLink.href = 'ecuador/index.html'; propLink.textContent = 'Ecuador Projects'; }
+    if (enquireBtn) enquireBtn.href = 'uk/contact.html';
+  } else if (from === 'spain') {
+    if (propLink) { propLink.href = 'spain/index.html'; propLink.textContent = 'Spain Properties'; }
+    if (enquireBtn) enquireBtn.href = 'spain/contact.html';
+  } else {
+    if (propLink) propLink.href = 'uk/index.html';
+    if (enquireBtn) enquireBtn.href = 'uk/contact.html';
+  }
 })();
 </script>
 </body>
