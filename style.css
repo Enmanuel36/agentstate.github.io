@@ -1714,3 +1714,34 @@ a:hover { color: var(--c-gold-dark); }
   opacity: 1;
   border-color: var(--c-gold);
 }
+
+/* Stats section (UK/Spain) */
+.stats-section {
+  background: var(--c-navy);
+  border-top: 1px solid rgba(200,167,90,0.15);
+  border-bottom: 1px solid rgba(200,167,90,0.15);
+  padding: 3rem 0;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  text-align: center;
+}
+.stat-num {
+  font-family: var(--f-display);
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--c-gold);
+  line-height: 1;
+}
+.stat-label {
+  font-size: 0.85rem;
+  color: rgba(250,247,240,0.6);
+  margin-top: 8px;
+  font-weight: 400;
+}
+@media (max-width: 640px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  .stat-num { font-size: 2rem; }
+}
