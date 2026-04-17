@@ -197,9 +197,10 @@
       </a>
       <nav class="main-nav" id="mainNav">
         <a href="../index.html" class="nav-link" style="color:rgba(255,255,255,0.5);font-size:.8rem;">&#8592; Countries</a>
+        <a href="../about.html" class="nav-link" data-i18n="nav.about">Who We Are</a>
         <a href="#proyectos" class="nav-link" data-i18n="nav.projects">Projects</a>
-        <a href="../about.html?from=ecuador" class="nav-link" data-i18n="nav.about">Who We Are</a>
-<a href="../uk/contact.html?from=ecuador" class="btn btn-primary btn-sm nav-cta">Enquire Now</a>
+        <a href="#contacto" class="nav-link">Contacto</a>
+        <a href="mailto:hello@patriciarealestate.com?subject=Consulta Ecuador" class="btn btn-primary btn-sm nav-cta">Enquire Now</a>
         <button class="btn btn-sm nav-cta lang-toggle" id="langToggle" onclick="toggleLang()" style="background:transparent;border:1px solid rgba(200,167,90,0.5);color:var(--c-gold);padding:6px 14px;border-radius:4px;cursor:pointer;font-size:.78rem;font-weight:600;letter-spacing:1px;">ES</button>
       </nav>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu">
@@ -237,7 +238,7 @@
           <div class="ec-stat-label" data-i18n="ec.stat2">Families and investors served</div>
         </div>
         <div>
-          <div class="ec-stat-num">5</div>
+          <div class="ec-stat-num" id="projectCount">5</div>
           <div class="ec-stat-label" data-i18n="ec.stat3">Active projects in Ecuador</div>
         </div>
         <div>
@@ -331,7 +332,7 @@
       <h2 data-i18n-html="ec.cta.h2">Ready to invest<br/><em>in your future?</em></h2>
       <p data-i18n="ec.cta.p">Speak with our team today. We advise you without obligation and present the project that best suits your budget and goals.</p>
       <div class="ec-cta-actions">
-        <a href="../uk/contact.html?from=ecuador" class="btn btn-primary btn-lg" data-i18n="ec.cta.btn">Enquire Now →</a>
+        <a href="mailto:hello@patriciarealestate.com?subject=Consulta Ecuador" class="btn btn-primary btn-lg" data-i18n="ec.cta.btn">Enquire Now →</a>
       </div>
     </div>
   </section>
@@ -371,6 +372,8 @@
     // Projects loaded from data.js
 
     const grid = document.getElementById('projectsGrid');
+    var countEl = document.getElementById('projectCount');
+    if (countEl) countEl.textContent = ecuadorProjects.length;
     ecuadorProjects.forEach(p => {
       const card = document.createElement('a');
       card.className = 'ec-project-card';
