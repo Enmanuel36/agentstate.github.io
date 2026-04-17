@@ -317,7 +317,7 @@ a:hover { color: var(--c-gold-dark); }
   min-height: 580px;
   display: flex;
   align-items: center;
-  padding: 80px 0 60px;
+  padding: 80px 0 40px;
 }
 
 /* Decorative background */
@@ -392,7 +392,7 @@ a:hover { color: var(--c-gold-dark); }
   display: flex;
   gap: 14px;
   flex-wrap: wrap;
-  margin-bottom: 52px;
+  margin-bottom: 32px;
 }
 
 /* Hero stats */
@@ -1720,7 +1720,10 @@ a:hover { color: var(--c-gold-dark); }
   background: var(--c-navy);
   border-top: 1px solid rgba(200,167,90,0.15);
   border-bottom: 1px solid rgba(200,167,90,0.15);
-  padding: 3rem 0;
+  padding: 1.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .stats-grid {
   display: flex;
