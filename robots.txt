@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin-panel.html
 
-Sitemap: https://yourdomain.com/sitemap.xml
+Sitemap: https://patriciaestateagent.com
