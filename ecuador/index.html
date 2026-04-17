@@ -190,7 +190,7 @@
 <body>
 
   <!-- HEADER -->
-  <header class="site-header">
+  <header class="site-header" style="position:relative;z-index:1000;">
     <div class="container header-inner">
       <a href="index.html">
         <img src="../images/logo.png" alt="Patricia Real Estate" class="site-logo" />
@@ -398,7 +398,7 @@
     // Hamburger
     const hamburger = document.getElementById('hamburger');
     const mainNav = document.getElementById('mainNav');
-    hamburger.addEventListener('click', () => mainNav.classList.toggle('open'));
+    hamburger.addEventListener('click', () => { mainNav.classList.toggle('open'); hamburger.classList.toggle('open'); document.body.style.overflow = mainNav.classList.contains('open') ? 'hidden' : ''; });
     mainNav.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => mainNav.classList.remove('open')));
   </script>
   <script src="../js/i18n.js"></script>
