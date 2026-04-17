@@ -174,7 +174,7 @@ a:hover { color: var(--c-gold-dark); }
 
 /* Logo image */
 .site-logo {
-  height: 80px;
+  height: 100px;
   width: auto;
   object-fit: contain;
   flex-shrink: 0;
