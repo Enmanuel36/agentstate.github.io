@@ -23,6 +23,7 @@ let searchQuery  = '';
 
 document.addEventListener('DOMContentLoaded', () => {
   if (statTotal) statTotal.textContent = propertyListings.length;
+  var statBar = document.getElementById('statTotalBar'); if (statBar) statBar.textContent = propertyListings.length;
   const params = new URLSearchParams(window.location.search);
   const urlFilter = params.get('filter');
   if (urlFilter) {
