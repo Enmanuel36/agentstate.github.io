@@ -224,7 +224,7 @@
           <div class="team-role-lg" data-i18n="about.team.r1.role">Founder &amp; Director</div>
           <p class="team-bio-lg" data-i18n="about.team.r1.bio">With 10+ years in residential property across Hampshire and Surrey, Patricia founded the agency on the belief that personal service always wins. Fluent in English and Spanish, she oversees all three markets and every client relationship personally.</p>
           <div class="team-contact-row">
-            <a href="uk/contact.html"" class="btn btn-primary btn-sm" data-i18n="about.team.contact">Contact Patricia →</a>
+            <a href="uk/contact.html" class="btn btn-primary btn-sm" id="contactPatriciaBtn" data-i18n="about.team.contact">Contact Patricia →</a>
           </div>
         </div>
 
@@ -281,7 +281,7 @@
       <p data-i18n="about.cta.p">Whether you're finding, selling, renting or investing — our team is here to guide you every step of the way.</p>
       <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;">
         <a href="index.html" class="btn btn-primary btn-lg" data-i18n="about.cta.browse">Browse Properties →</a>
-        <a href="uk/contact.html" class="btn btn-ghost-light btn-lg" data-i18n="about.cta.contact">Get in Touch</a>
+        <a href="uk/contact.html" class="btn btn-ghost-light btn-lg" id="getInTouchBtn" data-i18n="about.cta.contact">Get in Touch</a>
       </div>
     </div>
   </section>
@@ -334,11 +334,40 @@
   var from = params.get('from');
   var propLink = document.getElementById('propertiesLink');
   var enquireBtn = document.getElementById('enquireBtn');
+  var contactPatriciaBtn = document.getElementById('contactPatriciaBtn');
+  var getInTouchBtn = document.getElementById('getInTouchBtn');
   if (from === 'ecuador') {
     if (propLink) { propLink.href = 'ecuador/index.html'; propLink.textContent = 'Projects'; }
-    if (enquireBtn) enquireBtn.href = 'uk/contact.html';
+    if (enquireBtn) enquireBtn.href = 'uk/contact.html?from=ecuador';
+    if (contactPatriciaBtn) contactPatriciaBtn.href = 'uk/contact.html?from=ecuador';
+    if (getInTouchBtn) getInTouchBtn.href = 'uk/contact.html?from=ecuador';
+    if (aboutLink) aboutLink.href = '../about.html?from=ecuador';
   } else if (from === 'spain') {
     if (propLink) { propLink.href = 'spain/index.html'; propLink.textContent = 'Properties'; }
+    if (enquireBtn) enquireBtn.href = 'spain/contact.html?from=spain';
+    if (contactPatriciaBtn) contactPatriciaBtn.href = 'spain/contact.html?from=spain';
+    if (getInTouchBtn) getInTouchBtn.href = 'spain/contact.html?from=spain';
+    if (aboutLink) aboutLink.href = '../about.html?from=spain';
+  } else {
+    if (propLink) propLink.href = 'uk/index.html';
+    if (enquireBtn) enquireBtn.href = 'uk/contact.html';
+    if (contactPatriciaBtn) contactPatriciaBtn.href = 'uk/contact.html';
+    if (getInTouchBtn) getInTouchBtn.href = 'uk/contact.html';
+  }
+});
+</script>
+
+<script>
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var from = params.get('from');
+  var propLink = document.getElementById('propertiesLink');
+  var enquireBtn = document.getElementById('enquireBtn');
+  if (from === 'ecuador') {
+    if (propLink) { propLink.href = 'ecuador/index.html'; propLink.textContent = 'Ecuador Projects'; }
+    if (enquireBtn) enquireBtn.href = 'uk/contact.html';
+  } else if (from === 'spain') {
+    if (propLink) { propLink.href = 'spain/index.html'; propLink.textContent = 'Spain Properties'; }
     if (enquireBtn) enquireBtn.href = 'spain/contact.html';
   } else {
     if (propLink) propLink.href = 'uk/index.html';
