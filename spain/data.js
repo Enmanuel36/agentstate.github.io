@@ -263,27 +263,5 @@ const propertyListings = [
     "email": "hello@patriciarealestate.com",
     "added": "2026-03-20",
     "emoji": "🌹"
-  },
-  {
-    "id": 1776339066205,
-    "title": "tEST",
-    "type": "to-let",
-    "category": "house",
-    "price": "1000",
-    "address": "14 Oakwood Drive",
-    "town": "London",
-    "postcode": "GU2 7RN",
-    "bedrooms": 3,
-    "bathrooms": 1,
-    "reception": 1,
-    "sqft": "",
-    "photos": [
-      "https://raw.githubusercontent.com/Enmanuel36/agentstate.github.io/main/images/properties/1776339054935-a-stylized-3d-rhgothssvi.jpeg"
-    ],
-    "features": [],
-    "description": "",
-    "agent": "Patricia Reynolds",
-    "email": "hello@patriciarealestate.com",
-    "added": "2026-04-16"
   }
 ];
