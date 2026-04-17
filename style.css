@@ -1749,7 +1749,7 @@ a:hover { color: var(--c-gold-dark); }
   line-height: 1;
 }
 .stat-label {
-  font-size: 0.85rem;
+  font-size: 3rem;
   color: rgba(250,247,240,0.6);
   margin-top: 8px;
   font-weight: 400;
