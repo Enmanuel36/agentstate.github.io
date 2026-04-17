@@ -1723,9 +1723,11 @@ a:hover { color: var(--c-gold-dark); }
   padding: 3rem 0;
 }
 .stats-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  flex-wrap: wrap;
   text-align: center;
 }
 .stats-grid > div {
@@ -1733,6 +1735,7 @@ a:hover { color: var(--c-gold-dark); }
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  min-width: 100px;
 }
 .stat-num {
   font-family: var(--f-display);
@@ -1748,6 +1751,6 @@ a:hover { color: var(--c-gold-dark); }
   font-weight: 400;
 }
 @media (max-width: 640px) {
-  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  .stats-grid { gap: 2rem; }
   .stat-num { font-size: 2rem; }
 }
