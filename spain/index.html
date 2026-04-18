@@ -16,9 +16,8 @@
       <nav class="main-nav" id="mainNav">
         <a href="../index.html" class="nav-link" style="color:rgba(255,255,255,0.5);font-size:.8rem;">&#8592; Countries</a>
         <a href="index.html" class="nav-link active">Properties</a>
-        <a href="../about.html?from=spain" class="nav-link" data-i18n="nav.about">Who We Are</a>
+        <a href="../about.html?from=spain" class="nav-link">Who We Are</a>
         <a href="contact.html?from=spain" class="btn btn-primary btn-sm nav-cta">Enquire Now</a>
-        <button class="btn btn-sm nav-cta lang-toggle" id="langToggle" onclick="toggleLang()" style="background:transparent;border:1px solid rgba(200,167,90,0.5);color:var(--c-gold);padding:6px 14px;border-radius:4px;cursor:pointer;font-size:.78rem;font-weight:600;letter-spacing:1px;">ES</button>
       </nav>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
     </div>
@@ -26,16 +25,16 @@
 
   <section class="hero">
     <div class="container hero-content">
-      <p class="hero-eyebrow" data-i18n="hero.eyebrow">Patricia Real Estate</p>
-      <h1 data-i18n-html="es.hero.h1">Find Your <em>Dream</em><br />Spanish Home</h1>
-      <p class="hero-sub" data-i18n="es.hero.sub">Exclusive properties for sale and to let across Barcelona, Madrid, Marbella and the Costa del Sol.</p>
+      <p class="hero-eyebrow">Patricia Real Estate</p>
+      <h1>Find Your <em>Dream</em><br />Spanish Home</h1>
+      <p class="hero-sub">Exclusive properties for sale and to let across Barcelona, Madrid, Marbella and the Costa del Sol.</p>
       <div class="hero-actions">
-        <a href="#listings" class="btn btn-primary btn-lg" data-i18n="index.browse">Browse Properties</a>
+        <a href="#listings" class="btn btn-primary btn-lg">Browse Properties</a>
       </div>
       <div class="hero-stats">
-        <div class="hero-stat"><strong id="statTotal">0</strong><span data-i18n="stat.listings">Listings</span></div>
-        <div class="hero-stat"><strong>10+</strong><span data-i18n="stat.years">Years Experience</span></div>
-        <div class="hero-stat"><strong>98%</strong><span data-i18n="stat.satisfaction">Client Satisfaction</span></div>
+        <div class="hero-stat"><strong id="statTotal">0</strong><span>Listings</span></div>
+        <div class="hero-stat"><strong>10+</strong><span>Years Experience</span></div>
+        <div class="hero-stat"><strong>98%</strong><span>Client Satisfaction</span></div>
       </div>
     </div>
   </section>
@@ -43,15 +42,15 @@
   <section class="search-section">
     <div class="container">
       <div class="search-card">
-        <h3 data-i18n="search.h3">Search Properties</h3>
+        <h3>Search Properties</h3>
         <div class="search-bar">
           <input type="text" id="searchInput" placeholder="Search by location, postcode, or property type..." autocomplete="off" />
-          <button class="btn btn-primary" id="searchBtn" data-i18n="index.search.btn">Search</button>
+          <button class="btn btn-primary" id="searchBtn">Search</button>
         </div>
         <div class="filter-row">
-          <button class="filter-chip active" data-filter="all" data-i18n="index.filter.all">All Properties</button>
-          <button class="filter-chip" data-filter="to-let" data-i18n="index.filter.let">To Let</button>
-          <button class="filter-chip" data-filter="let-agreed" data-i18n="index.filter.agreed">Let Agreed</button>
+          <button class="filter-chip active" data-filter="all">All Properties</button>
+          <button class="filter-chip" data-filter="to-let">To Let</button>
+          <button class="filter-chip" data-filter="let-agreed">Let Agreed</button>
         </div>
       </div>
     </div>
@@ -60,25 +59,25 @@
   <section class="listings-section" id="listings">
     <div class="container">
       <div class="section-heading">
-        <span class="section-eyebrow" data-i18n="listings.eyebrow">Available Properties</span>
-        <h2 data-i18n="listings.h2">Featured Listings</h2>
-        <p data-i18n="listings.sub">Carefully selected properties, personally managed by our team.</p>
+        <span class="section-eyebrow">Available Properties</span>
+        <h2>Featured Listings</h2>
+        <p>Carefully selected properties, personally managed by our team.</p>
       </div>
       <div class="listings-controls">
         <p class="listings-count"><strong id="countDisplay">0</strong> properties found</p>
         <div class="sort-controls">
           <label for="sortSelect">Sort:</label>
           <select id="sortSelect">
-            <option value="newest" data-i18n="index.sort.newest">Newest First</option>
-            <option value="price-asc" data-i18n="index.sort.priceasc">Price: Low to High</option>
-            <option value="price-desc" data-i18n="index.sort.pricedesc">Price: High to Low</option>
-            <option value="beds-desc" data-i18n="index.sort.beds">Most Bedrooms</option>
+            <option value="newest">Newest First</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="beds-desc">Most Bedrooms</option>
           </select>
         </div>
       </div>
       <div class="listings-grid" id="listingsGrid"></div>
       <div class="empty-state" id="emptyState" style="display:none;">
-        <h3 data-i18n="empty.h3">No properties found</h3>
+        <h3>No properties found</h3>
         <p>Try adjusting your search or <a href="contact.html?from=spain">contact us</a>.</p>
       </div>
     </div>
@@ -88,26 +87,26 @@
     <div class="container footer-inner">
       <div class="footer-brand">
         <a href="../index.html"><img src="../images/logo.png" alt="Patricia Real Estate" class="site-logo-footer" /></a>
-        <p data-i18n="uk.footer.tagline">Trusted property specialists. Selling or letting — we're here to help.</p>
+        <p>Trusted property specialists. Selling or letting — we're here to help.</p>
       </div>
       <div class="footer-links">
-        <h4 data-i18n="footer.props">Properties</h4>
-        <a href="index.html?filter=to-let" data-i18n="footer.tolet">To Let</a>
+        <h4>Properties</h4>
+        <a href="index.html?filter=to-let">To Let</a>
       </div>
       <div class="footer-links">
-        <h4 data-i18n="footer.company">Company</h4>
-        <a href="../index.html" data-i18n="footer.countries">Countries</a>
-        <a href="contact.html" data-i18n="footer.contact">Contact</a>
+        <h4>Company</h4>
+        <a href="../index.html">Countries</a>
+        <a href="contact.html">Contact</a>
       </div>
       <div class="footer-links">
-        <h4 data-i18n="footer.legal">Legal</h4>
-        <a href="privacy.html" data-i18n="footer.privacy">Privacy Policy</a>
-        <a href="terms.html" data-i18n="footer.terms">Terms &amp; Conditions</a>
+        <h4>Legal</h4>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms &amp; Conditions</a>
       </div>
     </div>
     <div class="footer-bottom">
       <div class="container">
-        <p data-i18n="footer.copy">&#169; 2026 Patricia Real Estate. All rights reserved.</p>
+        <p>&#169; 2026 Patricia Real Estate. All rights reserved.</p>
       </div>
     </div>
   </footer>
@@ -121,8 +120,7 @@
 
   <script src="data.js"></script>
   <script src="../js/main.js"></script>
-  <script src="../js/i18n.js"></script>
-  <script>
+    <script>
     var hamburger = document.getElementById('hamburger');
     var mainNav = document.getElementById('mainNav');
     if (hamburger && mainNav) {
