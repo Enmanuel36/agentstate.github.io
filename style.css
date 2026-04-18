@@ -926,7 +926,7 @@ a:hover { color: var(--c-gold-dark); }
 }
 
 .footer-brand .site-logo-footer {
-  height: 48px;
+  height: 100px;
   width: auto;
   object-fit: contain;
   margin-bottom: 16px;
