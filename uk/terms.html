@@ -17,7 +17,7 @@
     <div class="container header-inner">
       <a href="index.html"><img src="../images/logo.png" alt="Patricia Real Estate" class="site-logo" /></a>
       <nav class="main-nav" id="mainNav">
-        <a href="index.html" class="nav-link">Browse</a>
+        <a href="../index.html" class="nav-link" style="color:rgba(255,255,255,0.5);font-size:.8rem;">&#8592; Countries</a>
         <a href="../about.html" class="nav-link" data-i18n="nav.about">Who We Are</a>
         <a href="contact.html" class="btn btn-primary btn-sm nav-cta">Enquire Now</a>
         <button class="btn btn-sm nav-cta lang-toggle" id="langToggle" onclick="toggleLang()" style="background:transparent;border:1px solid rgba(200,167,90,0.5);color:var(--c-gold);padding:6px 14px;border-radius:4px;cursor:pointer;font-size:.78rem;font-weight:600;letter-spacing:1px;">ES</button>
@@ -32,7 +32,7 @@
   <section class="page-hero">
     <div class="container">
       <h1>Terms &amp; Conditions</h1>
-      <p>Last updated: 11 April 2026</p>
+      <p>Last updated: <span id="lastUpdated">11 April 2026</span></p>
     </div>
   </section>
 
@@ -46,7 +46,7 @@
           <li><a href="#acceptance">Acceptance of Terms</a></li>
           <li><a href="#about-the-service">About the Service</a></li>
           <li><a href="#eligibility">Eligibility</a></li>
-          <li><a href="#listings">Proxy Listings</a></li>
+          <li><a href="#listings">Property Listings</a></li>
           <li><a href="#user-conduct">Acceptable Use</a></li>
           <li><a href="#prohibited-uses">Prohibited Uses</a></li>
           <li><a href="#disclaimer">Disclaimers</a></li>
@@ -63,24 +63,23 @@
       <div class="legal-body">
 
         <div class="legal-notice">
-          <strong>Plain-English Summary:</strong> Patricia Real Estate is a free marketplace listing property services.
-          We connect providers and renters but are not party to any rental agreement.
-          Use the Site lawfully, do not list or use proxies for illegal activity,
-          and understand that we cannot guarantee the quality of third-party listings.
+          <strong>Plain-English Summary:</strong> Patricia Real Estate is a property agency specialising in lettings and sales across the UK, Spain and Ecuador.
+          We connect clients with properties and provide a personal service throughout.
+          Use the Site lawfully and understand that we work to the highest professional standards on your behalf.
         </div>
 
         <!-- 1 -->
         <section id="acceptance">
           <h2>1. Acceptance of Terms</h2>
           <p>By accessing or using the Patricia Real Estate website ("Site", "Service"), you agree to be bound by these Terms and Conditions ("Terms"). If you do not agree with any part of these Terms, you must not use the Site.</p>
-          <p>These Terms apply to all visitors, proxy renters, proxy providers, and anyone else who accesses or uses the Site. By submitting a listing, sending an enquiry, or otherwise interacting with the Site, you confirm that you have read, understood, and agreed to these Terms.</p>
+          <p>These Terms apply to all visitors, clients, and anyone else who accesses or uses the Site. By sending an enquiry or otherwise interacting with the Site, you confirm that you have read, understood, and agreed to these Terms.</p>
         </section>
 
         <!-- 2 -->
         <section id="about-the-service">
           <h2>2. About the Service</h2>
-          <p>Patricia Real Estate is an online marketplace that enables property service providers ("Providers") to list their property services for free, and enables individuals and businesses ("Renters") to discover and enquire about those services.</p>
-          <p>Patricia Real Estate acts solely as a platform and intermediary. We are <strong>not</strong> a party to any agreement formed between a Provider and a Renter. We do not own, operate, manage, or control any property service listed on the Site.</p>
+          <p>Patricia Real Estate is a property agency offering residential lettings, sales and investment projects across the UK, Spain and Ecuador. We provide a personal, professional service connecting clients with carefully selected properties.</p>
+          <p>Patricia Real Estate acts as your agent throughout the process. We are committed to providing accurate information and professional guidance at every stage.</p>
         </section>
 
         <!-- 3 -->
@@ -92,23 +91,16 @@
 
         <!-- 4 -->
         <section id="listings">
-          <h2>4. Proxy Listings</h2>
+          <h2>4. Property Listings</h2>
 
-          <h3>4.1 Provider Responsibilities</h3>
-          <p>Providers who submit listings to Patricia Real Estate represent and warrant that:</p>
-          <ul>
-            <li>All information provided in the listing is accurate, complete, and not misleading.</li>
-            <li>They own or have the lawful right to offer the property service described.</li>
-            <li>The property service complies with all applicable laws and regulations.</li>
-            <li>They will honour the pricing, availability, and specifications stated in their listing.</li>
-            <li>They will respond to legitimate enquiries in a timely and professional manner.</li>
-          </ul>
+          <h3>4.1 Accuracy of Listings</h3>
+          <p>Patricia Real Estate takes reasonable care to ensure that all property listings on the Site are accurate and up to date. However, property details are subject to change and we recommend you verify all information before making any decisions.</p>
 
           <h3>4.2 Listing Content</h3>
-          <p>By submitting a listing, you grant Patricia Real Estate a non-exclusive, royalty-free, worldwide licence to display, reproduce, and distribute the listing content on the Site and in promotional materials. You retain ownership of the content you submit.</p>
+          <p>All listing content on this Site is the property of Patricia Real Estate. You may not reproduce, distribute or use any listing content without our prior written permission.</p>
 
           <h3>4.3 Removal of Listings</h3>
-          <p>Patricia Real Estate reserves the right to remove any listing at any time, without notice, if we believe the listing violates these Terms, is fraudulent, misleading, or otherwise harmful to users of the Site.</p>
+          <p>Patricia Real Estate reserves the right to remove any listing at any time, without notice, at our sole discretion.</p>
         </section>
 
         <!-- 5 -->
@@ -117,8 +109,8 @@
           <p>You agree to use the Site only for lawful purposes and in a manner that does not infringe the rights of others. You agree to:</p>
           <ul>
             <li>Provide accurate information when submitting listings or enquiries.</li>
-            <li>Treat other users, Providers, and Patricia Real Estate staff with respect.</li>
-            <li>Use any property services you obtain through this Site in compliance with the Provider's terms of service and all applicable laws.</li>
+            <li>Treat other clients and Patricia Real Estate staff with respect.</li>
+            <li>Use information obtained through this Site in compliance with all applicable laws.</li>
             <li>Not attempt to gain unauthorised access to the Site, its servers, or any related systems.</li>
           </ul>
         </section>
@@ -126,13 +118,12 @@
         <!-- 6 -->
         <section id="prohibited-uses">
           <h2>6. Prohibited Uses</h2>
-          <p>You must not use the Site or any property services found through the Site for any of the following purposes:</p>
+          <p>You must not use the Site for any of the following purposes:</p>
           <ul>
             <li>Any illegal activity, including hacking, fraud, identity theft, or any activity that violates applicable law.</li>
             <li>Sending unsolicited communications (spam).</li>
             <li>Distributing malware, viruses, or other harmful software.</li>
-            <li>Scraping, harvesting, or extracting data from websites in violation of those sites' terms of service.</li>
-            <li>Circumventing geographic restrictions on content where doing so is unlawful.</li>
+            <li>Scraping, harvesting, or extracting data from this Site without permission.</li>
             <li>Harassment, abuse, or harm directed at any individual or group.</li>
             <li>Violating intellectual property rights of any third party.</li>
             <li>Any activity that disrupts, interferes with, or places an unreasonable load on the infrastructure of any third party.</li>
@@ -147,10 +138,9 @@
           <p>Patricia Real Estate does not warrant that:</p>
           <ul>
             <li>The Site will be uninterrupted, error-free, or secure at all times.</li>
-            <li>Any proxy listing is accurate, up to date, or that the described service will be available.</li>
-            <li>Any property service obtained through the Site will meet your requirements or expectations.</li>
+            <li>Any property listing is accurate, up to date, or that the described property will remain available.</li>
           </ul>
-          <p>Patricia Real Estate is not responsible for the quality, legality, reliability, or suitability of any property service listed by a third-party Provider. All transactions and agreements are strictly between the Renter and the Provider.</p>
+          <p>Patricia Real Estate will always endeavour to provide accurate and current information. We recommend clients conduct their own due diligence before entering into any agreement.</p>
         </section>
 
         <!-- 8 -->
@@ -159,7 +149,7 @@
           <p>To the fullest extent permitted by applicable law, Patricia Real Estate and its owners, operators, employees, and agents shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from:</p>
           <ul>
             <li>Your use of or inability to use the Site.</li>
-            <li>Any property service obtained through the Site.</li>
+            <li>Any property transaction facilitated through the Site.</li>
             <li>Unauthorised access to or alteration of your transmissions or data.</li>
             <li>Any content, conduct, or activity of any third party on the Site.</li>
           </ul>
@@ -170,14 +160,14 @@
         <section id="third-party">
           <h2>9. Third-Party Links &amp; Providers</h2>
           <p>The Site may contain links to third-party websites and services. These links are provided for your convenience only. Patricia Real Estate has no control over the content or practices of third-party sites and accepts no responsibility for them. Accessing third-party links is entirely at your own risk.</p>
-          <p>Any contract for property services is formed directly between you and the relevant Provider. Patricia Real Estate is not a party to such contracts and accepts no liability in connection with them.</p>
+          <p>Any third-party links are provided for convenience only. Patricia Real Estate accepts no responsibility for third-party content or services.</p>
         </section>
 
         <!-- 10 -->
         <section id="intellectual-property">
           <h2>10. Intellectual Property</h2>
           <p>All original content on the Site — including but not limited to the website design, layout, graphics, and text authored by Patricia Real Estate — is the intellectual property of Patricia Real Estate and is protected by copyright and other applicable laws.</p>
-          <p>You may not reproduce, distribute, modify, or create derivative works from any Patricia Real Estate-owned content without our prior written permission. Listing content submitted by Providers remains the property of the respective Provider.</p>
+          <p>You may not reproduce, distribute, modify, or create derivative works from any Patricia Real Estate-owned content without our prior written permission. Property listing content created by Patricia Real Estate remains our intellectual property.</p>
           <p>The site's source code is published under an open-source licence on GitHub. Use of the code is subject to the terms of that licence.</p>
         </section>
 
@@ -186,7 +176,7 @@
           <h2>11. Indemnification</h2>
           <p>You agree to indemnify, defend, and hold harmless Patricia Real Estate and its officers, directors, employees, and agents from and against any claims, liabilities, damages, losses, costs, or expenses (including reasonable legal fees) arising out of or in any way connected with:</p>
           <ul>
-            <li>Your use of the Site or any property services found through the Site.</li>
+            <li>Your use of the Site or any property found through the Site.</li>
             <li>Your violation of these Terms.</li>
             <li>Your violation of any applicable law or the rights of any third party.</li>
             <li>Any content you submit to the Site.</li>
@@ -230,7 +220,7 @@
       </div>
       <div class="footer-links">
         <h4>Quick Links</h4>
-        <a href="index.html">Browse Proxies</a>
+        <a href="index.html">Browse Properties</a>
         <a href="contact.html">Contact Us</a>
       </div>
       <div class="footer-links">
