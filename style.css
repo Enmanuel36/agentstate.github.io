@@ -398,7 +398,7 @@ a:hover { color: var(--c-gold-dark); }
 /* Hero stats */
 .hero-stats {
   display: flex;
-  gap: 32px;
+  gap: 80px;
   flex-wrap: wrap;
   padding-top: 32px;
   padding-bottom: 32px;
