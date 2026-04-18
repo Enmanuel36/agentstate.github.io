@@ -914,7 +914,7 @@ a:hover { color: var(--c-gold-dark); }
    ────────────────────────────────────────── */
 .site-footer {
   background: var(--c-navy);
-  padding: 60px 0 0;
+  padding: 36px 0 0;
   border-top: 3px solid var(--c-gold);
 }
 
@@ -922,7 +922,9 @@ a:hover { color: var(--c-gold-dark); }
   display: grid;
   grid-template-columns: 2.2fr 1fr 1fr 1fr;
   gap: 44px;
-  padding-bottom: 44px;
+  padding-bottom: 28px;
+  padding-left: 24px;
+  padding-right: 24px;
 }
 
 .footer-brand .site-logo-footer {
@@ -935,6 +937,9 @@ a:hover { color: var(--c-gold-dark); }
   filter: brightness(1.05);
 }
 
+.footer-brand {
+  padding-left: 0;
+}
 .footer-brand p {
   color: var(--c-text-light);
   font-size: 0.87rem;
@@ -968,7 +973,7 @@ a:hover { color: var(--c-gold-dark); }
 
 .footer-bottom {
   border-top: 1px solid rgba(255,255,255,0.08);
-  padding: 20px 0;
+  padding: 14px 0;
 }
 .footer-bottom .container {
   display: flex;
