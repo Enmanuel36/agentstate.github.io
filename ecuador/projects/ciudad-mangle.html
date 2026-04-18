@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Urbanización Ciudad Mangle | Patricia Real Estate Ecuador</title>
@@ -120,8 +120,8 @@
       <a href="/index.html"><img src="../../images/logo.png" alt="Patricia Real Estate" class="site-logo" /></a>
       <nav class="main-nav" id="mainNav">
         <a href="../index.html" class="nav-link" style="color:rgba(255,255,255,.5);font-size:.8rem;" data-i18n="proj.nav.back">← Ecuador</a>
-        <a href="../../about.html" class="nav-link" data-i18n="nav.about">Who We Are</a>
         <a href="../index.html#proyectos" class="nav-link" data-i18n="proj.nav.projects">Projects</a>
+        <a href="../../about.html?from=ecuador" class="nav-link" data-i18n="nav.about">Who We Are</a>
         <a href="../../uk/contact.html?from=ecuador" class="btn btn-primary btn-sm nav-cta" data-i18n="proj.nav.enquire">Enquire Now</a>
         <button class="btn btn-sm nav-cta lang-toggle" id="langToggle" onclick="toggleLang()" style="background:transparent;border:1px solid rgba(200,167,90,0.5);color:var(--c-gold);padding:6px 14px;border-radius:4px;cursor:pointer;font-size:.78rem;font-weight:600;letter-spacing:1px;">ES</button>
       </nav>
@@ -187,7 +187,7 @@
         <h2 style="color:#fff;" data-i18n="proj.civil.h2">Civil Works Included</h2>
       </div>
       <div class="proj-civil-grid">
-        <div class="proj-civil-item"><div class="civil-icon"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6M10 22h4"/></svg></span></div><p>Vías internas pavimentadas</p></div><div class="proj-civil-item"><div class="civil-icon"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></span></div><p>Red eléctrica subterránea</p></div><div class="proj-civil-item"><div class="civil-icon"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8H6a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2z"/></svg></span></div><p>Sistema de agua potable</p></div><div class="proj-civil-item"><div class="civil-icon"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2h-2"/><circle cx="9" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></span></div><p>Alcantarillado sanitario</p></div>
+        <div class="proj-civil-item"><div class="civil-icon"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6M10 22h4"/></svg></span></div><p>Vías internas pavimentadas</p></div><div class="proj-civil-item"><div class="civil-icon"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8H6a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2z"/></svg></span></div><p>Red eléctrica subterránea</p></div><div class="proj-civil-item"><div class="civil-icon"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></span></div><p>Sistema de agua potable</p></div><div class="proj-civil-item"><div class="civil-icon"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2h-2"/><circle cx="9" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></span></div><p>Alcantarillado sanitario</p></div>
       </div>
     </div>
   </section>
@@ -291,5 +291,16 @@
     });
   </script>
   <script src="../../js/i18n.js"></script>
+<script>
+// Project pages always default to English
+(function() {
+  var saved = localStorage.getItem('pre_lang');
+  if (saved === 'es') {
+    // Don't override - user explicitly chose Spanish
+  } else {
+    localStorage.removeItem('pre_lang');
+  }
+})();
+</script>
 </body>
 </html>
