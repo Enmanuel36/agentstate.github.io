@@ -1045,7 +1045,7 @@ a:hover { color: var(--c-gold-dark); }
   backdrop-filter: blur(4px);
   z-index: 200;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   padding: 20px;
   opacity: 0;
@@ -1062,12 +1062,13 @@ a:hover { color: var(--c-gold-dark); }
   border-radius: var(--r-xl);
   max-width: 700px;
   width: 100%;
-  max-height: 92vh;
+  max-height: calc(100vh - var(--nav-h) - 24px);
   overflow-y: auto;
   position: relative;
   transform: translateY(24px);
   transition: transform var(--transition);
   box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+  margin-top: var(--nav-h);
 }
 .modal-overlay.open .modal { transform: translateY(0); }
 
