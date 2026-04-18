@@ -17,7 +17,7 @@
     <div class="container header-inner">
       <a href="index.html"><img src="../images/logo.png" alt="Patricia Real Estate" class="site-logo" /></a>
       <nav class="main-nav" id="mainNav">
-        <a href="index.html" class="nav-link">Browse</a>
+        <a href="../index.html" class="nav-link" style="color:rgba(255,255,255,0.5);font-size:.8rem;">&#8592; Countries</a>
         <a href="../about.html" class="nav-link" data-i18n="nav.about">Who We Are</a>
         <a href="contact.html" class="btn btn-primary btn-sm nav-cta">Enquire Now</a>
         <button class="btn btn-sm nav-cta lang-toggle" id="langToggle" onclick="toggleLang()" style="background:transparent;border:1px solid rgba(200,167,90,0.5);color:var(--c-gold);padding:6px 14px;border-radius:4px;cursor:pointer;font-size:.78rem;font-weight:600;letter-spacing:1px;">ES</button>
@@ -32,7 +32,7 @@
   <section class="page-hero">
     <div class="container">
       <h1>Privacy Policy</h1>
-      <p>Last updated: 11 April 2026</p>
+      <p>Last updated: <span id="lastUpdated">11 April 2026</span></p>
     </div>
   </section>
 
@@ -70,7 +70,7 @@
         <!-- 1 -->
         <section id="who-we-are">
           <h2>1. Who We Are</h2>
-          <p>Patricia Real Estate ("we", "us", "our") operates the website at <strong>patriciarealestate.com</strong> (the "Site"). We are a property marketplace connecting proxy providers with renters. The Site is hosted as a static website on GitHub Pages.</p>
+          <p>Patricia Real Estate ("we", "us", "our") operates the website at <strong>patriciarealestate.com</strong> (the "Site"). We are a property agency specialising in residential lettings and sales across the UK, Spain and Ecuador. The Site is hosted as a static website on GitHub Pages.</p>
           <p>For data protection purposes, Patricia Real Estate is the data controller. If you have any questions about this policy, please contact us at <a href="/cdn-cgi/l/email-protection#69010c05050629191b061110050c1d470a0604"><span class="__cf_email__" data-cfemail="5a323f3636351a2a28352223363f2e74393537">[email&#160;protected]</span></a>.</p>
         </section>
 
@@ -85,15 +85,12 @@
             <li>Your email address</li>
             <li>Your phone number (optional)</li>
             <li>Your message content</li>
-            <li>The proxy listing you are enquiring about</li>
+            <li>The property you are enquiring about</li>
           </ul>
           <p>This information is transmitted directly via your own email client using a <code>mailto:</code> link. It is sent from your device to our email inbox and is not intercepted or stored by any third-party service.</p>
 
           <h3>2.2 Information Collected Automatically</h3>
           <p>Because Patricia Real Estate is a static website hosted on GitHub Pages, we do not run server-side analytics, tracking scripts, or advertising technologies. GitHub, as our hosting provider, may collect standard server logs (IP addresses, browser type, pages visited) in accordance with their own <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">Privacy Statement</a>. We do not have access to or control over this data.</p>
-
-          <h3>2.3 Proxy Listing Data</h3>
-          <p>If you submit a proxy listing via our "List a Proxy" page, the listing data you enter is stored in a public JavaScript file (<code>data.js</code>) within the GitHub repository. This data is publicly visible as part of the open-source site code. Do not include sensitive credentials or personal information in a proxy listing.</p>
         </section>
 
         <!-- 3 -->
@@ -102,8 +99,8 @@
           <p>We use the personal information you send us solely to:</p>
           <ul>
             <li>Respond to your enquiry or support request</li>
-            <li>Provide information about proxy listings you have asked about</li>
-            <li>Connect you with proxy providers where relevant</li>
+            <li>Provide information about property listings you have asked about</li>
+            <li>Connect you with property specialists where relevant</li>
           </ul>
           <p>We do not use your data for automated decision-making, profiling, or marketing without your explicit consent.</p>
         </section>
@@ -124,7 +121,7 @@
           <h2>5. Data Sharing &amp; Third Parties</h2>
           <p>We do not sell, rent, or trade your personal data. We may share your information only in the following limited circumstances:</p>
           <ul>
-            <li><strong>Proxy providers:</strong> If you enquire about a specific listing, we may forward your message to the relevant provider to facilitate a response. This will always be clear from the context of your enquiry.</li>
+            <li><strong>Property specialists:</strong> If you enquire about a specific listing, we may forward your message to the relevant specialist to facilitate a response. This will always be clear from the context of your enquiry.</li>
             <li><strong>Legal obligations:</strong> We may disclose information if required by law, court order, or to protect the rights and safety of Patricia Real Estate and its users.</li>
             <li><strong>GitHub Pages:</strong> Our hosting provider. Please see <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub's privacy statement</a>.</li>
           </ul>
@@ -134,7 +131,6 @@
         <section id="cookies">
           <h2>6. Cookies &amp; Tracking</h2>
           <p>Patricia Real Estate does <strong>not</strong> use cookies, local storage for tracking purposes, or any third-party analytics or advertising scripts. The Site loads fonts from Google Fonts — Google's servers receive your IP address when the fonts are loaded. You may block Google Fonts by using a browser extension or privacy mode.</p>
-          <p>No cookie consent banner is required because we do not set any non-essential cookies.</p>
         </section>
 
         <!-- 7 -->
@@ -200,7 +196,7 @@
       </div>
       <div class="footer-links">
         <h4>Quick Links</h4>
-        <a href="index.html">Browse Proxies</a>
+        <a href="index.html">Browse Properties</a>
         <a href="contact.html">Contact Us</a>
       </div>
       <div class="footer-links">
