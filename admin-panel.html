@@ -1243,11 +1243,13 @@ function editListing(market, idx) {
 
 function deleteListing(market, idx) {
   if (!confirm('Delete this listing? This cannot be undone.')) return;
-  if (market === 'uk') ukListings.splice(idx, 1);
-  else esListings.splice(idx, 1);
+  var deleted = market === 'uk' ? ukListings.splice(idx, 1)[0] : esListings.splice(idx, 1)[0];
   renderTables();
   updateMetrics();
   pushToGitHub(market);
+  if (deleted && deleted.photos && deleted.photos.length > 0) {
+    deleteProjectPhotos(deleted.photos);
+  }
 }
 
 /* == ADD / EDIT PROPERTY ========================================== */
@@ -1563,6 +1565,40 @@ function deleteEcListing(idx) {
   if (deleted && deleted.slug) {
     deleteProjectPage(deleted.slug);
   }
+  if (deleted && deleted.photos && deleted.photos.length > 0) {
+    deleteProjectPhotos(deleted.photos);
+  }
+}
+
+async function deleteProjectPhotos(photos) {
+  var user = localStorage.getItem('ghUser'), repo = localStorage.getItem('ghRepo'),
+      branch = localStorage.getItem('ghBranch') || 'main', token = localStorage.getItem('ghToken');
+  if (!user || !repo || !token) return;
+  var deleted = 0;
+  for (var i = 0; i < photos.length; i++) {
+    var url = photos[i];
+    // Only delete photos hosted on this GitHub repo
+    if (url.indexOf('raw.githubusercontent.com/' + user + '/' + repo) === -1 &&
+        url.indexOf('github.io') === -1) continue;
+    // Extract path from URL
+    var match = url.match(/\/images\/properties\/([^?#]+)/);
+    if (!match) continue;
+    var path = 'images/properties/' + match[1];
+    try {
+      var getRes = await fetch('https://api.github.com/repos/' + user + '/' + repo + '/contents/' + path + '?ref=' + branch, {
+        headers: { Authorization: 'token ' + token, Accept: 'application/vnd.github.v3+json' }
+      });
+      if (!getRes.ok) continue;
+      var d = await getRes.json();
+      await fetch('https://api.github.com/repos/' + user + '/' + repo + '/contents/' + path, {
+        method: 'DELETE',
+        headers: { Authorization: 'token ' + token, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: 'Admin: delete photo ' + match[1], sha: d.sha, branch: branch })
+      });
+      deleted++;
+    } catch(e) { /* skip if can't delete */ }
+  }
+  if (deleted > 0) showToast(deleted + ' photo' + (deleted > 1 ? 's' : '') + ' deleted from GitHub', 'success');
 }
 
 async function deleteProjectPage(slug) {
