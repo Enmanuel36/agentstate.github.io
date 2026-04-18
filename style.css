@@ -1040,14 +1040,18 @@ a:hover { color: var(--c-gold-dark); }
    ────────────────────────────────────────── */
 .modal-overlay {
   position: fixed;
-  inset: 0;
+  top: var(--nav-h);
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: rgba(20,26,34,0.75);
   backdrop-filter: blur(4px);
   z-index: 200;
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: 20px;
+  padding: 16px;
+  overflow-y: auto;
   opacity: 0;
   pointer-events: none;
   transition: opacity var(--transition);
@@ -1068,7 +1072,7 @@ a:hover { color: var(--c-gold-dark); }
   transform: translateY(24px);
   transition: transform var(--transition);
   box-shadow: 0 30px 80px rgba(0,0,0,0.35);
-  margin-top: var(--nav-h);
+  margin-top: 0;
 }
 .modal-overlay.open .modal { transform: translateY(0); }
 
