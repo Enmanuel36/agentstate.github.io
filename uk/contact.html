@@ -16,7 +16,7 @@
       <nav class="main-nav" id="mainNav">
         <a href="index.html" class="nav-link" id="backLink">Properties</a>
         <a href="../about.html" class="nav-link" id="aboutLink">Who We Are</a>
-<a href="contact.html" class="btn btn-primary btn-sm nav-cta">Enquire Now</a>
+<a href="contact.html" class="btn btn-primary btn-sm nav-cta" id="enquireNowBtn">Enquire Now</a>
       </nav>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
     </div>
@@ -169,12 +169,15 @@
   var from = params.get('from');
   var backLink = document.getElementById('backLink');
   var aboutLink = document.getElementById('aboutLink');
+  var enquireNowBtn = document.getElementById('enquireNowBtn');
   if (from === 'ecuador') {
     if (backLink) { backLink.href = '../ecuador/index.html'; backLink.textContent = 'Projects'; }
     if (aboutLink) { aboutLink.href = '../about.html?from=ecuador'; }
+    if (enquireNowBtn) enquireNowBtn.href = 'contact.html?from=ecuador';
   } else if (from === 'spain') {
     if (backLink) { backLink.href = 'index.html'; backLink.textContent = 'Properties'; }
     if (aboutLink) { aboutLink.href = '../about.html?from=spain'; }
+    if (enquireNowBtn) enquireNowBtn.href = 'contact.html?from=spain';
   } else {
     if (backLink) { backLink.href = 'index.html'; backLink.textContent = 'Properties'; }
     if (aboutLink) { aboutLink.href = '../about.html'; }
