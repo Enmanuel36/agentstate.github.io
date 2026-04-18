@@ -23,7 +23,6 @@ let searchQuery  = '';
 
 document.addEventListener('DOMContentLoaded', () => {
   if (statTotal) statTotal.textContent = propertyListings.length;
-  var statBar = document.getElementById('statTotalBar'); if (statBar) statBar.textContent = propertyListings.length;
   const params = new URLSearchParams(window.location.search);
   const urlFilter = params.get('filter');
   if (urlFilter) {
@@ -111,7 +110,7 @@ function createCard(p) {
       '<p class="card-desc">' + esc(p.description) + '</p>' +
     '</div>' +
     '<div class="card-footer">' +
-      '<div class="card-agent"><span>Listed by</span><strong>Patricia AM</strong></div>' +
+      '<div class="card-agent"><span>Listed by</span><strong>' + esc(p.agent) + '</strong></div>' +
       '<button class="btn btn-primary btn-sm card-enquire" data-id="' + p.id + '">Enquire</button>' +
     '</div>';
 
@@ -170,7 +169,6 @@ function openModal(p) {
 
   modalBody.innerHTML =
     galleryHTML +
-    (galleryPhotos.length > 0 ? '<button class="modal-close" id="modalCloseInner" style="position:absolute;top:12px;right:12px;z-index:10;">✕</button>' : '') +
     '<div class="modal-body">' +
       '<span class="modal-badge ' + p.type + '">' + (badgeLabels[p.type]||p.type) + '</span>' +
       '<div class="modal-price">' + esc(p.price) + '</div>' +
@@ -188,7 +186,7 @@ function openModal(p) {
       '<div class="modal-features">' + featurePills + '</div>' +
       '<div class="modal-agent">' +
         '<div class="modal-agent-icon">👤</div>' +
-        '<div class="modal-agent-info"><h4>Patricia AM</h4><p>Patricia Real Estate</p></div>' +
+        '<div class="modal-agent-info"><h4>' + esc(p.agent) + '</h4><p>Patricia Real Estate</p></div>' +
       '</div>' +
       '<div class="modal-actions">' +
         '<a href="contact.html?property=' + encodeURIComponent(p.title) + '" class="btn btn-primary">Enquire Now →</a>' +
