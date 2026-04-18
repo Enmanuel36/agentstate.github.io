@@ -23,11 +23,11 @@ const i18nStrings = {
     'landing.h1':       'Find Your <em>Next Property,</em><br/>Anywhere',
     'landing.sub':      'Choose your country to explore exclusive listings',
     'landing.uk.name':  'United Kingdom',
-    'landing.uk.sub':   'Browse properties across Hampshire &amp; Surrey',
+    'landing.uk.sub':   'Browse properties across London',
     'landing.ec.name':  'Ecuador',
     'landing.ec.sub':   'Invest in land and property projects in Ecuador',
     'landing.es.name':  'Spain',
-    'landing.es.sub':   'Explore luxury properties across Spain',
+    'landing.es.sub':   'Explore properties across Spain',
 
     // ── Shared hero / index ──
     'hero.eyebrow':         'Patricia Real Estate',
