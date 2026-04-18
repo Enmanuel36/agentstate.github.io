@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Urbanización Vista al Mar | Patricia Real Estate Ecuador</title>
@@ -120,8 +120,8 @@
       <a href="/index.html"><img src="../../images/logo.png" alt="Patricia Real Estate" class="site-logo" /></a>
       <nav class="main-nav" id="mainNav">
         <a href="../index.html" class="nav-link" style="color:rgba(255,255,255,.5);font-size:.8rem;" data-i18n="proj.nav.back">← Ecuador</a>
-        <a href="../../about.html" class="nav-link" data-i18n="nav.about">Who We Are</a>
         <a href="../index.html#proyectos" class="nav-link" data-i18n="proj.nav.projects">Projects</a>
+        <a href="../../about.html?from=ecuador" class="nav-link" data-i18n="nav.about">Who We Are</a>
         <a href="../../uk/contact.html?from=ecuador" class="btn btn-primary btn-sm nav-cta" data-i18n="proj.nav.enquire">Enquire Now</a>
         <button class="btn btn-sm nav-cta lang-toggle" id="langToggle" onclick="toggleLang()" style="background:transparent;border:1px solid rgba(200,167,90,0.5);color:var(--c-gold);padding:6px 14px;border-radius:4px;cursor:pointer;font-size:.78rem;font-weight:600;letter-spacing:1px;">ES</button>
       </nav>
@@ -291,5 +291,16 @@
     });
   </script>
   <script src="../../js/i18n.js"></script>
+<script>
+// Project pages always default to English
+(function() {
+  var saved = localStorage.getItem('pre_lang');
+  if (saved === 'es') {
+    // Don't override - user explicitly chose Spanish
+  } else {
+    localStorage.removeItem('pre_lang');
+  }
+})();
+</script>
 </body>
 </html>
