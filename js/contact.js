@@ -39,11 +39,15 @@ function bindHamburger() {
 /* ── Proxy Dropdown ────────────────────────────────────── */
 function populateProxyDropdown() {
   const select = document.getElementById('contactProperty');
-  if (!select || typeof propertyListings === 'undefined') return;
-  propertyListings.forEach(proxy => {
+  if (!select) return;
+  var listings = [];
+  if (typeof propertyListings !== 'undefined') listings = propertyListings;
+  else if (typeof ecuadorProjects !== 'undefined') listings = ecuadorProjects;
+  if (!listings.length) return;
+  listings.forEach(function(p) {
     const option       = document.createElement('option');
-    option.value       = property.title;
-    option.textContent = property.title + ' (' + property.town + ')';
+    option.value       = p.title;
+    option.textContent = p.title + ' (' + p.town + ')';
     select.appendChild(option);
   });
 }
