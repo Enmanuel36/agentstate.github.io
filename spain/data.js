@@ -4,40 +4,6 @@
  */
 const propertyListings = [
   {
-    "id": 1,
-    "title": "Luxury Villa with Sea Views",
-    "type": "to-let",
-    "category": "house",
-    "price": "€1,250,000",
-    "address": "Calle del Mar 12",
-    "town": "Marbella",
-    "postcode": "29602",
-    "bedrooms": 5,
-    "bathrooms": 4,
-    "reception": 3,
-    "sqft": "3,800 sq ft",
-    "photos": [
-      "https://images.unsplash.com/photo-1613977257363-707ba9348227?w=900&q=80",
-      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&q=80",
-      "https://images.unsplash.com/photo-1571055107559-3e67626fa8be?w=900&q=80",
-      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=900&q=80",
-      "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=900&q=80"
-    ],
-    "features": [
-      "Private pool",
-      "Sea views",
-      "Gated community",
-      "Roof terrace",
-      "Double garage",
-      "EPC: A"
-    ],
-    "description": "A magnificent five-bedroom villa perched above Marbella's golden mile. Floor-to-ceiling windows frame panoramic sea views. Infinity pool, landscaped gardens, and a double garage complete this exceptional home.",
-    "agent": "Patricia Morales",
-    "email": "hello@patriciarealestate.com",
-    "added": "2026-04-10",
-    "emoji": "🏖"
-  },
-  {
     "id": 2,
     "title": "Stylish Barcelona City Apartment",
     "type": "to-let",
