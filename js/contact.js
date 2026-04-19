@@ -15,7 +15,7 @@
  */
 
 /** ⭐ YOUR EMAIL ADDRESS — Change this to yours! */
-const OWNER_EMAIL = 'hello@patriciarealestate.com';
+const OWNER_EMAIL = 'patriciaestateagent@gmail.com';
 
 /* ── Init ──────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
