@@ -17,7 +17,7 @@
         <a href="../index.html" class="nav-link" style="color:rgba(255,255,255,0.5);">&#8592; Select Region</a>
         <a href="index.html" class="nav-link" id="backLink">Properties</a>
         <a href="../about.html" class="nav-link" id="aboutLink">Who We Are</a>
-<a href="contact.html" class="btn btn-primary btn-sm nav-cta" id="enquireNowBtn">Enquire Now</a>
+        <a href="contact.html" class="btn btn-primary btn-sm nav-cta" id="enquireNowBtn">Enquire Now</a>
       </nav>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
     </div>
@@ -25,7 +25,7 @@
 
   <section class="page-hero">
     <div class="container">
-      <div class="breadcrumb"><a href="index.html">Home</a> <span>›</span> <span>Contact</span></div>
+      <div class="breadcrumb"><a href="index.html" id="breadcrumbHome">Home</a> <span>›</span> <span>Contact</span></div>
       <h1>Get in Touch</h1>
       <p>Enquire about a property or speak with our team — we reply within 24 hours.</p>
     </div>
@@ -37,7 +37,6 @@
       <div class="contact-form-card">
         <h2>Send an Enquiry</h2>
 
-        <!-- How it works notice -->
         <div class="mailto-notice">
           <span class="mailto-icon">📨</span>
           <p>Fill in the form and click <strong>Send Message</strong>. Your email app will open with everything pre-filled — just click Send. No accounts needed.</p>
@@ -75,8 +74,8 @@
               <select id="contactSubject">
                 <option value="">Select reason for contact…</option>
                 <option value="Property Viewing">Book a Viewing</option>
-                                <option value="Pricing Enquiry">Pricing Enquiry</option>
-                <option value="Rental Enquiry">Rental Enquiry</option>
+                <option value="Pricing Enquiry">Pricing Enquiry</option>
+                <option value="Investment Enquiry">Investment Enquiry</option>
                 <option value="General Enquiry">General Enquiry</option>
                 <option value="Other">Other</option>
               </select>
@@ -92,7 +91,7 @@
 
           <div class="form-actions">
             <button type="button" class="btn btn-primary btn-lg" id="submitBtn">
-              Open Email App &amp; Send →
+              Open Email App &amp; Send &#8594;
             </button>
           </div>
 
@@ -106,15 +105,15 @@
       <aside class="contact-sidebar">
         <div class="sidebar-card">
           <h3>📧 Email Us</h3>
-          <p><a href="/cdn-cgi/l/email-protection#355d5059595a75455441475c565c54475054595046415441501b565a58"><span class="__cf_email__" data-cfemail="0d65686161624d7d6c797f646e646c7f686c61687e796c7968236e6260">[email&#160;protected]</span></a></p>
+          <p><a href="mailto:hello@patriciarealestate.com">hello@patriciarealestate.com</a></p>
         </div>
         <div class="sidebar-card">
           <h3>⏱ Response Time</h3>
           <p>We typically reply within 24 hours, Monday to Saturday.</p>
         </div>
-        <div class="sidebar-card">
+        <div class="sidebar-card" id="areasSidebar">
           <h3>📍 Areas We Cover</h3>
-          <p>Hampshire, Surrey, and surrounding counties. Contact us to discuss your area.</p>
+          <p id="areasText">Hampshire, Surrey, and surrounding counties. Contact us to discuss your area.</p>
         </div>
         <div class="sidebar-card faq-card">
           <h3>❓ FAQs</h3>
@@ -123,11 +122,8 @@
             <p>Use the form above and select "Book a Viewing", or email us directly. We'll confirm a time within 24 hours.</p>
           </details>
           <details>
-            
-          </details>
-          <details>
-            <summary>How do I list my property?</summary>
-            <p>Head to our page, fill in the details, and your listing goes live on GitHub Pages instantly.</p>
+            <summary>How quickly do you respond?</summary>
+            <p>We aim to respond to all enquiries within 24 hours, Monday to Saturday.</p>
           </details>
           <details>
             <summary>Why does clicking Send open my email app?</summary>
@@ -151,6 +147,7 @@
       </div>
       <div class="footer-links">
         <h4>Company</h4>
+        <a href="../index.html">Select Region</a>
         <a href="contact.html">Contact</a>
       </div>
       <div class="footer-links">
@@ -161,29 +158,58 @@
     </div>
     <div class="footer-bottom">
       <div class="container">
-        <p>© 2026 Patricia Real Estate. All rights reserved.</p>
-        <p><a href="privacy.html">Privacy</a> &nbsp;·&nbsp; <a href="terms.html">Terms</a></p>
+        <p>&#169; 2026 Patricia Real Estate. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
 
-<script>
-(function() {
-  var params = new URLSearchParams(window.location.search);
-  var from = params.get('from');
-  var backLink = document.getElementById('backLink');
-  var aboutLink = document.getElementById('aboutLink');
-  var enquireNowBtn = document.getElementById('enquireNowBtn');
-  if (from === 'ecuador') {
-    if (backLink) { backLink.href = '../ecuador/index.html'; backLink.textContent = 'Projects'; }
-    if (aboutLink) { aboutLink.href = '../about.html?from=ecuador'; }
-    if (enquireNowBtn) enquireNowBtn.href = 'contact.html?from=ecuador';
-  } else if (from === 'spain') {
-    if (backLink) { backLink.href = 'index.html'; backLink.textContent = 'Properties'; }
-    if (aboutLink) { aboutLink.href = '../about.html?from=spain'; }
-    if (enquireNowBtn) enquireNowBtn.href = 'contact.html?from=spain';
-  } else {
-    if (backLink) { backLink.href = 'index.html'; backLink.textContent = 'Properties'; }
-    if (aboutLink) { aboutLink.href = '../about.html'; }
-  }
-})();
-</script>
+  <script src="../js/contact.js"></script>
+  <script>
+  (function() {
+    var params = new URLSearchParams(window.location.search);
+    var from = params.get('from');
+    var backLink = document.getElementById('backLink');
+    var aboutLink = document.getElementById('aboutLink');
+    var enquireNowBtn = document.getElementById('enquireNowBtn');
+    var areasText = document.getElementById('areasText');
+    var breadcrumbHome = document.getElementById('breadcrumbHome');
+
+    if (from === 'ecuador') {
+      if (backLink) { backLink.href = '../ecuador/index.html'; backLink.textContent = 'Projects'; }
+      if (aboutLink) aboutLink.href = '../about.html?from=ecuador';
+      if (enquireNowBtn) enquireNowBtn.href = 'contact.html?from=ecuador';
+      if (areasText) areasText.textContent = 'Ecuador Pacific coast projects. Contact us for prices and payment plans.';
+      if (breadcrumbHome) { breadcrumbHome.href = '../ecuador/index.html'; breadcrumbHome.textContent = 'Ecuador'; }
+    } else if (from === 'spain') {
+      if (backLink) { backLink.href = 'index.html'; backLink.textContent = 'Properties'; }
+      if (aboutLink) aboutLink.href = '../about.html?from=spain';
+      if (enquireNowBtn) enquireNowBtn.href = 'contact.html?from=spain';
+      if (areasText) areasText.textContent = 'Barcelona, Madrid, Marbella, Costa del Sol and more. Contact us to discuss your requirements.';
+      if (breadcrumbHome) { breadcrumbHome.href = 'index.html'; breadcrumbHome.textContent = 'Spain'; }
+    } else {
+      if (backLink) { backLink.href = 'index.html'; backLink.textContent = 'Properties'; }
+      if (aboutLink) aboutLink.href = '../about.html';
+      if (breadcrumbHome) { breadcrumbHome.href = 'index.html'; breadcrumbHome.textContent = 'Home'; }
+    }
+
+    // Hamburger
+    var hamburger = document.getElementById('hamburger');
+    var mainNav = document.getElementById('mainNav');
+    if (hamburger && mainNav) {
+      hamburger.addEventListener('click', function() {
+        mainNav.classList.toggle('open');
+        hamburger.classList.toggle('open');
+        document.body.style.overflow = mainNav.classList.contains('open') ? 'hidden' : '';
+      });
+      mainNav.querySelectorAll('.nav-link').forEach(function(l) {
+        l.addEventListener('click', function() {
+          mainNav.classList.remove('open');
+          hamburger.classList.remove('open');
+          document.body.style.overflow = '';
+        });
+      });
+    }
+  })();
+  </script>
 </body>
 </html>
