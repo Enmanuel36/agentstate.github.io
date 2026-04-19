@@ -52,6 +52,20 @@ function renderListings() {
   if (countDisplay) countDisplay.textContent = items.length;
   if (items.length === 0) {
     emptyState.style.display = 'block';
+    var h3 = emptyState.querySelector('h3');
+    var p = emptyState.querySelector('p');
+    var btn = emptyState.querySelector('.empty-cta');
+    if (propertyListings.length === 0) {
+      // No listings at all
+      if (h3) h3.textContent = 'More listings coming soon';
+      if (p) p.textContent = "We're adding new properties shortly. In the meantime, get in touch and we'll find the right match for you.";
+      if (btn) btn.style.display = 'inline-flex';
+    } else {
+      // Search/filter returned nothing
+      if (h3) h3.textContent = 'No properties found';
+      if (p) p.innerHTML = "Try adjusting your search or <a href=\"contact.html\">contact us</a> to discuss your requirements.";
+      if (btn) btn.style.display = 'none';
+    }
   } else {
     emptyState.style.display = 'none';
     items.forEach(p => grid.appendChild(createCard(p)));
