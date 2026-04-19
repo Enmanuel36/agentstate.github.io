@@ -292,8 +292,12 @@
           <span style="font-size:.85rem;color:var(--text2)">Showing UK property listings</span>
           <button class="btn btn-gold btn-sm" onclick="showSection('add');document.getElementById('propMarket').value='uk'">+ Add UK listing</button>
         </div>
-        <div class="card" style="padding:0;overflow:hidden">
-          <table class="listings-table">
+        <div class="card" style="padding:12px 16px 0;overflow:hidden">
+            <div style="display:flex;gap:8px;margin-bottom:10px;padding:0 4px;">
+              <button class="btn btn-outline btn-sm" onclick="bulkHide('uk')">Hide Selected</button>
+              <button class="btn btn-danger btn-sm" onclick="bulkDelete('uk')">Delete Selected</button>
+            </div>
+            <table class="listings-table">
             <thead><tr><th style="width:32px"><input type="checkbox" class="select-all-cb" title="Select all" /></th><th>Photo</th><th>Property</th><th>Location</th><th>Price</th><th>Status</th><th>Actions</th></tr></thead>
             <tbody id="ukTableBody"></tbody>
           </table>
@@ -306,8 +310,12 @@
           <span style="font-size:.85rem;color:var(--text2)">Showing Spain property listings</span>
           <button class="btn btn-gold btn-sm" onclick="showSection('add');document.getElementById('propMarket').value='spain'">+ Add Spain listing</button>
         </div>
-        <div class="card" style="padding:0;overflow:hidden">
-          <table class="listings-table">
+        <div class="card" style="padding:12px 16px 0;overflow:hidden">
+            <div style="display:flex;gap:8px;margin-bottom:10px;padding:0 4px;">
+              <button class="btn btn-outline btn-sm" onclick="bulkHide('spain')">Hide Selected</button>
+              <button class="btn btn-danger btn-sm" onclick="bulkDelete('spain')">Delete Selected</button>
+            </div>
+            <table class="listings-table">
             <thead><tr><th style="width:32px"><input type="checkbox" class="select-all-cb" title="Select all" /></th><th>Photo</th><th>Property</th><th>Location</th><th>Price</th><th>Status</th><th>Actions</th></tr></thead>
             <tbody id="esTableBody"></tbody>
           </table>
@@ -461,8 +469,12 @@
           <span style="font-size:.85rem;color:var(--text2)">Ecuador land &amp; property projects</span>
           <button class="btn btn-gold btn-sm" onclick="showSection('add-ecuador')">+ Add Ecuador project</button>
         </div>
-        <div class="card" style="padding:0;overflow:hidden">
-          <table class="listings-table">
+        <div class="card" style="padding:12px 16px 0;overflow:hidden">
+            <div style="display:flex;gap:8px;margin-bottom:10px;padding:0 4px;">
+              <button class="btn btn-outline btn-sm" onclick="bulkHide('ecuador')">Hide Selected</button>
+              <button class="btn btn-danger btn-sm" onclick="bulkDelete('ecuador')">Delete Selected</button>
+            </div>
+            <table class="listings-table">
             <thead><tr><th style="width:32px"><input type="checkbox" class="select-all-cb" title="Select all" /></th><th>Photo</th><th>Project</th><th>Location</th><th>Price</th><th>Type</th><th>Actions</th></tr></thead>
             <tbody id="ecTableBody"></tbody>
           </table>
