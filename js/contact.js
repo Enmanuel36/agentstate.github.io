@@ -27,13 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* ── Hamburger ─────────────────────────────────────────── */
 function bindHamburger() {
-  const hamburger = document.getElementById('hamburger');
-  const mainNav   = document.getElementById('mainNav');
-  if (!hamburger || !mainNav) return;
-  hamburger.addEventListener('click', () => mainNav.classList.toggle('open'));
-  mainNav.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => mainNav.classList.remove('open'));
-  });
+  // Handled by inline script in contact.html
 }
 
 /* ── Proxy Dropdown ────────────────────────────────────── */
