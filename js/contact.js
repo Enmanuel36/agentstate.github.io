@@ -15,7 +15,7 @@
  */
 
 /** ⭐ YOUR EMAIL ADDRESS — Change this to yours! */
-const OWNER_EMAIL = 'patriciaestateagent@gmail.com';
+const OWNER_EMAIL = 'hello@patriciarealestate.com';
 
 /* ── Init ──────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
@@ -40,16 +40,21 @@ function bindHamburger() {
 function populateProxyDropdown() {
   const select = document.getElementById('contactProperty');
   if (!select) return;
-  var listings = [];
-  if (typeof propertyListings !== 'undefined') listings = propertyListings;
-  else if (typeof ecuadorProjects !== 'undefined') listings = ecuadorProjects;
-  if (!listings.length) return;
-  listings.forEach(function(p) {
-    const option       = document.createElement('option');
-    option.value       = p.title;
-    option.textContent = p.title + ' (' + p.town + ')';
-    select.appendChild(option);
-  });
+  // Wait for dynamic data.js to load then populate
+  setTimeout(function() {
+    var listings = [];
+    if (typeof propertyListings !== 'undefined') listings = propertyListings;
+    else if (typeof ecuadorProjects !== 'undefined') listings = ecuadorProjects;
+    if (!listings.length) return;
+    listings.forEach(function(p) {
+      var option = document.createElement('option');
+      var name = p.title || p.name || '';
+      var location = p.town || p.location || '';
+      option.value = name;
+      option.textContent = name + (location ? ' (' + location + ')' : '');
+      select.appendChild(option);
+    });
+  }, 300);
 }
 
 /* ── URL Pre-fill ──────────────────────────────────────── */
