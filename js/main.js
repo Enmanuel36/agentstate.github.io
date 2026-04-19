@@ -22,7 +22,9 @@ let currentSort  = 'newest';
 let searchQuery  = '';
 
 document.addEventListener('DOMContentLoaded', () => {
-  if (statTotal) statTotal.textContent = propertyListings.length;
+  var visibleCount = propertyListings.filter(function(p){return !p.hidden;}).length;
+  if (statTotal) statTotal.textContent = visibleCount;
+  var statBar = document.getElementById('statTotalBar'); if (statBar) statBar.textContent = visibleCount;
   const params = new URLSearchParams(window.location.search);
   const urlFilter = params.get('filter');
   if (urlFilter) {
@@ -35,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* ── Render ── */
 function renderListings() {
-  let items = [...propertyListings];
+  let items = propertyListings.filter(p => !p.hidden);
   if (activeFilter !== 'all') items = items.filter(p => p.type === activeFilter);
   if (searchQuery.trim()) {
     const q = searchQuery.toLowerCase();
