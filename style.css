@@ -779,14 +779,15 @@ a:hover { color: var(--c-gold-dark); }
   padding: 80px 20px;
   grid-column: 1 / -1;
 }
-.empty-icon { font-size: 3rem; margin-bottom: 16px; }
+.empty-icon { margin-bottom: 20px; display: flex; justify-content: center; }
 .empty-state h3 {
   font-family: var(--f-display);
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   color: var(--c-navy);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
-.empty-state p { color: var(--c-text-2); }
+.empty-state p { color: var(--c-text-2); max-width: 420px; margin: 0 auto; line-height: 1.7; }
+.empty-cta { margin-top: 1.5rem; }
 
 /* ──────────────────────────────────────────
    12. WHY CHOOSE US / FEATURES SECTION
