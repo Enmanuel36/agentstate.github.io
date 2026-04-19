@@ -8,6 +8,164 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../style.css" />
+  <style>
+    /* ── Contact page layout ── */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 2.5rem;
+      align-items: start;
+      padding: 3rem 0 4rem;
+    }
+    @media (max-width: 900px) {
+      .contact-layout { grid-template-columns: 1fr; }
+    }
+
+    /* ── Form card ── */
+    .contact-form-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 2.5rem;
+      border-left: 4px solid var(--c-gold);
+      box-shadow: 0 8px 40px rgba(31,41,51,0.10);
+    }
+    .contact-form-card h2 {
+      font-family: var(--f-display);
+      font-size: 1.6rem;
+      color: var(--c-navy);
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── Mailto notice ── */
+    .mailto-notice {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: rgba(200,167,90,0.08);
+      border: 1px solid rgba(200,167,90,0.25);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 1.5rem;
+      font-size: 0.875rem;
+      color: #5A6A7A;
+      line-height: 1.6;
+    }
+    .mailto-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
+
+    /* ── Form elements ── */
+    .form-row { margin-bottom: 1.2rem; }
+    .form-row.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 600px) { .form-row.two-col { grid-template-columns: 1fr; } }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-size: 0.85rem; font-weight: 600; color: var(--c-navy); }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      border: 1.5px solid #E5E7EB;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 0.9rem;
+      font-family: var(--f-body);
+      color: var(--c-navy);
+      transition: border-color 0.2s;
+      outline: none;
+      background: #fff;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--c-gold); }
+    .form-group textarea { resize: vertical; min-height: 130px; }
+    .required { color: var(--c-gold); }
+    .field-error { border-color: #E53E3E !important; }
+    .field-error-msg { font-size: 0.78rem; color: #E53E3E; margin-top: 3px; }
+
+    /* ── Submit button ── */
+    .form-actions { margin-top: 1.5rem; }
+    .form-actions .btn-lg {
+      width: 100%;
+      justify-content: center;
+      font-size: 1rem;
+      padding: 14px 24px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .form-actions .btn-lg:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(200,167,90,0.4);
+    }
+    .form-privacy {
+      font-size: 0.78rem;
+      color: #8A9AAA;
+      margin-top: 1rem;
+      line-height: 1.6;
+      text-align: center;
+    }
+    .form-privacy a { color: var(--c-gold); }
+
+    /* ── Sidebar ── */
+    .contact-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 8px 40px rgba(31,41,51,0.10);
+      overflow: hidden;
+    }
+    .sidebar-card {
+      padding: 1.4rem 1.6rem;
+      border-bottom: 1px solid #F0F2F5;
+    }
+    .sidebar-card:last-child { border-bottom: none; }
+    .sidebar-card h3 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--c-navy);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .sidebar-card p, .sidebar-card a {
+      font-size: 0.875rem;
+      color: #5A6A7A;
+      line-height: 1.6;
+      text-decoration: none;
+    }
+    .sidebar-card a:hover { color: var(--c-gold); }
+
+    /* ── FAQ accordion ── */
+    .faq-card details { margin-bottom: 8px; }
+    .faq-card details:last-child { margin-bottom: 0; }
+    .faq-card summary {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--c-navy);
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid #F0F2F5;
+    }
+    .faq-card summary::-webkit-details-marker { display: none; }
+    .faq-card summary::after {
+      content: '';
+      width: 16px;
+      height: 16px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C8A75A' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-size: contain;
+      background-repeat: no-repeat;
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+    .faq-card details[open] summary::after { transform: rotate(180deg); }
+    .faq-card details p {
+      font-size: 0.82rem;
+      color: #5A6A7A;
+      line-height: 1.65;
+      padding: 8px 0 4px;
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
@@ -25,7 +183,7 @@
 
   <section class="page-hero">
     <div class="container">
-      <div class="breadcrumb"><a href="index.html" id="breadcrumbHome">Home</a> <span>›</span> <span>Contact</span></div>
+      <div class="breadcrumb"><a href="index.html" id="breadcrumbHome">Home</a> <span>&#8250;</span> <span>Contact</span></div>
       <h1>Get in Touch</h1>
       <p>Enquire about a property or speak with our team — we reply within 24 hours.</p>
     </div>
@@ -43,7 +201,6 @@
         </div>
 
         <div id="contactForm">
-
           <div class="form-row two-col">
             <div class="form-group">
               <label for="contactName">Your Name <span class="required">*</span></label>
@@ -111,9 +268,9 @@
           <h3>⏱ Response Time</h3>
           <p>We typically reply within 24 hours, Monday to Saturday.</p>
         </div>
-        <div class="sidebar-card" id="areasSidebar">
+        <div class="sidebar-card">
           <h3>📍 Areas We Cover</h3>
-          <p id="areasText">Hampshire, Surrey, and surrounding counties. Contact us to discuss your area.</p>
+          <p id="areasText">Hampshire, Surrey, and surrounding counties.</p>
         </div>
         <div class="sidebar-card faq-card">
           <h3>❓ FAQs</h3>
@@ -163,6 +320,7 @@
     </div>
   </footer>
 
+  <script id="dataScript"></script>
   <script src="../js/contact.js"></script>
   <script>
   (function() {
@@ -173,6 +331,7 @@
     var enquireNowBtn = document.getElementById('enquireNowBtn');
     var areasText = document.getElementById('areasText');
     var breadcrumbHome = document.getElementById('breadcrumbHome');
+    var dataScript = document.getElementById('dataScript');
 
     if (from === 'ecuador') {
       if (backLink) { backLink.href = '../ecuador/index.html'; backLink.textContent = 'Projects'; }
@@ -180,19 +339,21 @@
       if (enquireNowBtn) enquireNowBtn.href = 'contact.html?from=ecuador';
       if (areasText) areasText.textContent = 'Ecuador Pacific coast projects. Contact us for prices and payment plans.';
       if (breadcrumbHome) { breadcrumbHome.href = '../ecuador/index.html'; breadcrumbHome.textContent = 'Ecuador'; }
+      if (dataScript) dataScript.src = '../ecuador/data.js';
     } else if (from === 'spain') {
       if (backLink) { backLink.href = 'index.html'; backLink.textContent = 'Properties'; }
       if (aboutLink) aboutLink.href = '../about.html?from=spain';
       if (enquireNowBtn) enquireNowBtn.href = 'contact.html?from=spain';
-      if (areasText) areasText.textContent = 'Barcelona, Madrid, Marbella, Costa del Sol and more. Contact us to discuss your requirements.';
+      if (areasText) areasText.textContent = 'Barcelona, Madrid, Marbella, Costa del Sol and more.';
       if (breadcrumbHome) { breadcrumbHome.href = 'index.html'; breadcrumbHome.textContent = 'Spain'; }
+      if (dataScript) dataScript.src = 'data.js';
     } else {
       if (backLink) { backLink.href = 'index.html'; backLink.textContent = 'Properties'; }
       if (aboutLink) aboutLink.href = '../about.html';
       if (breadcrumbHome) { breadcrumbHome.href = 'index.html'; breadcrumbHome.textContent = 'Home'; }
+      if (dataScript) dataScript.src = 'data.js';
     }
 
-    // Hamburger
     var hamburger = document.getElementById('hamburger');
     var mainNav = document.getElementById('mainNav');
     if (hamburger && mainNav) {
