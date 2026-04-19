@@ -294,7 +294,7 @@
         </div>
         <div class="card" style="padding:0;overflow:hidden">
           <table class="listings-table">
-            <thead><tr><th>Photo</th><th>Property</th><th>Location</th><th>Price</th><th>Status</th><th>Actions</th></tr></thead>
+            <thead><tr><th style="width:32px"><input type="checkbox" class="select-all-cb" title="Select all" /></th><th>Photo</th><th>Property</th><th>Location</th><th>Price</th><th>Status</th><th>Actions</th></tr></thead>
             <tbody id="ukTableBody"></tbody>
           </table>
         </div>
@@ -308,7 +308,7 @@
         </div>
         <div class="card" style="padding:0;overflow:hidden">
           <table class="listings-table">
-            <thead><tr><th>Photo</th><th>Property</th><th>Location</th><th>Price</th><th>Status</th><th>Actions</th></tr></thead>
+            <thead><tr><th style="width:32px"><input type="checkbox" class="select-all-cb" title="Select all" /></th><th>Photo</th><th>Property</th><th>Location</th><th>Price</th><th>Status</th><th>Actions</th></tr></thead>
             <tbody id="esTableBody"></tbody>
           </table>
         </div>
@@ -463,7 +463,7 @@
         </div>
         <div class="card" style="padding:0;overflow:hidden">
           <table class="listings-table">
-            <thead><tr><th>Photo</th><th>Project</th><th>Location</th><th>Price</th><th>Type</th><th>Actions</th></tr></thead>
+            <thead><tr><th style="width:32px"><input type="checkbox" class="select-all-cb" title="Select all" /></th><th>Photo</th><th>Project</th><th>Location</th><th>Price</th><th>Type</th><th>Actions</th></tr></thead>
             <tbody id="ecTableBody"></tbody>
           </table>
         </div>
@@ -1177,41 +1177,49 @@ function renderEcTable() {
     return;
   }
   tbody.innerHTML = ecListings.map((p, i) => `
-    <tr>
+    <tr style="${p.hidden ? 'opacity:0.45;' : ''}">
+      <td><input type="checkbox" class="row-cb" data-market="ecuador" data-idx="${i}" /></td>
       <td>${p.photos && p.photos[0] ? `<img class="prop-thumb" src="${p.photos[0]}" onerror="this.style.display='none'" />` : `<div class="prop-thumb-placeholder">&#127804;</div>`}</td>
-      <td style="max-width:200px"><strong style="display:block;font-size:.82rem">${p.name}</strong></td>
+      <td style="max-width:200px"><strong style="display:block;font-size:.82rem">${p.name}</strong>${p.hidden ? '<span style="font-size:.7rem;color:var(--gold);margin-left:6px;">Hidden</span>' : ''}</td>
       <td style="color:var(--text2)">${p.location}</td>
       <td><strong>${p.price}</strong></td>
       <td><span class="badge badge-let">${p.type}</span></td>
       <td><div class="actions-cell">
+        <button class="btn btn-outline btn-sm" onclick="hideEcListing(${i})" title="${p.hidden ? 'Unhide' : 'Hide'}">${p.hidden ? 'Unhide' : 'Hide'}</button>
         <button class="btn btn-outline btn-sm" onclick="editEcListing(${i})">Edit</button>
         <button class="btn btn-danger btn-sm" onclick="deleteEcListing(${i})">Delete</button>
+        <input type="checkbox" class="row-cb-end" data-market="ecuador" data-idx="${i}" style="margin-left:8px;cursor:pointer;width:16px;height:16px;accent-color:var(--gold);" />
       </div></td>
     </tr>
   `).join('');
+  bindTableCheckboxes('ecTableBody', ecListings, 'ecuador');
 }
 
 function renderTable(tbodyId, listings, market) {
   const tbody = document.getElementById(tbodyId);
   if (!listings.length) {
-    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:32px;color:var(--text2)">No listings yet — add your first property</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:32px;color:var(--text2)">No listings yet — add your first property</td></tr>';
     return;
   }
   tbody.innerHTML = listings.map((p, i) => `
-    <tr>
+    <tr style="${p.hidden ? 'opacity:0.45;' : ''}">
+      <td><input type="checkbox" class="row-cb" data-market="${market}" data-idx="${i}" /></td>
       <td>${p.photos && p.photos[0]
         ? `<img class="prop-thumb" src="${p.photos[0]}" onerror="this.style.display='none'" />`
         : `<div class="prop-thumb-placeholder">🏠</div>`}</td>
-      <td style="max-width:200px"><strong style="display:block;font-size:.82rem">${p.title}</strong></td>
+      <td style="max-width:200px"><strong style="display:block;font-size:.82rem">${p.title}</strong>${p.hidden ? '<span style="font-size:.7rem;color:var(--gold);margin-left:6px;">Hidden</span>' : ''}</td>
       <td style="color:var(--text2)">${p.town}, ${p.postcode}</td>
       <td><strong>${p.price}</strong></td>
       <td><span class="badge ${p.type==='let-agreed'?'badge-agreed':'badge-let'}">${p.type==='let-agreed'?'Let Agreed':'To Let'}</span></td>
       <td><div class="actions-cell">
+        <button class="btn btn-outline btn-sm" onclick="hideListing('${market}',${i})" title="${p.hidden ? 'Unhide' : 'Hide'}">${p.hidden ? 'Unhide' : 'Hide'}</button>
         <button class="btn btn-outline btn-sm" onclick="editListing('${market}',${i})">Edit</button>
         <button class="btn btn-danger btn-sm" onclick="deleteListing('${market}',${i})">Delete</button>
+        <input type="checkbox" class="row-cb-end" data-market="${market}" data-idx="${i}" style="margin-left:8px;cursor:pointer;width:16px;height:16px;accent-color:var(--gold);" />
       </div></td>
     </tr>
   `).join('');
+  bindTableCheckboxes(tbodyId, listings, market);
 }
 
 function editListing(market, idx) {
@@ -1870,6 +1878,76 @@ function buildProjectPage(p) {
     '</body></html>'
   ];
   return lines.join('\n');
+}
+
+
+function hideListing(market, idx) {
+  var list = market === 'uk' ? ukListings : esListings;
+  list[idx].hidden = !list[idx].hidden;
+  renderTables();
+  pushToGitHub(market);
+}
+
+function hideEcListing(idx) {
+  ecListings[idx].hidden = !ecListings[idx].hidden;
+  renderEcTable();
+  pushEcuadorToGitHub();
+}
+
+function bindTableCheckboxes(tbodyId, listings, market) {
+  var tbody = document.getElementById(tbodyId);
+  if (!tbody) return;
+  // Select-all checkbox in header
+  var table = tbody.closest('table');
+  var selectAll = table ? table.querySelector('.select-all-cb') : null;
+  if (selectAll) {
+    selectAll.onchange = function() {
+      tbody.querySelectorAll('.row-cb, .row-cb-end').forEach(function(cb) {
+        cb.checked = selectAll.checked;
+      });
+    };
+  }
+  // Sync row checkboxes
+  tbody.querySelectorAll('.row-cb, .row-cb-end').forEach(function(cb) {
+    cb.onchange = function() {
+      var idx = cb.dataset.idx;
+      // Sync both checkboxes on same row
+      tbody.querySelectorAll('[data-idx="'+idx+'"]').forEach(function(c2) { c2.checked = cb.checked; });
+    };
+  });
+}
+
+function getBulkSelected(market) {
+  var tbodyId = market === 'uk' ? 'ukTableBody' : market === 'spain' ? 'esTableBody' : 'ecTableBody';
+  var tbody = document.getElementById(tbodyId);
+  var selected = [];
+  if (!tbody) return selected;
+  tbody.querySelectorAll('.row-cb:checked').forEach(function(cb) {
+    selected.push(parseInt(cb.dataset.idx));
+  });
+  return [...new Set(selected)].sort(function(a,b){return b-a;}); // desc to splice safely
+}
+
+function bulkDelete(market) {
+  var selected = getBulkSelected(market);
+  if (!selected.length) { showToast('No items selected', 'error'); return; }
+  if (!confirm('Delete ' + selected.length + ' item(s)? This cannot be undone.')) return;
+  var list = market === 'uk' ? ukListings : market === 'spain' ? esListings : ecListings;
+  var photos = [];
+  selected.forEach(function(idx) { if (list[idx] && list[idx].photos) photos = photos.concat(list[idx].photos); });
+  selected.forEach(function(idx) { list.splice(idx, 1); });
+  renderTables(); updateMetrics();
+  if (market === 'ecuador') pushEcuadorToGitHub(); else pushToGitHub(market);
+  if (photos.length) deleteProjectPhotos(photos);
+}
+
+function bulkHide(market) {
+  var selected = getBulkSelected(market);
+  if (!selected.length) { showToast('No items selected', 'error'); return; }
+  var list = market === 'uk' ? ukListings : market === 'spain' ? esListings : ecListings;
+  selected.forEach(function(idx) { if (list[idx]) list[idx].hidden = !list[idx].hidden; });
+  renderTables(); updateMetrics();
+  if (market === 'ecuador') pushEcuadorToGitHub(); else pushToGitHub(market);
 }
 
 function showToast(msg, type='') {
