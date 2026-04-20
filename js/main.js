@@ -4,7 +4,8 @@
  */
 
 const grid         = document.getElementById('listingsGrid');
-const emptyState   = document.getElementById('emptyState');
+const emptyStateSoon = document.getElementById('emptyStateSoon');
+const emptyStateNoResults = document.getElementById('emptyStateNoResults');
 const searchInput  = document.getElementById('searchInput');
 const searchBtn    = document.getElementById('searchBtn');
 const sortSelect   = document.getElementById('sortSelect');
@@ -51,23 +52,16 @@ function renderListings() {
   grid.innerHTML = '';
   if (countDisplay) countDisplay.textContent = items.length;
   if (items.length === 0) {
-    emptyState.style.display = 'block';
-    var emptyH3 = emptyState.querySelector('h3');
-    var emptyP = emptyState.querySelector('p');
-    var emptyBtn = emptyState.querySelector('.empty-cta');
     if (propertyListings.length === 0) {
-      emptyState.classList.add('coming-soon');
-      if (emptyH3) emptyH3.textContent = 'More listings coming soon';
-      if (emptyP) emptyP.textContent = "We're adding new properties shortly. In the meantime, get in touch and we'll find the right match for you.";
-      if (emptyBtn) { emptyBtn.style.display = 'inline-flex'; emptyBtn.removeAttribute('hidden'); }
+      if (emptyStateSoon) emptyStateSoon.style.display = 'block';
+      if (emptyStateNoResults) emptyStateNoResults.style.display = 'none';
     } else {
-      emptyState.classList.remove('coming-soon');
-      if (emptyH3) emptyH3.textContent = 'No properties found';
-      if (emptyP) emptyP.innerHTML = "Try adjusting your search or <a href='contact.html'>contact us</a> to discuss your requirements.";
-      if (emptyBtn) emptyBtn.style.display = 'none';
+      if (emptyStateSoon) emptyStateSoon.style.display = 'none';
+      if (emptyStateNoResults) emptyStateNoResults.style.display = 'block';
     }
   } else {
-    emptyState.style.display = 'none';
+    if (emptyStateSoon) emptyStateSoon.style.display = 'none';
+    if (emptyStateNoResults) emptyStateNoResults.style.display = 'none';
     items.forEach(p => grid.appendChild(createCard(p)));
   }
 }
