@@ -265,8 +265,7 @@ function bindEvents() {
     if (e.key==='ArrowLeft'  && modalOverlay.classList.contains('open') && galleryPhotos.length>1) changeGallery(-1);
     if (e.key==='ArrowRight' && modalOverlay.classList.contains('open') && galleryPhotos.length>1) changeGallery(1);
   });
-  hamburger.addEventListener('click', () => mainNav.classList.toggle('open'));
-  mainNav.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => mainNav.classList.remove('open')));
+  // Hamburger handled by inline script in index.html for proper X animation and body scroll lock
 }
 
 /* ── Helpers ── */
