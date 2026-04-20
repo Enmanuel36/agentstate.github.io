@@ -266,7 +266,7 @@ function bindEvents() {
     if (e.key==='ArrowRight' && modalOverlay.classList.contains('open') && galleryPhotos.length>1) changeGallery(1);
   });
   // Hamburger handled by inline script in index.html for proper X animation and body scroll lock
-}
+});
 
 /* ── Helpers ── */
 function esc(str) {
