@@ -52,7 +52,8 @@ function renderListings() {
   grid.innerHTML = '';
   if (countDisplay) countDisplay.textContent = items.length;
   if (items.length === 0) {
-    if (propertyListings.length === 0) {
+    var visibleListings = propertyListings.filter(function(p){return !p.hidden;});
+    if (propertyListings.length === 0 || visibleListings.length === 0) {
       if (emptyStateSoon) emptyStateSoon.style.display = 'block';
       if (emptyStateNoResults) emptyStateNoResults.style.display = 'none';
     } else {
