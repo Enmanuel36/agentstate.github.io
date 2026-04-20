@@ -1902,9 +1902,9 @@ function buildProjectPage(p) {
     'function changeLb(dir){lbIdx=(lbIdx+dir+lbPhotos.length)%lbPhotos.length;document.getElementById("lbImg").src=lbPhotos[lbIdx];}',
     'document.addEventListener("keydown",function(e){if(e.key==="Escape")closeLightbox();if(e.key==="ArrowLeft")changeLb(-1);if(e.key==="ArrowRight")changeLb(1);});',
     'var h=document.getElementById("hamburger"),n=document.getElementById("mainNav");',
-    'h.addEventListener("click",function(){n.classList.toggle("open");});',
+    'if(h&&n){h.addEventListener("click",function(){n.classList.toggle("open");h.classList.toggle("open");document.body.style.overflow=n.classList.contains("open")?"hidden":"";});',
+    'n.querySelectorAll(".nav-link").forEach(function(l){l.addEventListener("click",function(){n.classList.remove("open");h.classList.remove("open");document.body.style.overflow="";});});}',
     '<\/scr'+'ipt>',
-    '<scr'+'ipt src="../../js/i18n.js"><\/scr'+'ipt>',
     '</body></html>'
   ];
   return lines.join('\n');
