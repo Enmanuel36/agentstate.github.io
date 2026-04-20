@@ -938,6 +938,8 @@ async function attemptUnlock() {
   if (hash === ADMIN_HASH) {
     localStorage.removeItem(ATTEMPTS_KEY);
     localStorage.removeItem(LOCKOUT_KEY);
+    // Store session for 4 hours
+    sessionStorage.setItem('adminUnlocked', Date.now().toString());
     document.getElementById('lockScreen').style.display = 'none';
     document.getElementById('adminApp').style.display = 'flex';
     await initAdmin();
@@ -1161,8 +1163,10 @@ async function fetchLatestDataFromGitHub(user, repo, branch, token) {
       if (!res.ok) return null;
       var d = await res.json();
       var code = decodeURIComponent(escape(atob(d.content.replace(/\n/g, ''))));
-      var match = code.match(/=\s*(\[\s*\{[\s\S]*?\}\s*\]);/);
-      return match ? JSON.parse(match[1]) : null;
+      // Match both populated arrays [{...}] and empty arrays []
+      var match = code.match(/=\s*(\[[\s\S]*?\]);/);
+      if (!match) return null;
+      try { return JSON.parse(match[1]); } catch(e) { return null; }
     } catch(e) { return null; }
   }
   var results = await Promise.all([
@@ -1170,10 +1174,12 @@ async function fetchLatestDataFromGitHub(user, repo, branch, token) {
     fetchData('spain/data.js'),
     fetchData('ecuador/data.js')
   ]);
-  if (results[0]) ukListings = results[0];
-  if (results[1]) esListings = results[1];
-  if (results[2]) ecListings = results[2];
-  if (results[0] || results[1] || results[2]) { renderTables(); updateMetrics(); }
+  // Update even if array is empty (results[x] could be [])
+  if (results[0] !== null) ukListings = results[0];
+  if (results[1] !== null) esListings = results[1];
+  if (results[2] !== null) ecListings = results[2];
+  renderTables();
+  updateMetrics();
 }
 
 function updateMetrics() {
@@ -2137,7 +2143,20 @@ function showToast(msg, type='') {
   }
   window.populateEcPhotoThumbs=function(urls){thumbs.innerHTML='';urls.forEach(function(url){addEcThumb(url);});};
 })();
-if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",initAdmin);}else{initAdmin();}
+function checkSessionAndInit() {
+  var unlocked = sessionStorage.getItem('adminUnlocked');
+  var fourHours = 4 * 60 * 60 * 1000;
+  if (unlocked && (Date.now() - parseInt(unlocked)) < fourHours) {
+    document.getElementById('lockScreen').style.display = 'none';
+    document.getElementById('adminApp').style.display = 'flex';
+    initAdmin();
+  } else {
+    sessionStorage.removeItem('adminUnlocked');
+    // Keep lock screen visible
+    updateAttemptsDisplay();
+  }
+}
+if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",checkSessionAndInit);}else{checkSessionAndInit();}
 </script>
 </body>
 </html>
