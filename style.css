@@ -811,6 +811,10 @@ a:hover { color: var(--c-gold-dark); }
 }
 .empty-cta {
   margin-top: 2rem;
+  display: none;
+}
+.empty-cta.visible, .empty-state.coming-soon .empty-cta {
+  display: inline-flex;
 }
 
 /* ──────────────────────────────────────────
