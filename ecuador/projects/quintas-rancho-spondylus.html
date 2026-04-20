@@ -253,9 +253,22 @@
     </div>
   </footer>
   <script>
-    const h = document.getElementById('hamburger'), n = document.getElementById('mainNav');
-    h.addEventListener('click', () => n.classList.toggle('open'));
-    n.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => n.classList.remove('open')));
+    var hamburger = document.getElementById('hamburger');
+    var mainNav = document.getElementById('mainNav');
+    if (hamburger && mainNav) {
+      hamburger.addEventListener('click', function() {
+        mainNav.classList.toggle('open');
+        hamburger.classList.toggle('open');
+        document.body.style.overflow = mainNav.classList.contains('open') ? 'hidden' : '';
+      });
+      mainNav.querySelectorAll('.nav-link').forEach(function(l) {
+        l.addEventListener('click', function() {
+          mainNav.classList.remove('open');
+          hamburger.classList.remove('open');
+          document.body.style.overflow = '';
+        });
+      });
+    }
   </script>
 
   <div id="lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9999;align-items:center;justify-content:center;flex-direction:column;">
