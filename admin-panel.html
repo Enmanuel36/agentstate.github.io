@@ -940,7 +940,7 @@ async function attemptUnlock() {
     localStorage.removeItem(LOCKOUT_KEY);
     document.getElementById('lockScreen').style.display = 'none';
     document.getElementById('adminApp').style.display = 'flex';
-    initAdmin();
+    await initAdmin();
   } else {
     var attempts = parseInt(localStorage.getItem(ATTEMPTS_KEY) || '0') + 1;
     localStorage.setItem(ATTEMPTS_KEY, attempts);
@@ -1126,7 +1126,7 @@ async function refreshLiveWebsiteData() {
 }
 refreshLiveWebsiteData.pending = false;
 
-function initAdmin() {
+async function initAdmin() {
   try { ukListings = JSON.parse(JSON.stringify(_ukData)); } catch(e) { ukListings = []; }
   try { esListings = JSON.parse(JSON.stringify(_esData)); } catch(e) { esListings = []; }
   try { ecListings = JSON.parse(JSON.stringify(_ecData)); } catch(e) { ecListings = []; }
@@ -1136,7 +1136,21 @@ function initAdmin() {
   // Fetch latest data from GitHub if connected
   var user = localStorage.getItem('ghUser'), repo = localStorage.getItem('ghRepo'),
       branch = localStorage.getItem('ghBranch') || 'main', token = localStorage.getItem('ghToken');
-  if (user && repo && token) fetchLatestDataFromGitHub(user, repo, branch, token);
+  if (user && repo && token) {
+    // Show syncing indicator
+    var syncIndicator = document.createElement('div');
+    syncIndicator.id = 'syncIndicator';
+    syncIndicator.style.cssText = 'position:fixed;top:16px;right:16px;background:var(--navy);color:#fff;padding:10px 16px;border-radius:8px;font-size:.82rem;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,.2);border:1px solid rgba(200,167,90,.3);';
+    syncIndicator.innerHTML = '<span class="upload-spin"></span> Syncing with GitHub…';
+    document.body.appendChild(syncIndicator);
+    try {
+      await fetchLatestDataFromGitHub(user, repo, branch, token);
+      syncIndicator.innerHTML = '<span style="color:#27AE60">&#10003;</span> Synced';
+      setTimeout(function() { if (syncIndicator.parentNode) syncIndicator.parentNode.removeChild(syncIndicator); }, 1500);
+    } catch(e) {
+      if (syncIndicator.parentNode) syncIndicator.parentNode.removeChild(syncIndicator);
+    }
+  }
 }
 
 async function fetchLatestDataFromGitHub(user, repo, branch, token) {
@@ -1200,7 +1214,6 @@ function renderEcTable() {
         <button class="btn btn-outline btn-sm" onclick="hideEcListing(${i})" title="${p.hidden ? 'Unhide' : 'Hide'}">${p.hidden ? 'Unhide' : 'Hide'}</button>
         <button class="btn btn-outline btn-sm" onclick="editEcListing(${i})">Edit</button>
         <button class="btn btn-danger btn-sm" onclick="deleteEcListing(${i})">Delete</button>
-        <input type="checkbox" class="row-cb-end" data-market="ecuador" data-idx="${i}" style="margin-left:8px;cursor:pointer;width:16px;height:16px;accent-color:var(--gold);" />
       </div></td>
     </tr>
   `).join('');
@@ -1227,7 +1240,6 @@ function renderTable(tbodyId, listings, market) {
         <button class="btn btn-outline btn-sm" onclick="hideListing('${market}',${i})" title="${p.hidden ? 'Unhide' : 'Hide'}">${p.hidden ? 'Unhide' : 'Hide'}</button>
         <button class="btn btn-outline btn-sm" onclick="editListing('${market}',${i})">Edit</button>
         <button class="btn btn-danger btn-sm" onclick="deleteListing('${market}',${i})">Delete</button>
-        <input type="checkbox" class="row-cb-end" data-market="${market}" data-idx="${i}" style="margin-left:8px;cursor:pointer;width:16px;height:16px;accent-color:var(--gold);" />
       </div></td>
     </tr>
   `).join('');
@@ -1914,19 +1926,11 @@ function bindTableCheckboxes(tbodyId, listings, market) {
   var selectAll = table ? table.querySelector('.select-all-cb') : null;
   if (selectAll) {
     selectAll.onchange = function() {
-      tbody.querySelectorAll('.row-cb, .row-cb-end').forEach(function(cb) {
+      tbody.querySelectorAll('.row-cb').forEach(function(cb) {
         cb.checked = selectAll.checked;
       });
     };
   }
-  // Sync row checkboxes
-  tbody.querySelectorAll('.row-cb, .row-cb-end').forEach(function(cb) {
-    cb.onchange = function() {
-      var idx = cb.dataset.idx;
-      // Sync both checkboxes on same row
-      tbody.querySelectorAll('[data-idx="'+idx+'"]').forEach(function(c2) { c2.checked = cb.checked; });
-    };
-  });
 }
 
 function getBulkSelected(market) {
