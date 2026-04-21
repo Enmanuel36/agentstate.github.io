@@ -24,6 +24,6 @@ const propertyListings = [
     "agent": "Patricia Reynolds",
     "email": "hello@patriciarealestate.com",
     "added": "2026-04-21",
-    "hidden": false
+    "hidden": true
   }
 ];
