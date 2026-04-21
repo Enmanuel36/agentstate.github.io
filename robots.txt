@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /admin-panel.html
-
-Sitemap: https://patriciaestateagent.com
