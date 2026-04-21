@@ -628,6 +628,7 @@
 
 <!-- Toast notification -->
 <div class="toast" id="toast"></div>
+<div id="saveStatusBar" style="display:none;position:fixed;bottom:24px;left:24px;background:#27ae60;color:#fff;padding:10px 16px;border-radius:8px;font-size:.82rem;z-index:9999;align-items:center;gap:8px;box-shadow:0 4px 16px rgba(0,0,0,.2);"></div>
 
 <script>
 /**
@@ -963,6 +964,7 @@ async function attemptUnlock() {
 }
 
 document.getElementById('lockAgainBtn').addEventListener('click', function() {
+  sessionStorage.removeItem('adminUnlocked');
   document.getElementById('adminApp').style.display = 'none';
   document.getElementById('lockScreen').style.display = 'flex';
   document.getElementById('pwInput').value = '';
@@ -1483,6 +1485,8 @@ async function pushToGitHub(market) {
       throw new Error(err.message || `GitHub error ${putRes.status}`);
     }
     showToast('Saved to GitHub ✓ — site will update in ~30 seconds', 'success');
+    var bar = document.getElementById('saveStatusBar');
+    if (bar) { bar.textContent = '✓ Last saved to GitHub: ' + new Date().toLocaleTimeString(); bar.style.display = 'flex'; }
   } catch(e) {
     showToast('GitHub error: ' + e.message, 'error');
   }
@@ -1521,6 +1525,8 @@ async function pushEcuadorToGitHub(options) {
     throw new Error(err.message || ('GitHub error ' + putRes.status));
   }
   if (!options.quiet) showToast('Ecuador saved to GitHub ✓', 'success');
+  var bar = document.getElementById('saveStatusBar');
+  if (bar) { bar.textContent = '✓ Last saved to GitHub: ' + new Date().toLocaleTimeString(); bar.style.display = 'flex'; }
 }
 
 function hasGitHubConnection() {
