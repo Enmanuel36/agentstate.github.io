@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' https: data: blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; script-src 'self'; connect-src 'self' https://api.github.com; frame-src 'self'; form-action 'self' mailto:;" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="description" content="Trusted property specialists operating across the UK, Spain and Ecuador. Residential lettings, apartments and land investment projects." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://patriciaestateagent.com/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Patricia Real Estate | UK, Spain & Ecuador" />
+  <meta property="og:description" content="Personal property services across three countries — UK homes, Spanish apartments and Ecuador land investments." />
+  <meta property="og:url" content="https://patriciaestateagent.com/" />
+  <meta property="og:image" content="https://patriciaestateagent.com/images/og-preview.jpg" />
+  <meta property="og:site_name" content="Patricia Real Estate" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Patricia Real Estate | UK, Spain & Ecuador" />
+  <meta name="twitter:description" content="Personal property services across three countries — UK homes, Spanish apartments and Ecuador land investments." />
+  <title>Patricia Real Estate | UK, Spain & Ecuador</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--c-navy:#1F2933;--c-gold:#C8A75A;--c-gold-dark:#A8872A;--c-ivory:#FAF7F0;--f-display:'Playfair Display',Georgia,serif;--f-body:'Inter',system-ui,sans-serif;--transition:0.22s ease}
+    html,body{height:100%}
+    body{font-family:var(--f-body);background:var(--c-navy);color:var(--c-ivory);min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased;position:relative;overflow-x:hidden}
+    body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 70% 90% at 90% 50%,rgba(200,167,90,.12) 0%,transparent 65%),radial-gradient(ellipse 50% 60% at 10% 80%,rgba(200,167,90,.07) 0%,transparent 60%);pointer-events:none;z-index:0}
+    body::after{content:'';position:fixed;right:0;top:0;bottom:0;width:42%;background:linear-gradient(135deg,transparent 50%,rgba(200,167,90,.05) 50%);pointer-events:none;z-index:0}
+    .site-header{display:flex;justify-content:center;align-items:center;padding:2rem 2rem 0;position:relative;z-index:2;animation:fadeInUp .6s ease both}
+    .site-logo{height:110px;width:auto;object-fit:contain}
+    .hero{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem 1.5rem 2rem;position:relative;z-index:2}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--c-gold);margin-bottom:18px;animation:fadeInUp .6s .15s ease both}
+    .hero-eyebrow::before,.hero-eyebrow::after{content:'';width:24px;height:1px;background:var(--c-gold);opacity:.6}
+    .hero h1{font-family:var(--f-display);font-size:clamp(2rem,5vw,3.4rem);font-weight:600;line-height:1.2;color:var(--c-ivory);max-width:680px;margin:0 auto 1.2rem;animation:fadeInUp .6s .25s ease both}
+    .hero h1 em{color:var(--c-gold);font-style:italic}
+    .hero-sub{font-size:15px;font-weight:300;color:rgba(250,247,240,.6);letter-spacing:.04em;margin-bottom:3rem;animation:fadeInUp .6s .35s ease both}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;width:100%;max-width:880px;animation:fadeInUp .6s .45s ease both}
+    .card{border:1px solid rgba(200,167,90,.2);padding:2rem 1.5rem 1.75rem;text-decoration:none;color:var(--c-ivory);display:flex;flex-direction:column;align-items:center;text-align:center;gap:.75rem;position:relative;overflow:hidden;transition:border-color var(--transition),transform var(--transition);background:rgba(47,58,74,.35);border-radius:6px}
+    .card::before{content:'';position:absolute;inset:0;background:rgba(200,167,90,.05);opacity:0;transition:opacity var(--transition)}
+    .card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--c-gold);transform:scaleX(0);transition:transform var(--transition)}
+    .card:hover{border-color:rgba(200,167,90,.55);transform:translateY(-5px)}
+    .card:hover::before{opacity:1}.card:hover::after{transform:scaleX(1)}
+    .card-flag{font-size:2.4rem;line-height:1}
+    .card-name{font-family:var(--f-display);font-size:1.2rem;font-weight:600}
+    .card-sub{font-size:12px;color:rgba(250,247,240,.45);font-weight:300;letter-spacing:.05em;line-height:1.5}
+    .card-arrow{margin-top:.5rem;width:28px;height:28px;border:1px solid rgba(200,167,90,.3);display:flex;align-items:center;justify-content:center;transition:border-color var(--transition),background var(--transition)}
+    .card:hover .card-arrow{border-color:var(--c-gold);background:rgba(200,167,90,.1)}
+    .card-arrow svg{width:12px;height:12px;stroke:var(--c-gold);stroke-width:1.5;fill:none}
+    .site-footer{text-align:center;padding:1.5rem;font-size:11px;letter-spacing:.1em;color:rgba(250,247,240,.2);text-transform:uppercase;position:relative;z-index:2;animation:fadeInUp .6s .6s ease both}
+    .site-footer span{color:rgba(200,167,90,.4)}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    @media(max-width:640px){.cards{grid-template-columns:1fr;max-width:360px}.hero h1{font-size:1.8rem}.site-logo{height:80px}}
+      @media (max-width: 600px) {
+      .country-grid { grid-template-columns: 1fr; }
+      .landing-hero h1 { font-size: clamp(2rem, 8vw, 3rem); }
+      .country-card { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <img src="images/logo.png" alt="Patricia Real Estate" class="site-logo" />
+  </header>
+  <main class="hero">
+    <p class="hero-eyebrow"><span>Exclusive Properties Worldwide</span></p>
+    <h1><span>Find Your <em>Next Property,</em><br/>Anywhere</span></h1>
+    <p class="hero-sub"><span>Choose your country to explore exclusive listings</span></p>
+    <div class="cards">
+      <a class="card" href="uk/index.html">
+        <div class="card-flag">🇬🇧</div>
+        <div class="card-name"><span>United Kingdom</span></div>
+        <div class="card-sub"><span>Browse Hampshire &amp; Surrey listings</span></div>
+        <div class="card-arrow"><svg viewBox="0 0 12 12"><path d="M2 6h8M7 3l3 3-3 3"/></svg></div>
+      </a>
+      <a class="card" href="ecuador/index.html">
+        <div class="card-flag">🇪🇨</div>
+        <div class="card-name"><span>Ecuador</span></div>
+        <div class="card-sub"><span>Invest in land and projects in Ecuador</span></div>
+        <div class="card-arrow"><svg viewBox="0 0 12 12"><path d="M2 6h8M7 3l3 3-3 3"/></svg></div>
+      </a>
+      <a class="card" href="spain/index.html">
+        <div class="card-flag">🇪🇸</div>
+        <div class="card-name"><span>Spain</span></div>
+        <div class="card-sub"><span>Explore properties across Spain</span></div>
+        <div class="card-arrow"><svg viewBox="0 0 12 12"><path d="M2 6h8M7 3l3 3-3 3"/></svg></div>
+      </a>
+    </div>
+  </main>
+  <footer class="site-footer">&copy; 2026 <span>Patricia Real Estate.</span> All rights reserved.</footer>
+  
+<!-- Cookie consent -->
+<div id="cookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1F2933;color:rgba(255,255,255,.85);padding:14px 24px;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;z-index:9999;border-top:2px solid #C8A75A;font-size:.82rem;">
+  <p style="margin:0;line-height:1.6;max-width:680px;">We use Google Fonts and similar services that may set cookies. By continuing to use this site you agree to our <a href="uk/privacy.html" style="color:#C8A75A;">Privacy Policy</a>.</p>
+  <div style="display:flex;gap:10px;flex-shrink:0">
+    <button type="button" data-cookie-action="accept" style="background:#C8A75A;color:#1F2933;border:none;padding:8px 18px;border-radius:6px;font-weight:600;cursor:pointer;font-size:.82rem;">Accept</button>
+    <button type="button" data-cookie-action="decline" style="background:transparent;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.2);padding:8px 14px;border-radius:6px;cursor:pointer;font-size:.82rem;">Decline</button>
+  </div>
+</div>
+<script defer src="js/shared/cookie-banner.js"></script>
+</body>
+</html>
