@@ -33,7 +33,8 @@ const propertyListings = [
     "description": "A stunning high-specification apartment on the 18th floor of the prestigious Meridian Tower. Floor-to-ceiling windows flood the space with natural light and offer breathtaking city views. Fitted kitchen with integrated appliances, luxury bathroom, and a private balcony.",
     "agent": "James Carter",
     "email": "hello@patriciarealestate.com",
-    "added": "2026-04-17"
+    "added": "2026-04-17",
+    "hidden": true
   },
   {
     "id": 4,
