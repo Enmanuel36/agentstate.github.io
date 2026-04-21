@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' https: data: blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; script-src 'self'; connect-src 'self' https://api.github.com; frame-src 'self'; form-action 'self' mailto:;" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="description" content="Land and residential projects on Ecuador's Pacific coast. Legal security, high returns and personal support for local and overseas investors." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://patriciaestateagent.com/ecuador/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Ecuador Property Investment | Patricia Real Estate" />
+  <meta property="og:description" content="Secure land and residential projects on Ecuador's Pacific coast. Expert guidance from first enquiry to title deeds." />
+  <meta property="og:url" content="https://patriciaestateagent.com/ecuador/" />
+  <meta property="og:image" content="https://patriciaestateagent.com/images/og-preview.jpg" />
+  <meta property="og:site_name" content="Patricia Real Estate" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Ecuador Property Investment | Patricia Real Estate" />
+  <meta name="twitter:description" content="Secure land and residential projects on Ecuador's Pacific coast. Expert guidance from first enquiry to title deeds." />
+  <title>Invest in Ecuador | Patricia Real Estate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    /* ── Ecuador-specific overrides ── */
+    .ec-hero {
+      position: relative; overflow: hidden;
+      background: var(--c-navy); min-height: 92vh;
+      display: flex; align-items: center;
+    }
+    .ec-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 90% at 90% 50%, rgba(200,167,90,0.13) 0%, transparent 65%),
+                  radial-gradient(ellipse 50% 60% at 10% 80%, rgba(200,167,90,0.08) 0%, transparent 60%);
+    }
+    .ec-hero::after {
+      content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 42%;
+      background: linear-gradient(135deg, transparent 50%, rgba(200,167,90,0.06) 50%);
+      pointer-events: none;
+    }
+    .ec-hero-inner {
+      position: relative; z-index: 1; max-width: 720px;
+    }
+    .ec-hero h1 {
+      font-family: var(--f-display);
+      font-size: clamp(2.2rem, 5.5vw, 4rem);
+      color: #fff; line-height: 1.15; margin-bottom: 1.5rem;
+    }
+    .ec-hero h1 em { color: var(--c-gold); font-style: italic; }
+    .ec-hero p {
+      font-size: 1.1rem; font-weight: 300; color: rgba(255,255,255,0.75);
+      line-height: 1.7; margin-bottom: 2.5rem; max-width: 560px;
+    }
+    .ec-hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-whatsapp {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 32px; border-radius: 6px;
+      background: #25D366; color: #fff; font-weight: 600;
+      font-size: 0.95rem; text-decoration: none;
+      transition: background 0.22s ease, transform 0.22s ease;
+      border: 2px solid #25D366;
+    }
+    .btn-whatsapp:hover { background: #1db954; border-color: #1db954; transform: translateY(-2px); }
+    .btn-whatsapp svg { width: 20px; height: 20px; fill: #fff; }
+
+    /* Stats band */
+    .ec-stats {
+      background: var(--c-navy); border-top: 1px solid rgba(200,167,90,0.15);
+      border-bottom: 1px solid rgba(200,167,90,0.15); padding: 3rem 0;
+    }
+    .ec-stats-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; text-align: center;
+    }
+    .ec-stat-num {
+      font-family: var(--f-display); font-size: 3rem; font-weight: 700;
+      color: var(--c-gold); line-height: 1;
+    }
+    .ec-stat-label { font-size: 0.85rem; color: rgba(250,247,240,0.6); margin-top: 8px; font-weight: 400; }
+
+    /* About strip */
+    .ec-about { background: var(--c-navy); padding: 5rem 0; }
+    .ec-about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .ec-about-text h2 { font-family: var(--f-display); font-size: 2rem; color: #fff; margin-bottom: 1.2rem; }
+    .ec-about-text h2 em { color: var(--c-gold); font-style: italic; }
+    .ec-about-text p { color: rgba(250,247,240,0.7); line-height: 1.75; margin-bottom: 1rem; }
+    .ec-about-visual {
+      background: rgba(47,58,74,0.5); border: 1px solid rgba(200,167,90,0.2);
+      border-radius: 12px; padding: 3rem; text-align: center;
+    }
+    .ec-about-visual .big-emoji { font-size: 5rem; margin-bottom: 1rem; display: block; }
+    .ec-about-visual p { color: rgba(250,247,240,0.6); font-size: 0.9rem; }
+
+    /* Projects section */
+    .ec-projects { background: #17222C; padding: 5rem 0; }
+    .ec-projects .section-heading { margin-bottom: 3rem; }
+    .ec-projects-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+    }
+    .ec-project-card {
+      background: var(--c-navy); border: 1px solid rgba(200,167,90,0.18);
+      border-radius: 10px; overflow: hidden;
+      transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+      text-decoration: none; color: inherit; display: flex; flex-direction: column;
+    }
+    .ec-project-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(200,167,90,0.5);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+    .ec-project-img {
+      height: 180px; position: relative; overflow: hidden;
+      background: rgba(47,58,74,0.6);
+      border-bottom: 1px solid rgba(200,167,90,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 4rem;
+    }
+    .ec-project-img img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      transition: transform 0.3s ease;
+    }
+    .ec-project-card:hover .ec-project-img img { transform: scale(1.04); }
+    .ec-project-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; gap: 0.5rem; }
+    .ec-project-type {
+      font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--c-gold); font-weight: 600;
+    }
+    .ec-project-name {
+      font-family: var(--f-display); font-size: 1.1rem; font-weight: 600; color: #fff;
+    }
+    .ec-project-location { font-size: 0.85rem; color: rgba(250,247,240,0.55); }
+    .ec-project-desc { font-size: 0.85rem; color: rgba(250,247,240,0.65); line-height: 1.6; margin-top: 0.25rem; }
+    .ec-project-footer {
+      padding: 1rem 1.5rem; border-top: 1px solid rgba(200,167,90,0.12);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .ec-project-price { font-size: 1rem; font-weight: 600; color: var(--c-gold); }
+    .ec-project-link {
+      font-size: 0.8rem; color: var(--c-gold); text-decoration: none;
+      display: flex; align-items: center; gap: 4px;
+      transition: gap 0.2s ease;
+    }
+    .ec-project-link:hover { gap: 8px; }
+
+    /* Why invest */
+    .ec-why { background: var(--c-navy); padding: 5rem 0; }
+    .ec-why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+    .ec-why-card {
+      background: rgba(47,58,74,0.4); border: 1px solid rgba(200,167,90,0.15);
+      border-radius: 10px; padding: 2rem 1.5rem; text-align: left;
+    }
+    .ec-why-icon { width:52px; height:52px; min-width:52px; min-height:52px; background:rgba(200,167,90,.12); border-radius:12px; display:flex; align-items:center; justify-content:center; margin:0 auto 1rem; }
+    .ec-why-icon span { width:26px; height:26px; display:block; color:#C8A75A; flex-shrink:0; }
+    .ec-why-icon span svg { width:100%; height:100%; }
+    .ec-why-card h3 { font-family: var(--f-display); font-size: 1.1rem; color: #fff; margin-bottom: 0.75rem; text-align: center; }
+    .ec-why-card p { font-size: 0.875rem; color: rgba(250,247,240,0.6); line-height: 1.65; text-align: left; }
+
+    /* CTA banner */
+    .ec-cta {
+      background: linear-gradient(135deg, #1a2730 0%, #253040 100%);
+      border-top: 1px solid rgba(200,167,90,0.2);
+      border-bottom: 1px solid rgba(200,167,90,0.2);
+      padding: 5rem 0; text-align: center;
+    }
+    .ec-cta h2 { font-family: var(--f-display); font-size: 2.2rem; color: #fff; margin-bottom: 1rem; }
+    .ec-cta h2 em { color: var(--c-gold); font-style: italic; }
+    .ec-cta p { color: rgba(250,247,240,0.7); max-width: 560px; margin: 0 auto 2.5rem; line-height: 1.7; }
+    .ec-cta-actions { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .ec-projects-grid { grid-template-columns: 1fr 1fr; }
+      .ec-stats-grid { grid-template-columns: repeat(2,1fr); }
+      .ec-about-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .ec-why-grid { grid-template-columns: 1fr 1fr; }
+      .ec-hero h1 { font-size: clamp(2rem, 6vw, 3.5rem); }
+    }
+    @media (max-width: 600px) {
+      .ec-projects-grid { grid-template-columns: 1fr; }
+      .ec-why-grid { grid-template-columns: 1fr; }
+      .ec-stats-grid { grid-template-columns: repeat(2,1fr); }
+      .ec-hero-actions { flex-direction: column; align-items: stretch; }
+      .ec-hero-actions a { text-align: center; }
+      .ec-cta-actions { flex-direction: column; align-items: center; }
+    }
+    @media (max-width: 400px) {
+      .ec-stats-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+      .ec-stat-num { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html">
+        <img src="../images/logo.png" alt="Patricia Real Estate" class="site-logo" />
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <a href="../index.html" class="nav-link" style="color:rgba(255,255,255,0.5);">&#8592; Select Region</a>
+        <a href="#proyectos" class="nav-link">Projects</a>
+        <a href="../about.html?from=ecuador" class="nav-link">Who We Are</a>
+<a href="../uk/contact.html?from=ecuador" class="btn btn-primary btn-sm nav-cta">Enquire Now</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="ec-hero" style="background-image: url('../images/cotopaxi.png'); background-size: cover; background-position: center;">
+    <div class="container ec-hero-inner">
+      <p class="hero-eyebrow" style="color:var(--c-gold);font-size:.78rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:1.2rem;display:flex;align-items:center;gap:8px;">
+        <span style="width:24px;height:1px;background:var(--c-gold);opacity:.6;display:block;"></span>
+        Patricia Real Estate Ecuador
+        <span style="width:24px;height:1px;background:var(--c-gold);opacity:.6;display:block;"></span>
+      </p>
+      <h1>Invest in Ecuador today.<br/><em>Secure your family's</em><br/>future.</h1>
+      <p>We help Ecuadorians at home and abroad invest with legal security, vision and high returns in Ecuador's finest real estate projects.</p>
+      <div class="ec-hero-actions">
+        <a href="#proyectos" class="btn btn-ghost-light btn-lg">View Projects ↓</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="ec-stats">
+    <div class="container">
+      <div class="ec-stats-grid">
+        <div>
+          <div class="ec-stat-num">10+</div>
+          <div class="ec-stat-label">Years of proven track record</div>
+        </div>
+        <div>
+          <div class="ec-stat-num">500+</div>
+          <div class="ec-stat-label">Families and investors served</div>
+        </div>
+        <div>
+          <div class="ec-stat-num" id="projectCount">5</div>
+          <div class="ec-stat-label">Active projects in Ecuador</div>
+        </div>
+        <div>
+          <div class="ec-stat-num">100%</div>
+          <div class="ec-stat-label">Legal security guaranteed</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="ec-about">
+    <div class="container ec-about-inner">
+      <div class="ec-about-text">
+        <h2>Secure investment<br/><em>with future vision</em></h2>
+        <p>At Patricia Real Estate Ecuador, we have guided hundreds of families and investors — both locally and abroad — to build wealth through strategic planning and long-term growth vision.</p>
+        <p>Each of our projects comes with full legal security, legalised title deeds and strategic high-value locations. We work transparently and personally, guiding you through every step of the process.</p>
+      </div>
+      <div class="ec-about-visual" style="padding:0;overflow:hidden;position:relative;min-height:320px;border-radius:16px;">
+        <img src="../images/costa-sierra-oriente.png" alt="Ecuador" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;" />
+        <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(to top,rgba(31,41,51,0.85) 0%,rgba(31,41,51,0.2) 60%,transparent 100%);"></div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:2rem 2rem 1.75rem;">
+          <p style="font-size:1.1rem;color:#fff;font-family:var(--f-display);margin-bottom:.5rem;font-weight:600;">Ecuador — Coast, Sierra &amp; Oriente</p>
+          <p style="color:rgba(250,247,240,0.7);font-size:0.875rem;line-height:1.6;">Planned developments with growth vision, legal security and strategic location.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="ec-projects" id="proyectos">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-eyebrow">Our Projects</span>
+        <h2 style="color:#fff;">Projects in Ecuador</h2>
+        <p style="color:rgba(250,247,240,0.65);">Planned developments with growth vision, legal security and strategic location.</p>
+      </div>
+      <div class="ec-projects-grid" id="projectsGrid"></div>
+    </div>
+  </section>
+
+  <!-- WHY INVEST -->
+  <section class="ec-why">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-eyebrow">Why Invest?</span>
+        <h2 style="color:#fff;">Reasons to Invest in Ecuador</h2>
+        <p style="color:rgba(250,247,240,0.65);">Ecuador offers unique real estate investment opportunities with high return potential.</p>
+      </div>
+      <div class="ec-why-grid">
+        <div class="ec-why-card">
+          <div class="ec-why-icon"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></span></div>
+          <h3>Legal Security</h3>
+          <p>All our projects have properly legalised title deeds, municipal permits and full legal guarantee for the investor.</p>
+        </div>
+        <div class="ec-why-card">
+          <div class="ec-why-icon"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span></div>
+          <h3>High Returns</h3>
+          <p>Strategic locations with proven growth. Our projects on the Ecuadorian coast have significantly increased in value year after year.</p>
+        </div>
+        <div class="ec-why-card">
+          <div class="ec-why-icon"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></span></div>
+          <h3>For Overseas Ecuadorians</h3>
+          <p>We facilitate the entire purchase process remotely. Contract signing, title deed management and personalised follow-up from anywhere in the world.</p>
+        </div>
+        <div class="ec-why-card">
+          <div class="ec-why-icon"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></span></div>
+          <h3>Accessible Prices</h3>
+          <p>Flexible payment plans, low entry cost and in-house financing. Investing in Ecuador is more accessible than you think.</p>
+        </div>
+        <div class="ec-why-card">
+          <div class="ec-why-icon"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></svg></span></div>
+          <h3>Personal Support</h3>
+          <p>A dedicated advisor will accompany you throughout the entire process — from the first consultation to the delivery of title deeds — at no extra cost.</p>
+        </div>
+        <div class="ec-why-card">
+          <div class="ec-why-icon"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="2.5" fill="currentColor" stroke="none"/></svg></span></div>
+          <h3>Coastal Projects</h3>
+          <p>Privileged access to land and developments on the Ecuadorian coast, one of the country's fastest-growing tourism and real estate zones.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="ec-cta" id="contacto">
+    <div class="container">
+      <h2>Ready to invest<br/><em>in your future?</em></h2>
+      <p>Speak with our team today. We advise you without obligation and present the project that best suits your budget and goals.</p>
+      <div class="ec-cta-actions">
+        <a href="../uk/contact.html?from=ecuador" class="btn btn-primary btn-lg">Enquire Now →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="../index.html"><img src="../images/logo.png" alt="Patricia Real Estate" class="site-logo-footer" /></a>
+        <p>Real estate investment specialists in Ecuador. Legal security, vision and high returns.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Projects</h4>
+        <a href="#proyectos">View all</a>
+      </div>
+      <div class="footer-links">
+        <h4>Company</h4>
+        <a href="../index.html">Countries</a>
+        <a href="../uk/contact.html?from=ecuador">Contact</a>
+      </div>
+      <div class="footer-links">
+        <h4>Legal</h4>
+        <a href="../uk/privacy.html">Privacy Policy</a>
+        <a href="../uk/terms.html">Terms &amp; Conditions</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&#169; 2026 Patricia Real Estate Ecuador. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script defer src="data.js"></script>
+
+<!-- Cookie consent -->
+<div id="cookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1F2933;color:rgba(255,255,255,.85);padding:14px 24px;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;z-index:9999;border-top:2px solid #C8A75A;font-size:.82rem;">
+  <p style="margin:0;line-height:1.6;max-width:680px;">We use Google Fonts and similar services that may set cookies. By continuing to use this site you agree to our <a href="../uk/privacy.html" style="color:#C8A75A;">Privacy Policy</a>.</p>
+  <div style="display:flex;gap:10px;flex-shrink:0">
+    <button type="button" data-cookie-action="accept" style="background:#C8A75A;color:#1F2933;border:none;padding:8px 18px;border-radius:6px;font-weight:600;cursor:pointer;font-size:.82rem;">Accept</button>
+    <button type="button" data-cookie-action="decline" style="background:transparent;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.2);padding:8px 14px;border-radius:6px;cursor:pointer;font-size:.82rem;">Decline</button>
+  </div>
+</div>
+<script defer src="../js/shared/site-nav.js"></script>
+<script defer src="../js/pages/ecuador-home.js"></script>
+<script defer src="../js/shared/cookie-banner.js"></script>
+</body>
+</html>

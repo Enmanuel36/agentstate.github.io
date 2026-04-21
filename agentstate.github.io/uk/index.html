@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' https: data: blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; script-src 'self'; connect-src 'self' https://api.github.com; frame-src 'self'; form-action 'self' mailto:;" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="description" content="Browse Patricia Real Estate listings across Hampshire, Surrey and nearby areas. Personal lettings support, viewings and tailored property advice." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://patriciaestateagent.com/uk/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Properties in Hampshire & Surrey | Patricia Real Estate" />
+  <meta property="og:description" content="Browse Patricia Real Estate listings across Hampshire, Surrey and nearby areas. Personal lettings support, viewings and tailored property advice." />
+  <meta property="og:url" content="https://patriciaestateagent.com/uk/" />
+  <meta property="og:image" content="https://patriciaestateagent.com/images/og-preview.jpg" />
+  <meta property="og:site_name" content="Patricia Real Estate" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Properties in Hampshire & Surrey | Patricia Real Estate" />
+  <meta name="twitter:description" content="Browse Patricia Real Estate listings across Hampshire, Surrey and nearby areas. Personal lettings support, viewings and tailored property advice." />
+  <title>Properties to Let in Hampshire & Surrey | Patricia Real Estate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html"><img src="../images/logo.png" alt="Patricia Real Estate" class="site-logo" /></a>
+      <nav class="main-nav" id="mainNav">
+        <a href="../index.html" class="nav-link" style="color:rgba(255,255,255,0.5);font-size:.8rem;">&#8592; Select Region</a>
+        <a href="index.html" class="nav-link active">Properties</a>
+        <a href="../about.html" class="nav-link">Who We Are</a>
+        <a href="contact.html" class="btn btn-primary btn-sm nav-cta">Enquire Now</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-content">
+      <p class="hero-eyebrow">Patricia Real Estate</p>
+      <h1>Find Your <em>Perfect</em><br />Home</h1>
+      <p class="hero-sub">Trusted, personal property services across Hampshire, Surrey and nearby areas.</p>
+      <div class="hero-actions">
+        <a href="#listings" class="btn btn-primary btn-lg">Browse Properties</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><strong id="statTotal">0</strong><span>Listings</span></div>
+        <div class="hero-stat"><strong>10+</strong><span>Years Experience</span></div>
+        <div class="hero-stat"><strong>98%</strong><span>Client Satisfaction</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="search-section">
+    <div class="container">
+      <div class="search-card">
+        <h3>Search Properties</h3>
+        <div class="search-bar">
+          <input type="text" id="searchInput" placeholder="Search by location, postcode, or property type..." autocomplete="off" />
+          <button class="btn btn-primary" id="searchBtn">Search</button>
+        </div>
+        <div class="filter-row">
+          <button class="filter-chip active" data-filter="all">All Properties</button>
+          <button class="filter-chip" data-filter="to-let">To Let</button>
+          <button class="filter-chip" data-filter="let-agreed">Let Agreed</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="listings-section" id="listings">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-eyebrow">Available Properties</span>
+        <h2>Featured Listings</h2>
+        <p>Carefully selected properties, personally managed by our team.</p>
+      </div>
+      <div class="listings-controls">
+        <p class="listings-count"><strong id="countDisplay">0</strong> properties found</p>
+        <div class="sort-controls">
+          <label for="sortSelect">Sort:</label>
+          <select id="sortSelect">
+            <option value="newest">Newest First</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="beds-desc">Most Bedrooms</option>
+          </select>
+        </div>
+      </div>
+      <div class="listings-grid" id="listingsGrid"></div>
+      <div class="empty-state" id="emptyStateSoon" style="display:none;">
+        <div class="empty-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#C8A75A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="36" height="36"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+        </div>
+        <h3>More listings coming soon</h3>
+        <p>We&#8217;re adding new properties shortly. In the meantime, get in touch and we&#8217;ll find the right match for you.</p>
+        <a href="contact.html" class="btn btn-primary" style="margin-top:1.5rem;display:inline-flex;">Get in Touch &#8594;</a>
+      </div>
+      <div class="empty-state" id="emptyStateNoResults" style="display:none;background:transparent;border:none;box-shadow:none;">
+        <h3 style="color:var(--c-navy);">No properties found</h3>
+        <p style="color:var(--c-text-2);">Try adjusting your search or <a href="contact.html">contact us</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="../index.html"><img src="../images/logo.png" alt="Patricia Real Estate" class="site-logo-footer" /></a>
+        <p>Trusted property specialists. Selling or letting — we're here to help.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Properties</h4>
+        <a href="index.html?filter=to-let">To Let</a>
+      </div>
+      <div class="footer-links">
+        <h4>Company</h4>
+        <a href="../index.html">Countries</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-links">
+        <h4>Legal</h4>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms &amp; Conditions</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&#169; 2026 Patricia Real Estate. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="propertyModal">
+      <button class="modal-close" id="modalClose">&#10005;</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <script defer src="data.js"></script>
+  <script defer src="../js/pages/main.js"></script>
+  <script defer src="../js/shared/site-nav.js"></script>
+</body>
+</html>
