@@ -65,11 +65,17 @@
     return card;
   }
 
+  function getEcuadorProjects() {
+    if (Array.isArray(window.ecuadorProjects)) return window.ecuadorProjects;
+    if (typeof ecuadorProjects !== 'undefined' && Array.isArray(ecuadorProjects)) return ecuadorProjects;
+    return [];
+  }
+
   function initEcuadorHome() {
     var grid = document.getElementById('projectsGrid');
     if (!grid || grid.dataset.projectsBound === 'true') return;
 
-    var allProjects = Array.isArray(window.ecuadorProjects) ? window.ecuadorProjects : [];
+    var allProjects = getEcuadorProjects();
     var visibleProjects = allProjects.filter(function(project) {
       return !project.hidden;
     });
